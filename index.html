@@ -3,176 +3,978 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OS Quiz — Hệ Điều Hành</title>
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<title>OS Quiz — Bộ đề gốc đầy đủ (Đề thi thực tế)</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Sora:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 <style>
-  :root{--bg:#0a0a0f;--surface:#13131a;--surface2:#1c1c27;--border:#2a2a3d;--accent:#7c6fff;--accent2:#ff6b9d;--green:#4ade80;--red:#f87171;--yellow:#fbbf24;--text:#e8e8f0;--muted:#6b6b85;--card-glow:0 0 40px rgba(124,111,255,0.12)}
-  *{margin:0;padding:0;box-sizing:border-box}
-  body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;min-height:100vh;overflow-x:hidden}
-  body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(124,111,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(124,111,255,0.03) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0}
-  .container{max-width:860px;margin:0 auto;padding:40px 24px 80px;position:relative;z-index:1}
-  .header{text-align:center;margin-bottom:48px;animation:fadeDown 0.6s ease both}
-  .tag{display:inline-block;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);border:1px solid var(--accent);padding:4px 12px;border-radius:2px;margin-bottom:16px}
-  h1{font-size:clamp(2rem,5vw,3.2rem);font-weight:800;line-height:1.1;background:linear-gradient(135deg,#fff 30%,var(--accent) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:12px}
-  .header p{color:var(--muted);font-size:15px;font-family:'Space Mono',monospace}
-  .stats-bar{display:flex;gap:12px;margin-bottom:32px;flex-wrap:wrap}
-  .stat-chip{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:10px 16px;font-family:'Space Mono',monospace;font-size:12px;flex:1;text-align:center;min-width:70px}
-  .stat-chip .val{display:block;font-size:22px;font-weight:700;color:var(--accent);margin-bottom:2px}
-  .stat-chip .lbl{color:var(--muted);font-size:10px;letter-spacing:1px}
-  .progress-wrap{margin-bottom:32px}
-  .progress-top{display:flex;justify-content:space-between;font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);margin-bottom:8px}
-  .progress-track{height:4px;background:var(--surface2);border-radius:2px;overflow:hidden}
-  .progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:2px;transition:width 0.5s cubic-bezier(0.4,0,0.2,1)}
-  .question-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:36px;margin-bottom:24px;box-shadow:var(--card-glow);animation:slideIn 0.4s ease both;position:relative;overflow:hidden}
-  .question-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--accent2))}
-  .q-number{font-family:'Space Mono',monospace;font-size:11px;color:var(--accent);letter-spacing:2px;margin-bottom:16px;text-transform:uppercase}
-  .q-text{font-size:17px;font-weight:600;line-height:1.6;color:var(--text);margin-bottom:28px;white-space:pre-wrap}
-  .multi-badge{display:inline-block;font-family:'Space Mono',monospace;font-size:10px;background:rgba(124,111,255,0.15);color:var(--accent);border:1px solid rgba(124,111,255,0.3);padding:2px 8px;border-radius:4px;margin-bottom:16px}
-  .options{display:flex;flex-direction:column;gap:10px}
-  .option-btn{display:flex;align-items:flex-start;gap:14px;padding:14px 18px;background:var(--surface2);border:1.5px solid var(--border);border-radius:10px;cursor:pointer;transition:all 0.2s ease;text-align:left;color:var(--text);font-family:'Syne',sans-serif;font-size:14.5px;font-weight:500;line-height:1.5;width:100%}
-  .option-btn:hover:not(:disabled){border-color:var(--accent);background:rgba(124,111,255,0.08);transform:translateX(4px)}
-  .option-btn.selected{border-color:var(--accent);background:rgba(124,111,255,0.12)}
-  .option-btn.correct{border-color:var(--green);background:rgba(74,222,128,0.1)}
-  .option-btn.wrong{border-color:var(--red);background:rgba(248,113,113,0.1)}
-  .option-btn.reveal-correct{border-color:var(--green);background:rgba(74,222,128,0.07)}
-  .option-letter{display:flex;align-items:center;justify-content:center;width:28px;height:28px;min-width:28px;border-radius:6px;background:var(--border);font-family:'Space Mono',monospace;font-size:12px;font-weight:700;transition:all 0.2s}
-  .option-btn.selected .option-letter{background:var(--accent);color:#fff}
-  .option-btn.correct .option-letter{background:var(--green);color:#000}
-  .option-btn.wrong .option-letter{background:var(--red);color:#fff}
-  .option-btn.reveal-correct .option-letter{background:var(--green);color:#000}
-  .option-icon{margin-left:auto;font-size:16px;min-width:20px;text-align:right}
-  .explanation{margin-top:20px;padding:16px 18px;background:rgba(124,111,255,0.07);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;font-family:'Space Mono',monospace;font-size:12.5px;color:#a0a0c0;line-height:1.7;display:none}
-  .explanation.show{display:block;animation:fadeUp 0.3s ease}
-  .controls{display:flex;gap:12px;margin-top:24px}
-  .btn{padding:14px 28px;border-radius:10px;border:none;font-family:'Syne',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:all 0.2s;letter-spacing:0.5px}
-  .btn-primary{background:var(--accent);color:#fff;flex:1}
-  .btn-primary:hover{background:#9488ff;transform:translateY(-1px)}
-  .btn-primary:disabled{opacity:0.4;cursor:not-allowed;transform:none}
-  .btn-secondary{background:var(--surface2);color:var(--text);border:1.5px solid var(--border)}
-  .btn-secondary:hover{border-color:var(--accent)}
-  .result-screen{text-align:center;animation:fadeUp 0.6s ease both;display:none}
-  .result-screen.show{display:block}
-  .result-emoji{font-size:72px;margin-bottom:16px;display:block;animation:bounce 0.6s ease}
-  .result-score{font-size:clamp(3rem,8vw,5rem);font-weight:800;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:8px}
-  .result-label{font-family:'Space Mono',monospace;color:var(--muted);font-size:14px;margin-bottom:32px}
-  .result-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:40px}
-  .result-item{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px}
-  .result-item .big{font-size:2rem;font-weight:800;margin-bottom:4px}
-  .result-item .small{font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:1px}
-  .result-item.c .big{color:var(--green)}
-  .result-item.w .big{color:var(--red)}
-  .result-item.s .big{color:var(--yellow)}
-  .rank-badge{display:inline-block;padding:8px 24px;border-radius:100px;font-weight:800;font-size:18px;margin-bottom:32px}
-  .review-header{text-align:left;font-size:20px;font-weight:800;margin:48px 0 20px;padding-bottom:12px;border-bottom:1px solid var(--border)}
-  .review-item{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px 24px;margin-bottom:12px}
-  .review-item.r-correct{border-left:3px solid var(--green)}
-  .review-item.r-wrong{border-left:3px solid var(--red)}
-  .review-q{font-size:14px;font-weight:600;margin-bottom:10px;line-height:1.5;display:flex;gap:10px}
-  .review-num{font-family:'Space Mono',monospace;font-size:11px;color:var(--accent);white-space:nowrap;margin-top:2px}
-  .review-answers{display:flex;gap:8px;flex-wrap:wrap}
-  .review-ans{padding:3px 10px;border-radius:4px;font-size:11px;font-family:'Space Mono',monospace}
-  .review-ans.user-right{background:rgba(74,222,128,0.15);color:var(--green)}
-  .review-ans.user-wrong{background:rgba(248,113,113,0.15);color:var(--red)}
-  .review-ans.correct-ans{background:rgba(74,222,128,0.1);color:var(--green);border:1px solid rgba(74,222,128,0.3)}
-  .welcome-screen{text-align:center;animation:fadeUp 0.5s ease both}
-  .welcome-screen.hide{display:none}
-  .options-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin:32px 0}
-  .mode-card{background:var(--surface);border:1.5px solid var(--border);border-radius:12px;padding:20px 12px;cursor:pointer;transition:all 0.2s}
-  .mode-card:hover,.mode-card.active{border-color:var(--accent);background:rgba(124,111,255,0.08)}
-  .mode-card .icon{font-size:28px;margin-bottom:8px;display:block}
-  .mode-card .name{font-weight:700;font-size:14px;margin-bottom:4px}
-  .mode-card .desc{font-family:'Space Mono',monospace;font-size:10px;color:var(--muted)}
-  @keyframes fadeDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
-  @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-  @keyframes slideIn{from{opacity:0;transform:translateX(-16px)}to{opacity:1;transform:translateX(0)}}
-  @keyframes bounce{0%,100%{transform:scale(1)}50%{transform:scale(1.2)}}
-  @media(max-width:600px){.question-card{padding:24px 16px}.controls{flex-direction:column}}
+:root{
+  --bg:#0a0e1a;--surface:#111827;--surface2:#1a2235;--border:#1e2d45;
+  --accent:#00d4ff;--accent2:#7c3aed;--accent3:#10b981;
+  --danger:#ef4444;--warning:#f59e0b;--text:#e2e8f0;--muted:#64748b;
+  --glow:0 0 20px rgba(0,212,255,.3);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Sora',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,212,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,.03) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0}
+.container{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:0 24px}
+header{padding:40px 0 20px;text-align:center}
+.logo-tag{display:inline-block;font-family:'Space Mono',monospace;font-size:10px;color:var(--accent);border:1px solid var(--accent);padding:4px 12px;border-radius:2px;letter-spacing:3px;text-transform:uppercase;margin-bottom:16px;animation:pulse-border 2s ease-in-out infinite}
+@keyframes pulse-border{0%,100%{box-shadow:0 0 0 0 rgba(0,212,255,.4)}50%{box-shadow:0 0 0 6px rgba(0,212,255,0)}}
+h1{font-size:clamp(24px,4vw,44px);font-weight:800;line-height:1.1;background:linear-gradient(135deg,#fff 0%,var(--accent) 50%,var(--accent2) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:8px}
+.subtitle{color:var(--muted);font-size:14px;font-weight:300;letter-spacing:1px}
+.nav-tabs{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;padding:20px 0;border-bottom:1px solid var(--border);margin-bottom:28px}
+.nav-tab{font-family:'Space Mono',monospace;font-size:11px;padding:8px 16px;border-radius:4px;border:1px solid var(--border);background:var(--surface);color:var(--muted);cursor:pointer;transition:all .2s;letter-spacing:1px;text-transform:uppercase}
+.nav-tab:hover{border-color:var(--accent);color:var(--accent)}
+.nav-tab.active{background:var(--accent);color:var(--bg);border-color:var(--accent);font-weight:700;box-shadow:var(--glow)}
+.section{display:none;animation:fadeIn .4s ease}
+.section.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+/* STATS GRID */
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin-bottom:28px}
+.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px;text-align:center;transition:all .3s}
+.stat-card:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:var(--glow)}
+.stat-num{font-size:30px;font-weight:800;font-family:'Space Mono',monospace;color:var(--accent)}
+.stat-label{font-size:12px;color:var(--muted);margin-top:4px;letter-spacing:1px}
+/* CONFIG */
+.config-panel{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px;margin-bottom:20px}
+.config-title{font-size:15px;font-weight:700;margin-bottom:16px}
+.config-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.config-opt{padding:7px 14px;background:var(--surface2);border:1px solid var(--border);border-radius:6px;cursor:pointer;font-size:13px;transition:all .2s}
+.config-opt:hover{border-color:var(--accent);color:var(--accent)}
+.config-opt.active{background:var(--accent);color:var(--bg);border-color:var(--accent);font-weight:600}
+/* TOPIC FILTER */
+.topic-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;margin-bottom:24px}
+.topic-btn{padding:10px 14px;background:var(--surface);border:1.5px solid var(--border);border-radius:10px;cursor:pointer;font-size:12px;transition:all .2s;text-align:center}
+.topic-btn:hover{border-color:var(--accent);color:var(--accent)}
+.topic-btn.selected{background:rgba(0,212,255,.1);border-color:var(--accent);color:var(--accent)}
+.topic-btn .t-count{font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);margin-top:3px}
+/* QUIZ */
+.quiz-wrapper{background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden}
+.quiz-topbar{background:var(--surface2);padding:14px 22px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);flex-wrap:wrap;gap:10px}
+.quiz-title-bar{font-family:'Space Mono',monospace;font-size:12px;color:var(--accent);letter-spacing:1px}
+.progress-wrap{flex:1;max-width:260px;min-width:120px}
+.progress-bar{height:4px;background:var(--border);border-radius:4px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:4px;transition:width .5s cubic-bezier(.4,0,.2,1)}
+.q-counter{font-family:'Space Mono',monospace;font-size:12px;color:var(--muted);white-space:nowrap}
+.timer-display{font-family:'Space Mono',monospace;font-size:13px;color:var(--warning);background:rgba(245,158,11,.1);padding:4px 10px;border-radius:6px;border:1px solid rgba(245,158,11,.3)}
+.timer-display.urgent{color:var(--danger);border-color:rgba(239,68,68,.5);background:rgba(239,68,68,.1);animation:blink .6s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.5}}
+.question-area{padding:28px 26px 22px}
+.q-num-badge{display:inline-flex;align-items:center;gap:8px;font-family:'Space Mono',monospace;font-size:11px;color:var(--accent2);background:rgba(124,58,237,.15);padding:4px 12px;border-radius:20px;border:1px solid rgba(124,58,237,.3);margin-bottom:14px}
+.q-text{font-size:16px;font-weight:600;line-height:1.65;color:var(--text);margin-bottom:22px}
+.q-text code{font-family:'Space Mono',monospace;background:rgba(0,212,255,.1);color:var(--accent);padding:2px 7px;border-radius:4px;font-size:13px}
+.options{display:flex;flex-direction:column;gap:9px;margin-bottom:20px}
+.option{display:flex;align-items:flex-start;gap:12px;padding:12px 16px;background:var(--bg);border:1.5px solid var(--border);border-radius:10px;cursor:pointer;transition:all .2s;position:relative;overflow:hidden}
+.option:hover{border-color:var(--accent);transform:translateX(4px)}
+.option-key{font-family:'Space Mono',monospace;font-size:11px;font-weight:700;min-width:24px;height:24px;display:flex;align-items:center;justify-content:center;border-radius:5px;background:var(--surface2);color:var(--muted);border:1px solid var(--border);transition:all .2s;flex-shrink:0;margin-top:1px}
+.option-text{font-size:13.5px;line-height:1.55}
+.option.selected{border-color:var(--accent);background:rgba(0,212,255,.07)}
+.option.selected .option-key{background:var(--accent);color:var(--bg);border-color:var(--accent)}
+.option.correct{border-color:var(--accent3);background:rgba(16,185,129,.1)}
+.option.correct .option-key{background:var(--accent3);color:var(--bg);border-color:var(--accent3)}
+.option.wrong{border-color:var(--danger);background:rgba(239,68,68,.08)}
+.option.wrong .option-key{background:var(--danger);color:#fff;border-color:var(--danger)}
+.option.disabled{cursor:not-allowed;pointer-events:none}
+.feedback{padding:12px 16px;border-radius:10px;font-size:13px;line-height:1.6;display:none;margin-bottom:18px;border-left:3px solid}
+.feedback.correct-fb{background:rgba(16,185,129,.1);border-color:var(--accent3);color:#6ee7b7;display:block}
+.feedback.wrong-fb{background:rgba(239,68,68,.08);border-color:var(--danger);color:#fca5a5;display:block}
+.feedback strong{display:block;margin-bottom:4px;font-size:14px}
+.btn-row{display:flex;gap:10px;flex-wrap:wrap;justify-content:space-between;align-items:center}
+.btn{font-family:'Sora',sans-serif;font-size:13px;font-weight:600;padding:10px 22px;border-radius:8px;border:none;cursor:pointer;transition:all .2s;letter-spacing:.5px}
+.btn-primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;box-shadow:0 4px 15px rgba(0,212,255,.3)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(0,212,255,.4)}
+.btn-secondary{background:var(--surface2);color:var(--text);border:1px solid var(--border)}
+.btn-secondary:hover{border-color:var(--accent);color:var(--accent)}
+.btn-danger{background:var(--danger);color:#fff}
+.btn:disabled{opacity:.4;cursor:not-allowed;transform:none!important}
+/* RESULTS */
+.results-panel{text-align:center;padding:44px 28px}
+.score-ring{width:150px;height:150px;margin:0 auto 22px;position:relative}
+.score-ring svg{transform:rotate(-90deg)}
+.score-ring-track{fill:none;stroke:var(--border);stroke-width:8}
+.score-ring-fill{fill:none;stroke-width:8;stroke-linecap:round;transition:stroke-dashoffset 1.5s cubic-bezier(.4,0,.2,1)}
+.score-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.score-pct{font-family:'Space Mono',monospace;font-size:28px;font-weight:700}
+.score-label{font-size:10px;color:var(--muted);letter-spacing:2px}
+.result-grade{font-size:18px;font-weight:700;margin-bottom:6px}
+.result-stats{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin:20px 0}
+.r-stat{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:14px 20px;min-width:100px}
+.r-stat-num{font-family:'Space Mono',monospace;font-size:20px;font-weight:700}
+.r-stat-label{font-size:10px;color:var(--muted);margin-top:3px}
+/* REVIEW */
+.review-item{background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:18px;margin-bottom:14px}
+.review-q{font-size:13.5px;font-weight:600;margin-bottom:10px;line-height:1.55}
+.review-options{display:flex;flex-direction:column;gap:5px}
+.review-opt{font-size:12px;padding:7px 10px;border-radius:6px;border:1px solid var(--border);color:var(--muted)}
+.review-opt.correct-opt{background:rgba(16,185,129,.12);border-color:var(--accent3);color:#6ee7b7}
+.review-opt.selected-wrong{background:rgba(239,68,68,.1);border-color:var(--danger);color:#fca5a5}
+.review-explain{margin-top:10px;font-size:12px;color:var(--muted);padding:9px;background:var(--bg);border-radius:6px;border-left:2px solid var(--accent2);line-height:1.6}
+/* BANK */
+.bank-search{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap}
+.search-input{flex:1;min-width:180px;background:var(--surface);border:1.5px solid var(--border);border-radius:8px;padding:9px 14px;color:var(--text);font-family:'Sora',sans-serif;font-size:13px;outline:none;transition:border-color .2s}
+.search-input:focus{border-color:var(--accent)}
+.bank-item{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:18px;margin-bottom:10px;transition:border-color .2s;cursor:default}
+.bank-item:hover{border-color:var(--accent)}
+.bank-q{font-size:13.5px;font-weight:600;margin-bottom:10px;line-height:1.5}
+.bank-opts{display:flex;flex-direction:column;gap:4px}
+.bank-opt{font-size:12px;color:var(--muted);padding:4px 8px;border-radius:4px}
+.bank-opt.correct-ans{color:var(--accent3);font-weight:600;background:rgba(16,185,129,.1)}
+.bank-topic{font-family:'Space Mono',monospace;font-size:10px;color:var(--accent2);background:rgba(124,58,237,.15);padding:2px 8px;border-radius:10px;display:inline-block;margin-bottom:7px}
+.bank-pagination{display:flex;gap:7px;justify-content:center;flex-wrap:wrap;margin-top:20px}
+.page-btn{width:34px;height:34px;border-radius:6px;background:var(--surface);border:1px solid var(--border);color:var(--muted);cursor:pointer;font-family:'Space Mono',monospace;font-size:12px;transition:all .2s;display:flex;align-items:center;justify-content:center}
+.page-btn:hover,.page-btn.active{background:var(--accent);color:var(--bg);border-color:var(--accent)}
+/* LOADING */
+.loading-screen{position:fixed;inset:0;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:1000;transition:opacity .5s}
+.loading-screen.fade-out{opacity:0;pointer-events:none}
+.loader{width:44px;height:44px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin 1s linear infinite;margin-bottom:14px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loading-text{font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:2px}
+/* TOAST */
+.toast{position:fixed;bottom:22px;right:22px;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px 18px;font-size:13px;box-shadow:0 8px 30px rgba(0,0,0,.5);transform:translateY(80px);opacity:0;transition:all .3s cubic-bezier(.4,0,.2,1);z-index:999;max-width:300px}
+.toast.show{transform:translateY(0);opacity:1}
+.toast.success{border-color:var(--accent3);color:var(--accent3)}
+.toast.error{border-color:var(--danger);color:var(--danger)}
+.toast.info{border-color:var(--accent);color:var(--accent)}
+/* CHAPTER TAGS */
+.ch-badge{display:inline-block;font-family:'Space Mono',monospace;font-size:9px;padding:2px 7px;border-radius:8px;margin-right:4px}
+.ch1{background:rgba(0,212,255,.12);color:var(--accent)}
+.ch2{background:rgba(124,58,237,.15);color:#a78bfa}
+.ch3{background:rgba(16,185,129,.12);color:var(--accent3)}
+.ch4{background:rgba(245,158,11,.12);color:var(--warning)}
+.ch5{background:rgba(239,68,68,.12);color:var(--danger)}
+.ch6{background:rgba(236,72,153,.12);color:#f472b6}
+.ch7{background:rgba(6,182,212,.12);color:#22d3ee}
+/* FOOTER */
+footer{text-align:center;padding:44px 0 28px;border-top:1px solid var(--border);margin-top:56px}
+.footer-owner{font-family:'Space Mono',monospace;font-size:13px;color:var(--muted);letter-spacing:2px}
+.footer-owner span{color:var(--accent);font-weight:700}
+.footer-sub{font-size:11px;color:var(--muted);margin-top:5px;opacity:.6}
+.footer-badges{display:flex;gap:10px;justify-content:center;margin:14px 0;flex-wrap:wrap}
+.badge{font-family:'Space Mono',monospace;font-size:10px;color:var(--accent2);border:1px solid rgba(124,58,237,.3);padding:3px 10px;border-radius:10px;background:rgba(124,58,237,.08)}
+@media(max-width:640px){.question-area{padding:18px 14px 14px}.quiz-topbar{padding:10px 14px}}
 </style>
 </head>
 <body>
+
+<div class="loading-screen" id="loadingScreen">
+  <div class="loader"></div>
+  <div class="loading-text">LOADING EXAM QUESTIONS...</div>
+</div>
+<div class="toast" id="toast"></div>
+
 <div class="container">
-  <div class="header">
-    <div class="tag">// HỆ ĐIỀU HÀNH</div>
-    <h1>OS Quiz</h1>
-    <p>Operating Systems — Ôn tập trắc nghiệm</p>
+<header>
+  <div class="logo-tag">Bộ đề gốc đầy đủ · Đề thi thực tế</div>
+  <h1>OS Quiz — Đề Thi Thực Tế</h1>
+  <p class="subtitle">Toàn bộ câu hỏi từ các bộ đề thi cuối kỳ · 198 câu · Tanenbaum 4th Ed.</p>
+</header>
+
+<nav class="nav-tabs">
+  <button class="nav-tab active" onclick="showSection('home')">🏠 Tổng quan</button>
+  <button class="nav-tab" onclick="showSection('quiz')">🎯 Luyện thi</button>
+  <button class="nav-tab" onclick="showSection('bank')">📚 Ngân hàng</button>
+  <button class="nav-tab" onclick="showSection('stats')">📊 Kết quả</button>
+</nav>
+
+<!-- HOME -->
+<section class="section active" id="home">
+  <div class="stat-grid">
+    <div class="stat-card"><div class="stat-num" id="hTotal">198</div><div class="stat-label">Tổng câu hỏi</div></div>
+    <div class="stat-card"><div class="stat-num">10</div><div class="stat-label">Chương</div></div>
+    <div class="stat-card"><div class="stat-num" id="hAttempts">0</div><div class="stat-label">Lần làm bài</div></div>
+    <div class="stat-card"><div class="stat-num" id="hBest">—</div><div class="stat-label">Điểm cao nhất</div></div>
   </div>
 
-  <div class="welcome-screen" id="welcomeScreen">
-    <p style="color:var(--muted);font-family:'Space Mono',monospace;font-size:13px;margin-bottom:4px;">Chọn số câu hỏi</p>
-    <p style="color:var(--accent);font-family:'Space Mono',monospace;font-size:12px;margin-bottom:24px;" id="totalInfo"></p>
-    <div class="options-grid" id="modeGrid">
-      <div class="mode-card active" data-count="10"><span class="icon">⚡</span><div class="name">10 câu</div><div class="desc">Quick</div></div>
-      <div class="mode-card" data-count="20"><span class="icon">🎯</span><div class="name">20 câu</div><div class="desc">Standard</div></div>
-      <div class="mode-card" data-count="30"><span class="icon">🔥</span><div class="name">30 câu</div><div class="desc">Challenge</div></div>
-      <div class="mode-card" data-count="50"><span class="icon">💪</span><div class="name">50 câu</div><div class="desc">Hard</div></div>
-      <div class="mode-card" data-count="0"><span class="icon">💀</span><div class="name">Tất cả</div><div class="desc">Full exam</div></div>
-    </div>
-    <button class="btn btn-primary" id="startBtn" style="min-width:200px">Bắt đầu →</button>
-  </div>
-
-  <div id="quizSection" style="display:none">
-    <div class="stats-bar">
-      <div class="stat-chip"><span class="val" id="statCurrent">1</span><span class="lbl">HIỆN TẠI</span></div>
-      <div class="stat-chip"><span class="val" id="statTotal">—</span><span class="lbl">TỔNG</span></div>
-      <div class="stat-chip"><span class="val" id="statCorrect" style="color:var(--green)">0</span><span class="lbl">ĐÚNG</span></div>
-      <div class="stat-chip"><span class="val" id="statWrong" style="color:var(--red)">0</span><span class="lbl">SAI</span></div>
-    </div>
-    <div class="progress-wrap">
-      <div class="progress-top"><span id="progressLabel">Câu 1</span><span id="progressPct">0%</span></div>
-      <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
-    </div>
-    <div class="question-card" id="questionCard">
-      <div class="q-number" id="qNumber">QUESTION 01</div>
-      <div class="q-text" id="qText"></div>
-      <div id="multiBadge"></div>
-      <div class="options" id="optionsContainer"></div>
-      <div class="explanation" id="explanation"></div>
-    </div>
-    <div class="controls">
-      <button class="btn btn-secondary" id="skipBtn">Bỏ qua</button>
-      <button class="btn btn-primary" id="submitBtn" disabled>Xác nhận</button>
-      <button class="btn btn-primary" id="nextBtn" style="display:none">Câu tiếp →</button>
+  <div class="config-panel" style="margin-bottom:20px">
+    <div style="font-size:14px;font-weight:700;margin-bottom:10px">📋 Về bộ đề này</div>
+    <p style="font-size:13px;color:var(--muted);line-height:1.7">
+      Bộ đề tổng hợp <strong style="color:var(--text)">toàn bộ câu hỏi từ các đề thi cuối kỳ thực tế</strong> môn Hệ Điều Hành.
+      Gồm các câu từ nhiều batch đề thi khác nhau, bao gồm cả câu tính toán (FCFS, SJF, LRU, disk scheduling),
+      câu lý thuyết, và câu phân tích.
+    </p>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:14px">
+      <span class="ch-badge ch1">Ch.1 Introduction</span>
+      <span class="ch-badge ch2">Ch.2 Processes & Threads</span>
+      <span class="ch-badge ch3">Ch.3 Memory</span>
+      <span class="ch-badge ch4">Ch.4 File Systems</span>
+      <span class="ch-badge ch5">Ch.5 I/O</span>
+      <span class="ch-badge ch6">Ch.6 Deadlocks</span>
+      <span class="ch-badge ch7">Ch.7+ Advanced</span>
     </div>
   </div>
 
-  <div class="result-screen" id="resultScreen">
-    <span class="result-emoji" id="resultEmoji">🎉</span>
-    <div class="result-score" id="resultScore">—</div>
-    <div class="result-label" id="resultLabel"></div>
-    <div id="rankBadge" class="rank-badge"></div>
-    <div class="result-grid">
-      <div class="result-item c"><div class="big" id="rCorrect">0</div><div class="small">ĐÚNG</div></div>
-      <div class="result-item w"><div class="big" id="rWrong">0</div><div class="small">SAI</div></div>
-      <div class="result-item s"><div class="big" id="rSkip">0</div><div class="small">BỎ QUA</div></div>
+  <div style="text-align:center;margin-top:8px">
+    <button class="btn btn-primary" style="font-size:15px;padding:14px 44px" onclick="showSection('quiz')">
+      Bắt đầu luyện thi →
+    </button>
+  </div>
+</section>
+
+<!-- QUIZ -->
+<section class="section" id="quiz">
+  <!-- SELECTOR -->
+  <div id="quizSelector">
+    <h2 style="font-size:18px;font-weight:700;margin-bottom:6px">Cấu hình bài thi</h2>
+    <p style="color:var(--muted);font-size:13px;margin-bottom:20px">Lọc theo chương hoặc chủ đề, chọn số câu và thời gian</p>
+
+    <div class="config-panel">
+      <div class="config-title">Lọc theo chương</div>
+      <div class="config-row" id="chapterFilter">
+        <div class="config-opt active" data-ch="all" onclick="setChFilter(this)">Tất cả</div>
+        <div class="config-opt" data-ch="Ch.1" onclick="setChFilter(this)">Ch.1 Intro</div>
+        <div class="config-opt" data-ch="Ch.2" onclick="setChFilter(this)">Ch.2 Processes</div>
+        <div class="config-opt" data-ch="Ch.3" onclick="setChFilter(this)">Ch.3 Memory</div>
+        <div class="config-opt" data-ch="Ch.4" onclick="setChFilter(this)">Ch.4 Files</div>
+        <div class="config-opt" data-ch="Ch.5" onclick="setChFilter(this)">Ch.5 I/O</div>
+        <div class="config-opt" data-ch="Ch.6" onclick="setChFilter(this)">Ch.6 Deadlocks</div>
+        <div class="config-opt" data-ch="Ch.7+" onclick="setChFilter(this)">Ch.7+ Advanced</div>
+      </div>
+
+      <div class="config-title" style="margin-top:16px">Số câu hỏi</div>
+      <div class="config-row" id="numConfig">
+        <div class="config-opt active" data-val="10" onclick="setCfg('num',this)">10 câu</div>
+        <div class="config-opt" data-val="25" onclick="setCfg('num',this)">25 câu</div>
+        <div class="config-opt" data-val="50" onclick="setCfg('num',this)">50 câu</div>
+        <div class="config-opt" data-val="all" onclick="setCfg('num',this)">Tất cả</div>
+      </div>
+
+      <div class="config-title" style="margin-top:16px">Thời gian mỗi câu</div>
+      <div class="config-row" id="timeConfig">
+        <div class="config-opt active" data-val="30" onclick="setCfg('time',this)">30 giây</div>
+        <div class="config-opt" data-val="60" onclick="setCfg('time',this)">60 giây</div>
+        <div class="config-opt" data-val="0" onclick="setCfg('time',this)">Không giới hạn</div>
+      </div>
+
+      <div class="config-title" style="margin-top:16px">Chế độ</div>
+      <div class="config-row" id="modeConfig">
+        <div class="config-opt active" data-val="practice" onclick="setCfg('mode',this)">🎓 Luyện tập (xem đáp án ngay)</div>
+        <div class="config-opt" data-val="exam" onclick="setCfg('mode',this)">📝 Thi thật (xem cuối bài)</div>
+      </div>
     </div>
-    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
-      <button class="btn btn-secondary" id="reviewBtn">Xem lại đáp án</button>
-      <button class="btn btn-primary" id="restartBtn">Làm lại</button>
-    </div>
-    <div id="reviewSection" style="display:none">
-      <div class="review-header">📋 Chi tiết đáp án</div>
-      <div id="reviewList"></div>
+
+    <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap">
+      <button class="btn btn-primary" style="font-size:15px;padding:13px 44px" onclick="startQuiz()">Bắt đầu →</button>
+      <div style="font-size:13px;color:var(--muted)" id="poolInfo">Pool: 198 câu</div>
     </div>
   </div>
+
+  <!-- ENGINE -->
+  <div id="quizEngine" style="display:none">
+    <div class="quiz-wrapper">
+      <div class="quiz-topbar">
+        <div class="quiz-title-bar" id="qTitleBar">QUIZ</div>
+        <div class="progress-wrap"><div class="progress-bar"><div class="progress-fill" id="pFill" style="width:0%"></div></div></div>
+        <div class="q-counter" id="qCtr">1/10</div>
+        <div class="timer-display" id="timerEl" style="display:none">⏱ 30s</div>
+        <button class="btn btn-secondary" style="padding:5px 10px;font-size:12px" onclick="exitQuiz()">✕</button>
+      </div>
+      <div class="question-area">
+        <div class="q-num-badge" id="qBadge">Q1</div>
+        <div class="q-text" id="qText"></div>
+        <div class="options" id="optsCont"></div>
+        <div class="feedback" id="feedbackEl"></div>
+        <div class="btn-row">
+          <div style="display:flex;gap:10px">
+            <button class="btn btn-secondary" id="btnCheck" onclick="checkAnswer()">Kiểm tra</button>
+            <button class="btn btn-primary" id="btnNext" onclick="nextQ()" style="display:none">Tiếp →</button>
+          </div>
+          <div style="font-size:12px;color:var(--muted)" id="scoreTrack"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESULTS -->
+  <div id="quizResults" style="display:none">
+    <div class="quiz-wrapper">
+      <div class="results-panel">
+        <div class="score-ring">
+          <svg width="150" height="150" viewBox="0 0 150 150">
+            <circle class="score-ring-track" cx="75" cy="75" r="63"/>
+            <circle class="score-ring-fill" id="sRingFill" cx="75" cy="75" r="63" stroke-dasharray="396" stroke-dashoffset="396"/>
+          </svg>
+          <div class="score-center"><div class="score-pct" id="sPct">0%</div><div class="score-label">ĐIỂM</div></div>
+        </div>
+        <div class="result-grade" id="rGrade">—</div>
+        <div class="result-stats">
+          <div class="r-stat"><div class="r-stat-num" id="rC" style="color:var(--accent3)">0</div><div class="r-stat-label">Đúng</div></div>
+          <div class="r-stat"><div class="r-stat-num" id="rW" style="color:var(--danger)">0</div><div class="r-stat-label">Sai</div></div>
+          <div class="r-stat"><div class="r-stat-num" id="rT">0</div><div class="r-stat-label">Tổng</div></div>
+          <div class="r-stat"><div class="r-stat-num" id="rTime" style="color:var(--warning)">0s</div><div class="r-stat-label">Thời gian</div></div>
+        </div>
+        <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+          <button class="btn btn-primary" onclick="reviewAnswers()">📖 Xem lại</button>
+          <button class="btn btn-secondary" onclick="restartQ()">🔄 Làm lại</button>
+          <button class="btn btn-secondary" onclick="backToSel()">← Cấu hình</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- REVIEW -->
+  <div id="quizReview" style="display:none">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;flex-wrap:wrap;gap:10px">
+      <h3 style="font-size:17px;font-weight:700">📖 Xem lại đáp án</h3>
+      <button class="btn btn-secondary" onclick="backToRes()">← Kết quả</button>
+    </div>
+    <div id="reviewCont"></div>
+  </div>
+</section>
+
+<!-- BANK -->
+<section class="section" id="bank">
+  <div class="stat-grid" style="grid-template-columns:repeat(auto-fit,minmax(140px,1fr))">
+    <div class="stat-card"><div class="stat-num" id="bTotal">198</div><div class="stat-label">Tổng câu</div></div>
+    <div class="stat-card"><div class="stat-num" id="bFiltered">198</div><div class="stat-label">Đang hiển thị</div></div>
+  </div>
+  <div class="bank-search">
+    <input class="search-input" id="searchInp" placeholder="🔍 Tìm kiếm câu hỏi, chủ đề..." oninput="filterBank()">
+    <select class="search-input" style="max-width:160px;cursor:pointer" id="chSelect" onchange="filterBank()">
+      <option value="all">Tất cả chương</option>
+      <option value="Ch.1">Ch.1 Intro</option>
+      <option value="Ch.2">Ch.2 Processes</option>
+      <option value="Ch.3">Ch.3 Memory</option>
+      <option value="Ch.4">Ch.4 Files</option>
+      <option value="Ch.5">Ch.5 I/O</option>
+      <option value="Ch.6">Ch.6 Deadlocks</option>
+      <option value="Ch.7+">Ch.7+ Advanced</option>
+    </select>
+  </div>
+  <div id="bankCont"></div>
+  <div class="bank-pagination" id="bankPag"></div>
+</section>
+
+<!-- STATS -->
+<section class="section" id="stats">
+  <h2 style="font-size:18px;font-weight:700;margin-bottom:20px">📊 Lịch sử làm bài</h2>
+  <div class="stat-grid">
+    <div class="stat-card"><div class="stat-num" id="st1">0</div><div class="stat-label">Tổng lần làm</div></div>
+    <div class="stat-card"><div class="stat-num" id="st2">—</div><div class="stat-label">Cao nhất</div></div>
+    <div class="stat-card"><div class="stat-num" id="st3">—</div><div class="stat-label">Trung bình</div></div>
+    <div class="stat-card"><div class="stat-num" id="st4">0</div><div class="stat-label">Câu đã làm</div></div>
+  </div>
+  <div id="histList" style="margin-top:20px"></div>
+  <div style="text-align:center;margin-top:20px">
+    <button class="btn btn-danger" onclick="clearHist()">🗑️ Xóa lịch sử</button>
+  </div>
+</section>
 </div>
 
-<script>
-const Q=[ {q:"Which of the following is NOT a function of an operating system?",o:["A. Resource Management","B. Process Management","C. Memory Management","D. Transistors Management"],a:["D"]},{q:"What is the primary purpose of an operating system?",o:["A. To execute application programs.","B. To provide a user-friendly interface.","C. To manage hardware resources and provide services to software.","D. To create computer games."],a:["C"]},{q:"Which statement is FALSE about operating systems?",o:["A. Operating System is a type of system software","B. Operating System is a type of application","C. The Operating System as an Extended Machine","D. The Operating System as a Resource Manager"],a:["B"]},{q:"Select the correct statement from the following options.",o:["A. Mouse is unique tool to interface between user and computer","B. Windows OS does not provide a work in network environment.","C. The Windows OS is viewed as an object that performs tasks.","D. The Windows OS has a graphical interface."],a:["D"]},{q:"A key concept in all operating systems is the ____.",o:["A. Files","B. Process","C. Input/Output","D. The Shell"],a:["B"]},{q:"In the operating system zoo, what is the main priority of time-sharing system over a multiprogramming system?",o:["A. The cost of managing smaller processes","B. Increase the CPU's performance","C. Response time is smaller","D. Reduce the burst time of the process"],a:["C"]},{q:"An operating system is the ______ system because these systems are characterized by having time as a key parameter.",o:["A. Real-time","B. Handheld","C. Multiprocessor","D. None of other choice"],a:["A"]},{q:"In the first generation of computers, what operating system did users use?",o:["A. This stage does not have an operating system.","B. Users use the FM operating system.","C. Users use the OS/360 operating system.","D. Users use the UNIX operating system."],a:["A"]},{q:"Which early operating system was designed for the UNIVAC I computer?",o:["A. MS-DOS","B. UNIX","C. COBOL","D. EDVAC"],a:["D"]},{q:"Which of the following is NOT a part of the operating system?",o:["A. Performance monitor","B. Input/output control program","C. Job control program","D. Supervisor"],a:["A"]},{q:"Which of the following is an Operating System component?",o:["A. Process Management","B. Speed Management","C. Space Management","D. Time Management"],a:["A"]},{q:"The CPU's simple model of instructions retrieved from memory and run is:",o:["A. Fetch, decode, and execute","B. Fetch, execute, and decode","C. Decode, fetch, and execute","D. Execute, decode, and fetch"],a:["A"]},{q:"What is the purpose of a pipeline in a CPU?",o:["A. To increase speed by executing multiple stages of instructions simultaneously.","B. To reduce the number of instructions in the program.","C. To combine all instructions into one operation.","D. To execute instructions randomly."],a:["A"]},{q:"______ is programmed at the factory and cannot be changed afterward.",o:["A. RAM","B. ROM","C. EEPROM","D. CMOS"],a:["B"]},{q:"Main memory is usually called _____.",o:["A. RAM","B. ROM","C. EEPROM","D. CMOS"],a:["A"]},{q:"This register contains condition code bits, CPU priority, mode (user or kernel), and control bits. It is called the:",o:["A. All of the above","B. IR (Instruction Register)","C. PC (Program Counter)","D. PSW (Program Status Word)"],a:["D"]},{q:"What special registers are visible to the programmer? (Choose all correct)",o:["A. MAR (Memory address register)","B. Program counter","C. Stack pointer","D. PSW (Program Status Word)"],a:["B","C","D"],m:true},{q:"The ENIAC had 18,000 vacuum tubes and consumed ______ watts of power.",o:["A. 1,400,000","B. 140,000","C. 14,000","D. 1,400"],a:["B"]},{q:"The ______ was invented to attach slow I/O devices (keyboard, mouse) to the computer.",o:["A. ISA","B. PCI","C. DMI","D. USB"],a:["D"]},{q:"Main advantage of multiprocessor systems?",o:["A. Increase throughput","B. Decrease throughput","C. Low-speed communication","D. Reduced reliability"],a:["A"]},{q:"In what scenario would a microkernel-based OS be advantageous over monolithic?",o:["A. When direct hardware access is necessary for user applications","B. When isolation between user and kernel space is crucial","C. When a layered approach complicates system performance","D. When centralized system control is required"],a:["B"]},{q:"Compare monolithic and client-server OS structures. Which is correct?",o:["A. Monolithic systems integrate all functionalities into a single layer, whereas client-server systems distribute across multiple components.","B. Monolithic systems promote scalability better than client-server systems.","C. Client-server systems offer more efficient communication between components.","D. Monolithic systems have a modular architecture that simplifies maintenance."],a:["A"]},{q:"A simple structuring model for a monolithic system consists of:",o:["A. Main procedure","B. Service procedures","C. Utility procedures","D. All of the above"],a:["D"]},{q:"What is NOT a main feature of a monolithic system?",o:["A. Information hiding: Every procedure is hidden from every other procedure.","B. The operating system runs as a single program in kernel mode.","C. The operating system is organized as a hierarchy.","D. The OS is written as a collection of procedures linked together."],a:["C"]},{q:"What is the purpose of the TRAP instruction in the execution of a system call?",o:["A. To switch from user mode to kernel mode.","B. To call a function from the library.","C. To determine a specific address in memory for the kernel.","D. To check the input parameters before execution."],a:["A"]},{q:"What is NOT an operating system mode?",o:["A. System mode","B. User mode","C. Kernel mode","D. Supervisor mode"],a:["A"]},{q:"What is the purpose of the Kernel in an OS structure?",o:["A. To provide a user-friendly interface.","B. To manage hardware resources and provide services to software.","C. To store user data and files.","D. To control the display and graphics of the user interface."],a:["B"]},{q:"In which OS is the system call for voluntary process termination referred to as ExitProcess?",o:["A. UNIX","B. Windows","C. macOS","D. Linux"],a:["B"]},{q:"If a system requires efficient process handling and termination, which system calls are essential?",o:["A. Process creation and termination","B. File reading and writing","C. Directory management","D. Miscellaneous system calls"],a:["A"]},{q:"What is a process in the context of computer systems?",o:["A. A sequence of activities carried out by an operating system.","B. A method of scheduling CPU tasks for optimal performance.","C. A method of scheduling CPU tasks including registers and variables.","D. An instance of an executing program, including the current values of the program counter, registers, and variables."],a:["D"]},{q:"In computer operating systems, how are processes understood?",o:["A. A program saved on disk.","B. A program is loaded into memory and the CPU is executing.","C. A program loads into primary or secondary memory.","D. A program loaded on disk."],a:["B"]},{q:"What are the basic states of a process?",o:["A. Running, Ready, and Blocked","B. Running, Blocked, and Exit","C. Create, Running, and Exit","D. Create, Running, and Blocked"],a:["A"]},{q:"What triggers a transition from the 'Blocked' state to the 'Ready' state?",o:["A. Completion of an I/O operation","B. User input request","C. Process termination","D. CPU scheduler selection"],a:["A"]},{q:"Which process state transition is ILLEGAL?",o:["A. Ready → Blocked","B. Running → Blocked","C. Blocked → Ready","D. Running → Ready"],a:["A"],x:"A process cannot go directly from Ready to Blocked — it must run first."},{q:"In the Windows OS, which is true about the blocked state of a process?",o:["A. Waiting for an event triggered by the CPU's scheduling mechanism","B. Waiting for an event that has not happened yet","C. Waiting to I/O and waiting for an event that has not happened yet","D. The CPU and Memory are waiting for other events"],a:["C"]},{q:"What are the four main events that cause processes to be created?",o:["A. System initialization.","B. Execution of a process-creation system call by a running process.","C. System that interacts with users and performs work for them.","D. A user request to create a new process.","E. Initiation of a batch job."],a:["A","B","D","E"],m:true},{q:"Which of the following is a voluntary reason for process termination?",o:["A. Fatal error","B. Error exit","C. Killed by another process","D. System crash"],a:["B"]},{q:"Which action does the OS take to execute a new process?",o:["A. Provide immediate CPU for process.","B. Deliver the resources must be process.","C. Create immediate PCB blocks for process.","D. Provide immediate Register for process."],a:["C"]},{q:"What is the primary purpose of process control blocks (PCBs)?",o:["A. To display information about running processes on the screen.","B. To store the user's program and data.","C. To maintain information about each process, including its state, program counter, and CPU registers.","D. To allocate memory for new processes."],a:["C"]},{q:"In Unix, which system call creates the new process?",o:["A. create","B. fork","C. new","D. exec"],a:["B"]},{q:"Processes in UNIX have memory divided into three segments. The third one (besides Data and Stack) is ______.",o:["A. Text segment","B. Heap segment","C. Program segment","D. None of these above"],a:["A"]},{q:"If a process fails, most operating systems write the error information to a ______",o:["A. new file","B. old file","C. another running process","D. log file"],a:["D"]},{q:"In Linux, the command ps -aux gives the equivalent of what in MS-Windows?",o:["A. Start/shutdown.","B. Start/Run input CMD.","C. Open program Task Manager.","D. Open Add/Remove program."],a:["C"]},{q:"What is the main difference between a process and a thread?",o:["A. Threads share the same memory space, while processes do not","B. Processes are faster than threads","C. Processes can only execute one task, while threads execute multiple tasks","D. Threads are independent of processes"],a:["A"]},{q:"Which best describes the relationship between threads within a single process?",o:["A. Threads are completely independent and do not share any resources.","B. Threads share the same memory space but have their own registers.","C. Threads are separate and isolated from one another.","D. Threads are tightly integrated, and they all have their own separate memory space."],a:["B"]},{q:"Which best describes the difference between a process and a thread in Windows?",o:["A. A process contains multiple threads and shares resources, while a thread is an independent execution unit within a process.","B. A process is a program in execution, while a thread is a sequence of instructions that can execute independently.","C. A process and a thread are essentially the same in Windows OS.","D. A process represents system resources, while a thread is responsible for user interface interactions."],a:["A"]},{q:"How do threads enable efficient resource sharing?",o:["A. By allowing threads to share resources within the same address space","B. By isolating resources for each thread","C. By restricting access to shared resources","D. By creating separate address spaces for each thread"],a:["A"]},{q:"Compare threads in user space vs kernel. Which statement is correct?",o:["A. Threads in user space offer faster context switching, whereas kernel threads have direct access to hardware resources.","B. Kernel threads provide better synchronization mechanisms compared to user space threads.","C. User space threads allow for better multitasking performance, while kernel threads are more prone to deadlocks.","D. User space threads have limited access to system resources, whereas kernel threads can efficiently manage I/O operations."],a:["A"]},{q:"When threads are managed in user space, what does each process need to track them?",o:["A. User space table","B. Kernel table","C. Thread table","D. Process table"],a:["C"]},{q:"What is the purpose of the pthread_join function in Pthreads?",o:["A. To create and initialize a thread's attribute structure","B. To wait for a specific thread to exit","C. To release the CPU and let another thread run","D. To terminate the calling thread"],a:["B"]},{q:"What is Interprocess Communication (IPC)?",o:["A. allows processes to communicate and synchronize when using the same address space","B. allows processes to communicate and synchronize their actions","C. allows the processes only to synchronize their actions without communication","D. allows the processes only to communicate without synchronizing"],a:["B"]},{q:"Message passing system allows processes to ______",o:["A. communicate with each other without sharing the same address space","B. communicate with one another by resorting to shared data","C. share data","D. name the recipient or sender of the message"],a:["A"]},{q:"What defines a critical section in Windows?",o:["A. A section of code where the processor gives priority to execute multiple threads simultaneously.","B. A section of code where hardware interrupts are disabled.","C. A segment of code that only one thread can execute at a time to avoid data inconsistency.","D. A part of the kernel where system-level processes are given higher priority."],a:["C"]},{q:"When using Critical Regions solution, which condition is NOT necessary?",o:["A. Processes entering critical regions must set their speed or number of CPUs.","B. Two processes are not in critical regions at the same time.","C. A process outside the staging area must not prevent other processes from entering.","D. Processes do not have to wait indefinitely to enter critical regions."],a:["A"]},{q:"Which best describes a 'race condition'?",o:["A. Multiple processes access and manipulate shared data concurrently","B. A process is stuck in an infinite loop","C. A process waits indefinitely for an event","D. A process exceeds its allocated memory"],a:["A"]},{q:"What problem does using semaphores help solve in the Producer-Consumer scenario?",o:["A. Deadlock","B. Lost-wakeup problem","C. Process termination","D. Memory allocation"],a:["B"]},{q:"IPC primitives role in solving synchronization problems:",o:["A. IPC primitives significantly improve system stability by eliminating all potential deadlock scenarios.","B. While IPC primitives address synchronization issues, they might introduce overhead and scalability challenges.","C. IPC primitives have minimal impact on system stability but greatly enhance performance.","D. The usage of IPC primitives enhances system scalability without any performance trade-offs."],a:["B"]},{q:"In the Dining Philosophers problem, what do the philosophers represent?",o:["A. Real-world philosophers dining in a restaurant.","B. Concurrent processes that compete for access to shared resources.","C. Philosophical concepts unrelated to computing.","D. A form of computer virus."],a:["B"]},{q:"The dining philosophers problem demonstrates that shared resources managed by semaphores/mutexes can lead to:",o:["A. Need for thread priorities in deadlock resolution.","B. Prevention of deadlocks by allowing multiple processes to access critical sections simultaneously.","C. Deadlock situations without proper synchronization.","D. Ineffective resolution of scheduling issues."],a:["C"]},{q:"In 1965, Dijkstra posed and then solved a synchronization problem he called ____.",o:["A. the dining philosophers problem","B. the ostrich algorithm","C. the banker's algorithm","D. the allocation algorithm"],a:["A"]},{q:"Which part of the OS is responsible for deciding which process should run and for how long?",o:["A. CPU Scheduler","B. Disk Scheduler","C. Memory Manager","D. File System","E. Network Manager"],a:["A"]},{q:"Which scheduling algorithm allocates the CPU first to the process that requests it first?",o:["A. First-come, first-served scheduling","B. Shortest job scheduling","C. Priority scheduling","D. Multi-level queue"],a:["A"]},{q:"Which algorithm operates in preemptive scheme only in batch systems?",o:["A. First Come First Served","B. Shortest Job First","C. Round Robin","D. Priority"],a:["C"]},{q:"Which is NOT a scheduling algorithm in Batch Systems?",o:["A. First-Come, First-Served","B. Shortest Job First","C. Shortest Remaining Time Next","D. Round-Robin"],a:["D"],x:"Round-Robin is for interactive systems, not batch systems."},{q:"A preemptive version of SJF is ___.",o:["A. Shortest Process Next","B. First-Come, First-Served","C. Shortest remaining time next","D. Shortest used time"],a:["C"]},{q:"The interval from the time of submission of a process to the time of completion is termed as ______",o:["A. waiting time","B. turnaround time","C. response time","D. throughput"],a:["B"]},{q:"In batch systems, which goal maximizes the number of jobs completed per hour?",o:["A. Throughput","B. Turnaround time","C. CPU utilization","D. Fairness"],a:["A"]},{q:"In interactive systems, what does 'proportionality' refer to?",o:["A. Ensuring processes get an equal share of CPU time","B. Meeting users' expectations in terms of performance","C. Completing as many jobs as possible in a given time frame","D. Predicting how the system will behave under load"],a:["B"]},{q:"In Round-Robin scheduling, what happens when a process runs out of its time slice?",o:["A. The process switches from running to a ready state.","B. The process switches from running to a blocked state.","C. The process switches from running to a suspended-ready state.","D. The process switches from running to a suspended state."],a:["A"]},{q:"FCFS Scheduling: processes arrive in order P2, P3, P1. Burst: P1=24, P2=3, P3=3. Average waiting time?",o:["A. 3","B. 30","C. 27","D. 9","E. 6","F. 2"],a:["A"],x:"P2 waiting=0, P3 waiting=3, P1 waiting=6 → Total=9, Average=9/3=3"},{q:"SJF Scheduling: P1=10, P2=1, P3=2, P4=4, P5=5 (all at time 0). Average waiting time?",o:["A. 4.6","B. 6.2","C. 5.2","D. 4.2"],a:["A"],x:"Order: P2,P3,P4,P5,P1. Waiting: 0,1,3,7,12 → Sum=23, Avg=4.6"},{q:"With ______ only one process can execute at a time. With ______ more than one process can run simultaneously.",o:["A. Multiprocessing, Multiprogramming","B. Multiprogramming, Uniprocessing","C. Multiprogramming, Multiprocessing","D. Uniprogramming, Multiprocessing"],a:["D"]},{q:"4GB RAM, OS occupies 2GB. Processes are 1024MB each, idle 50% for I/O. CPU utilization?",o:["A. 75%","B. 90%","C. 1%","D. 50%"],a:["A"],x:"Available=2GB→2 processes. Utilization=1-(0.5)²=75%"},{q:"What is the role of the Memory Management Unit (MMU)?",o:["A. The MMU translates virtual addresses into physical addresses","B. It controls the allocation of memory to different processes.","C. It manages the paging and swapping of memory pages.","D. It is a data structure used in OS for virtual memory management"],a:["A"]},{q:"What memory management technique uses a binary representation where each bit corresponds to an allocation unit?",o:["A. Bitmap","B. Linked List","C. Paging","D. Partition"],a:["A"]},{q:"The ______ swaps processes in and out of the memory.",o:["A. CPU","B. CPU manager","C. Memory manager","D. User"],a:["C"]},{q:"______ searches the entire list, from beginning to end, and takes the smallest hole that is adequate.",o:["A. Best fit","B. Next fit","C. Worst fit","D. First fit"],a:["A"]},{q:"Memory holes: 16MB,4MB,12MB,28MB,9MB,22MB,12MB,18MB. Which hole for 12MB request using WORST FIT?",o:["A. 18 MB","B. 28 MB","C. 12 MB","D. 16 MB"],a:["B"],x:"Worst Fit selects the largest hole: 28 MB."},{q:"When a higher priority process swaps out a lower priority process, this variant is called?",o:["A. roll out, roll in","B. priority swapping","C. pull in, push out","D. pull out, push in"],a:["A"]},{q:"A general solution to provide many completely independent address spaces is called?",o:["A. Segment","B. Paging","C. Partition","D. Virtual"],a:["D"]},{q:"Given Base and Limit Registers: P1=8KB, P2=4KB, P3=16KB. Base and Limit for P3?",o:["A. Base: 8KB, Limit: 24KB","B. Base: 8KB, Limit: 28KB","C. Base: 12KB, Limit: 16KB","D. Base: 12KB, Limit: 28KB"],a:["D"],x:"P3 starts at 12KB. Limit=12+16=28KB."},{q:"Free memory: 10KB,4KB,15KB,18KB,7KB,9KB,13KB,20KB. Process needing 12KB is placed into 20KB block. Which algorithm?",o:["A. Worst-fit","B. First-fit","C. Best-fit","D. Next-fit"],a:["A"],x:"Worst-fit places the process into the largest available hole."},{q:"Memory blocks B1-B6: 300,600,380,200,750,125 KB. Processes P1-P5: 115,500,350,200,375 KB. Best-fit for P5 (375KB)?",o:["A. B5 (750KB)","B. B3 (380KB)","C. B4 (200KB)","D. B2 (600KB)"],a:["B"],x:"Best-fit: smallest block ≥ 375KB. B3=380KB is the best fit."},{q:"What is the purpose of a segment table in a segmented memory system?",o:["A. To store the contents of disk pages","B. To map segment numbers to physical addresses","C. To manage CPU cache memory","D. To control input/output operations"],a:["B"]},{q:"What is the primary advantage of segmented memory over paging?",o:["A. Simplified address translation","B. Efficient use of memory space","C. Reduced overhead in memory management","D. Elimination of fragmentation"],a:["B"]},{q:"What is the DISADVANTAGE of segmentation in memory management?",o:["A. It can have external fragmentation.","B. The average segment size is larger than the actual page size.","C. It is easier to relocate segments than the entire address space.","D. The segment table is smaller as compared to the page table."],a:["A"]},{q:"In virtual memory, a solution adopted in the 1960s was to split programs into pieces called ____.",o:["A. overlays","B. pages","C. page table","D. page fault"],a:["A"]},{q:"What is paging in virtual memory?",o:["A. A technique for managing disk storage","B. A method for managing memory by dividing it into fixed-size blocks","C. A process for controlling CPU scheduling","D. A mechanism for handling network communication"],a:["B"]},{q:"Most virtual memory systems use a technique called ______?",o:["A. Page Fault","B. Page Frames","C. Page Table","D. Paging"],a:["D"]},{q:"What is the benefit of using paging in virtual memory systems?",o:["A. Enhanced CPU performance","B. Improved disk storage management","C. Efficient memory utilization","D. Faster network communication"],a:["C"]},{q:"What technique is NOT used in the implementation of Virtual Memory?",o:["A. Paging","B. Mapping","C. Segmentation","D. Partition"],a:["D"]},{q:"Which statement best describes virtual memory in Windows?",o:["A. Virtual memory stores temporary files to free up physical RAM.","B. Virtual memory allows a larger address space than physical memory, using RAM and hard disk.","C. Virtual memory is a reserved area on the hard disk for storing system files.","D. Virtual memory enables the OS to manage display settings for multiple monitors."],a:["B"]},{q:"What is the primary goal of a page replacement algorithm?",o:["A. To increase the speed of the CPU","B. To minimize disk I/O operations","C. To increase the number of processes in memory","D. To simplify memory management"],a:["B"]},{q:"The percentage of times a page number is found in the TLB is known as _______",o:["A. miss ratio","B. miss percent","C. hit ratio","D. hit percent"],a:["C"]},{q:"When there is a large logical address space, the best way of paging would be _______",o:["A. not to page","B. a two-level paging algorithm","C. the page table itself","D. a single-level paging algorithm"],a:["B"]},{q:"A multilevel page table is preferred over a single level page table because ______.",o:["A. it helps reduce the number of page faults in page replacement algorithms","B. it is required by the translation lookaside buffer","C. it helps reduce the size of page table needed to implement the virtual address space","D. it reduces the memory access time to read or write a memory location"],a:["C"]},{q:"What is the primary disadvantage of using a fixed-size page table?",o:["A. It limits the number of pages a process can have.","B. It results in excessive memory consumption.","C. It requires a complex page replacement algorithm.","D. It leads to inefficient page allocation."],a:["B"]},{q:"What is another name for the Modified Bit?",o:["A. Referenced Bit","B. Access Bit","C. Dirty Bit","D. Clear Bit"],a:["C"]},{q:"In a paging system, data stored in secondary storage not currently in main memory is called:",o:["A. Cache","B. Page table","C. Disk image","D. Swap space"],a:["D"]},{q:"Which information bit in the page table entry indicates the types of access permitted?",o:["A. Present/absent bit","B. Caching disabled","C. Protection bit","D. Modified bit"],a:["C"]},{q:"In the FIFO page replacement algorithm, what data structure is commonly used?",o:["A. Stack","B. Queue","C. Linked list","D. Array"],a:["B"]},{q:"Main advantage of the Clock Algorithm over the Second Chance Algorithm?",o:["A. The Clock algorithm eliminates the need to move pages around, reducing overhead.","B. The Clock algorithm increases the complexity of implementation.","C. The Clock algorithm guarantees fewer page faults compared to Second Chance algorithm.","D. The Clock algorithm uses more memory to maintain the circular structure."],a:["A"]},{q:"In which page replacement algorithm can the page fault rate increase even when the number of frames increases?",o:["A. FIFO","B. LRU","C. NRU","D. OPT"],a:["A"],x:"This is known as Belady's Anomaly."},{q:"In the context of virtual memory, what does 'thrashing' refer to?",o:["A. When a process is spending more time paging than executing","B. When a process is terminated unexpectedly","C. When a process is using more memory than allocated","D. When a process is waiting for I/O operations"],a:["A"]},{q:"Assume 16-bit virtual address and 4-KB page size. How many indexes in a one-level page table?",o:["A. 16","B. 4","C. 8","D. 64"],a:["A"],x:"4KB=2^12 offset bits, 16-12=4 bits for page number → 2^4=16 indexes"},{q:"32-bit address, two-level page table: 10-bit PT1, 12-bit PT2, remaining offset. Page size?",o:["A. 512B","B. 1-KB","C. 2-KB","D. 4-KB"],a:["B"],x:"Offset=32-10-12=10 bits → 2^10=1024 bytes=1KB"},{q:"Virtual address 0x00403008, split 10-bit PT1, 10-bit PT2, 12-bit offset. Find PT1, PT2, offset.",o:["A. PT1=1; PT2=3; offset=8","B. PT1=1; PT2=1; offset=8","C. PT1=4; PT2=3; offset=8","D. PT1=4; PT2=1; offset=8"],a:["A"],x:"0x00403008 binary: PT1=0000000001=1, PT2=0000000011=3, offset=0000 0000 1000=8"},{q:"Evaluate memory virtualization in optimizing resource allocation:",o:["A. It effectively isolates processes, leading to a reduction in overall system performance.","B. It enhances resource allocation efficiency, improving system performance.","C. It complicates memory management, decreasing performance.","D. It only impacts I/O performance, not overall system performance."],a:["B"]},{q:"What is segmentation with paging?",o:["A. A technique for managing multiple memory segments simultaneously.","B. A method that combines the flexibility of segmentation with the efficiency of paging.","C. A scheme that uses fixed-size pages to allocate memory.","D. A scheduling algorithm for thread management."],a:["B"]},{q:"When is the page table created for a new process in a paging system?",o:["A. process creation time.","B. process execution time.","C. page fault time.","D. process termination time."],a:["A"]},{q:"LRU with 3 frames, reference string: 4,7,6,1,7,6,1,2,7,2. Total page faults?",o:["A. 2","B. 4","C. 6","D. 7"],a:["C"],x:"4F,7F,6F,1F(rep4),7H,6H,1H,2F(rep7),7F(rep6),2H → 6 faults"},{q:"FIFO with 3 frames, reference string: 1,2,3,4,1,2. Page faults?",o:["A. 6","B. 4","C. 5","D. 3"],a:["A"],x:"1F,2F,3F,4F(rep1),1F(rep2),2F(rep3) → 6 page faults"},{q:"FIFO with 3 frames, string 1,2,3,4,1,2,5. When page 5 is loaded, which page is replaced?",o:["A. Page 1","B. Page 2","C. Page 3","D. Page 4"],a:["D"],x:"Sequence: 1F,2F,3F,4F(rep1),1F(rep2),2F(rep3),5F(rep4)"},{q:"Optimal replacement with 4 frames, reference string: 7,0,1,2,0,3,0. Page faults?",o:["A. 5","B. 6","C. 4","D. 7"],a:["A"],x:"7F,0F,1F,2F,0H,3F(rep7),0H → 5 page faults"},{q:"Files are ______ units of information created by processes.",o:["A. physical","B. logical","C. sequential","D. conditional"],a:["B"]},{q:"Which file is a sequence of bytes organized into blocks understandable by the system's linker?",o:["A. Text file","B. Object file","C. Source file","D. Executable file"],a:["B"]},{q:"What kind of file access did early operating systems provide?",o:["A. Linear access","B. Unsequential access","C. Random access","D. Sequential access"],a:["D"]},{q:"In file access system, what two methods are used to specify where to start reading in random access?",o:["A. Write and Read","B. Write and Seek","C. Read and Seek","D. Read and Write"],a:["C"]},{q:"Which file attribute specifies who can access the file and in what way?",o:["A. Protection","B. Password","C. Creator","D. Owner"],a:["A"]},{q:"Which file extension is used for backup files?",o:["A. bak","B. zip","C. txt","D. o"],a:["A"]},{q:"Which file extension is used for compressed archives?",o:["A. .mpg","B. .bak","C. .zip","D. .gif"],a:["C"]},{q:"In a Unix-like OS, what does the tilde (~) character represent in a path?",o:["A. The home directory of the current user","B. The parent directory","C. The current directory","D. The root directory"],a:["A"]},{q:"What is an absolute path in operating systems?",o:["A. A path that starts from the root directory","B. A path that is relative to the current working directory","C. A path that includes only the file name","D. A path that is used for network communication"],a:["A"]},{q:"How does a relative path differ from an absolute path?",o:["A. Relative paths always start from the root directory","B. Relative paths are shorter than absolute paths","C. Relative paths depend on the current working directory","D. Relative paths contain only file extensions"],a:["C"]},{q:"How would the path usr/ast/mailbox be written in MULTICS?",o:["A. usr\\ast\\mailbox","B. >usr>ast>mailbox","C. /usr/ast/mailbox","D. usr>ast>mailbox"],a:["B"],x:"MULTICS uses the > character as a path separator."},{q:"The simplest form of directory system is having one directory containing all files. It is called the _____",o:["A. Root directory","B. User directory","C. Parent directory","D. Current directory"],a:["A"]},{q:"What file operation should free up internal tablespace when all accesses are completed?",o:["A. Close","B. Delete","C. Append","D. Seek"],a:["A"]},{q:"When a directory has been read, it should be closed using ____.",o:["A. Close","B. Closedir","C. Delete","D. Opendir"],a:["B"]},{q:"Which operation notifies the OS that a file is coming and sets some of its attributes?",o:["A. Delete","B. Create","C. Read","D. Write"],a:["B"]},{q:"In UNIX, which type of file is used to model disks?",o:["A. Regular files.","B. Character special files.","C. Block special files.","D. Directories."],a:["C"]},{q:"In UNIX, how are devices like USB sticks integrated into the file-system hierarchy?",o:["A. Devices are not integrated and require separate access commands","B. Devices are assigned unique identifiers that must be used to access files","C. Devices can be mounted on directories within the file-system hierarchy","D. Devices require special software to be accessed through the file system"],a:["C"]},{q:"In Unix, which command is used to move the file pointer?",o:["A. Write","B. Mount","C. Link","D. Lseek"],a:["D"]},{q:"In file sharing, B links to C's file by creating a new file containing the path name. What type of linking?",o:["A. Synchronous Linking","B. Symbolic Linking","C. Traditional (hard) Linking","D. Synthetic Linking"],a:["B"]},{q:"Which file access method is often used to optimize access to large files?",o:["A. Sequential access","B. Direct access","C. Indexed access","D. Linked access"],a:["C"]},{q:"What is the goal of uniform naming in file and device management?",o:["A. To make file names unique to each device","B. To limit file names to a specific format","C. To differentiate file names based on the device type","D. To ensure the name of a file or device is a simple string or integer, independent of the device"],a:["D"]},{q:"In Linux, what is the primary purpose of the /etc directory?",o:["A. To store temporary files.","B. To manage system boot files.","C. To house system configuration files and scripts.","D. To store user home directories."],a:["C"]},{q:"In Windows, which command is used to create a new directory?",o:["A. Mkdir","B. Rmdir","C. Chdir","D. Chmod"],a:["A"]},{q:"To prevent users from hogging too much disk space, multiuser OSes provide a mechanism called:",o:["A. Disk Quota","B. Allocation Limit","C. Disk Space Limit","D. Disk Allocation Limit"],a:["A"]},{q:"Disk can be divided into partitions. The first block of every partition is called:",o:["A. Boot block","B. Free block","C. Super block","D. MBR"],a:["C"]},{q:"Sector 0 of the disk is called the ____ and is used to boot the computer.",o:["A. DMA","B. MBR","C. FAT","D. NTFS"],a:["B"]},{q:"When the computer is booted, what is used to read in and execute?",o:["A. BIOS, Boot Block","B. CPU, BIOS","C. BIOS, MBR","D. MBR, BIOS"],a:["C"]},{q:"What is fragmentation in file-system implementation?",o:["A. A technique for managing directory structures.","B. The allocation of memory for file storage.","C. The splitting of files or free space into smaller, non-contiguous blocks.","D. The arrangement of files on storage devices."],a:["C"]},{q:"Using a linked list of disk blocks with 1-KB block and 32-bit disk block number, how many addresses can be stored?",o:["A. 255","B. 1024","C. 32","D. 128"],a:["A"],x:"1KB=1024 bytes, each 32-bit address=4 bytes → 1024/4=256, minus 1 management block=255"},{q:"4-TB disk, 4-KB blocks, free-list method. How many block addresses can be stored in one block?",o:["A. 1024 addresses","B. 256 addresses","C. 512 addresses","D. 2048 addresses","E. 128 addresses"],a:["A"],x:"4KB=4096 bytes, each 32-bit address=4 bytes → 4096/4=1024"},{q:"Analyze significance of log-structured file systems:",o:["A. Log-structured file systems optimize disk usage but may suffer from higher write latencies.","B. Log-structured file systems minimize write latencies by writing data in large units and improve disk usage.","C. Log-structured file systems have no impact on write latencies and disk usage.","D. Log-structured file systems slow down disk usage by writing data in small units."],a:["B"]},{q:"In Windows 95, maximum partition size with FAT-16 and 4KB block size?",o:["A. 128MB","B. 256MB","C. 512MB","D. 1024MB"],a:["B"],x:"FAT16: 65536 clusters × 4KB = 256MB"},{q:"In Windows 95, maximum partition size with FAT-32 and 16KB block size?",o:["A. 1TB","B. 2TB","C. 512MB","D. 128MB"],a:["B"]},{q:"In the original IBM PC 360-KB floppy disk, how many sectors per track?",o:["A. 4","B. 8","C. 9","D. 12"],a:["C"]},{q:"Which RAID level provides disk striping WITHOUT fault tolerance?",o:["A. RAID 0","B. RAID 1","C. RAID 2","D. RAID 5","E. RAID 6"],a:["A"]},{q:"RAID levels ______ work with strips and do not require synchronized drives.",o:["A. RAID levels 2 and 3","B. RAID levels 3 and 4","C. RAID levels 4 and 5","D. RAID levels 5 and 6"],a:["C"]},{q:"Weaknesses of RAID 0?",o:["A. Requires the highest number of disks in RAID modes","B. There is no data recovery mechanism","C. The unit of data transmitted is at the BIT level","D. Does not improve read and write speeds"],a:["B"]},{q:"Which OS uses the > symbol as a separator in its file path structure?",o:["A. Windows","B. UNIX","C. MULTICS","D. Linux"],a:["C"]},{q:"The software that talks to an I/O controller, giving it commands and accepting responses, is called ______.",o:["A. device driver","B. DMA","C. device interface","D. interrupt"],a:["A"]},{q:"The hardware mechanism that allows a device to notify the CPU is called ____.",o:["A. interrupt","B. polling","C. driver","D. controlling"],a:["A"]},{q:"An interrupt with four properties (PC saved, all prior instructions completed, no later instructions finished, execution state known) is called?",o:["A. Imprecise interrupt","B. Synchronous interrupt","C. Sequential interrupt","D. Precise interrupt"],a:["D"]},{q:"In computer interrupts, the number on address lines used as an index into a table to fetch a new PC is called:",o:["A. interrupt vector","B. interrupt handler","C. interrupt pointer","D. interrupt executor"],a:["A"]},{q:"What is the purpose of DMA in I/O hardware?",o:["A. To manage device controllers.","B. To allocate memory for device drivers.","C. To enable devices to transfer data to and from memory without CPU intervention.","D. To provide user interfaces for I/O devices."],a:["C"]},{q:"Key advantage of using DMA for data transfer?",o:["A. Increased CPU involvement in data transfers","B. Faster data transfer speeds","C. Limited device compatibility","D. Decreased device control over memory"],a:["B"]},{q:"What types of operations is DMA useful for?",o:["A. Transfers large and fast data between memory and I/O devices.","B. Transfers large and slow data between memory and I/O devices.","C. Transfers slow and small data between memory and I/O devices.","D. Transfers small data between memory and cache."],a:["A"]},{q:"What addresses are typically used by most DMA controllers?",o:["A. Logical memory","B. Abstract memory","C. Virtual memory","D. Physical memory"],a:["D"]},{q:"In DMA transfer cycle, what two modes can many buses operate in?",o:["A. Word-at-a-time mode and byte mode.","B. Word-at-a-time mode and block mode.","C. Word-at-a-time mode and bit mode.","D. Word-at-a-time mode and page mode."],a:["B"]},{q:"In DMA transfer cycle, when the DMA controller tells the device to acquire the bus, perform transfers, then release, this is called:",o:["A. Fly-by mode.","B. Word-at-a-time mode","C. Burst mode","D. Caching mode"],a:["C"]},{q:"I/O units' electronic component is called?",o:["A. Device controller or I/O devices","B. Device controller or adapter","C. Digital or terminal","D. Digital or I/O devices"],a:["B"]},{q:"Besides converting serial bit stream into bytes, what else does the I/O controller do?",o:["A. Perform any error correction necessary","B. Perform convert the sequence bit stream into a block of bytes","C. Perform connecting I/O devices","D. Perform read and write serial bit stream into a block of bytes"],a:["A"]},{q:"______ includes every peripheral unit such as disks, clocks, keyboards, displays, and so on.",o:["A. I/O devices","B. Memory","C. CPU","D. Software"],a:["A"]},{q:"What is a common block size range used in a file system or storage medium?",o:["A. 512 to 8192 bytes","B. 512 to 16384 bytes","C. 512 to 32768 bytes","D. 512 to 65536 bytes"],a:["D"]},{q:"What type of clock keeps track of current time and date and is typically battery-powered?",o:["A. System clock","B. CPU clock","C. Real-time clock (RTC)","D. Network clock"],a:["C"]},{q:"The simplest form of I/O where the CPU does all the work is called:",o:["A. Processed I/O","B. Programmed I/O","C. CPU I/O","D. Memory-mapped I/O"],a:["B"]},{q:"In programmed I/O, who is responsible for managing all aspects of data transfer?",o:["A. The I/O device","B. The DMA controller","C. The CPU","D. The interrupt handler"],a:["C"]},{q:"What are the three basic ways that I/O operations can be performed?",o:["A. Programmed I/O","B. Memory-mapped I/O","C. Interrupt-driven I/O","D. I/O using DMA"],a:["A","C","D"],m:true},{q:"In memory-mapped I/O, to prevent infinite loops while waiting for a device, what is used?",o:["A. Selectively enable caching","B. Selectively disable buffer","C. Selectively enable buffer","D. Selectively disable caching"],a:["D"]},{q:"What is 'blocking' in the context of I/O software?",o:["A. A technique for managing device drivers.","B. A mechanism for ensuring device synchronization.","C. The process of stopping a process until an I/O operation is completed.","D. A method of allocating memory for I/O operations."],a:["C"]},{q:"How many layers are there in the I/O software system?",o:["A. 3","B. 4","C. 5","D. 6"],a:["B"]},{q:"Which is NOT a responsibility of Device-Independent I/O Software layer?",o:["A. Uniform interfacing for device drivers","B. Allocating and releasing dedicated devices","C. Providing a device-independent block size","D. Allocating port numbers to I/O devices","E. Error handling","F. Buffering"],a:["D"]},{q:"What are the four important issues for I/O software?",o:["A. Error handling","B. Device independence","C. Synchronous and Asynchronous","D. Uniform naming","E. Buffering"],a:["A","B","D","E"],m:true},{q:"What happens to characters that arrive while the user buffer page is being brought in from disk?",o:["A. The buffer is full, there is no place to put them","B. The buffer is ready, there are more places to put them","C. The buffer is clear, there are more places to put them"],a:["A"]},{q:"Format of a sector after low-level formatting?",o:["A. The format of a sector is preamble, data and ECC.","B. The format of a sector is preamble, data and cylinder.","C. The format of a sector is preamble and data.","D. The format of a sector is data and ECC."],a:["A"]},{q:"Time to move the arm to the proper cylinder is called?",o:["A. Seek time","B. Rotational delay","C. Actual data transfer time","D. Access time"],a:["A"]},{q:"Which operation in stable storage writes and verifies a block on both drives?",o:["A. Stable read.","B. Crash recovery.","C. Stable write.","D. Data synchronization."],a:["C"]},{q:"Which is NOT one of the usual duties of Clock Software?",o:["A. Maintaining the time of day.","B. Helping processes run longer than they are allowed to.","C. Accounting for CPU usage.","D. Handling the alarm system call made by user processes.","E. Doing profiling, monitoring, and statistics gathering."],a:["B"]},{q:"In disk scheduling, which algorithm is considered the fairest but may lead to high seek times?",o:["A. FCFS","B. SSTF","C. SCAN","D. C-SCAN"],a:["A"]},{q:"SSF disk scheduling: cylinders 98,37,14,65,67 requested, head at 53. What is the order?",o:["A. 53, 65, 67, 37, 14, 98","B. 53, 37, 14, 65, 67, 98","C. 53, 14, 37, 65, 67, 98","D. 53, 98, 67, 65, 37, 14"],a:["A"],x:"From 53: nearest=65(12), then 67(2), then 37(30), then 14(23), then 98(84)"},{q:"Disk head at 53, sequence 53→98→37→14→65→67. Which algorithm is this?",o:["A. FCFS","B. SSF","C. SJF","D. Elevator"],a:["A"]},{q:"Disk head at 53, sequence 53→65→67→98→37→14. Which algorithm is this?",o:["A. Elevator","B. SSF","C. SJF","D. FCFS"],a:["B"]},{q:"SSF scheduling, cylinder 11 in progress, new requests: 1,36,16,34,9,12. Total head movements?",o:["A. 61","B. 111","C. 60","D. 108"],a:["A"],x:"11→12(1),12→9(3),9→16(7),16→1(15),1→34(33),34→36(2) = 61"},{q:"Which ISN'T a method to PREVENT deadlocks?",o:["A. Attacking the Mutual Exclusion Condition","B. Use Banker's Algorithm","C. Attacking the Hold and Wait Condition","D. Attacking the No Preemption Condition","E. Attacking the Circular Wait Condition"],a:["B"],x:"Banker's Algorithm is a deadlock AVOIDANCE technique, not prevention."},{q:"In deadlock, what is the mutual exclusion condition?",o:["A. Processes currently holding resources can request new resources.","B. Resources previously granted cannot be forcibly taken away.","C. There must be a circular list of processes each waiting for a resource held by the next.","D. Each resource is either currently assigned to exactly one process or is available."],a:["D"]},{q:"In deadlock, what is the no-preemption condition?",o:["A. Processes currently holding resources can request new resources.","B. Resources previously granted cannot be forcibly taken away. They must be explicitly released.","C. There must be a circular list of processes waiting for resources.","D. Each resource is assigned to exactly one process."],a:["B"]},{q:"Analyze the significance of the hold-and-wait condition:",o:["A. It allows processes to request resources without considering safety.","B. It dictates that processes must wait for all resources to be available before starting.","C. It can cause processes to indefinitely hold resources while waiting for others, influencing deadlock prevention strategies.","D. It mandates that resources must be released once a process completes."],a:["C"]},{q:"Which condition is described by 'Each resource is either currently assigned to exactly one process or is available'?",o:["A. Mutual exclusion condition","B. Hold-and-wait condition","C. No-preemption condition","D. Circular wait condition"],a:["A"]},{q:"What does 'no preemption' imply in the context of deadlocks?",o:["A. Resources can be preempted from one process to another.","B. Resources cannot be preempted once allocated.","C. Processes can be terminated to free up resources.","D. Resources are allocated in a circular manner."],a:["B"]},{q:"What does a resource allocation graph represent in deadlock detection?",o:["A. A graph that shows the number of resources allocated to each process.","B. A graph that depicts the processes and resources and their relationships.","C. A chart showing the execution order of processes.","D. A diagram of CPU scheduling."],a:["B"]},{q:"An arc directed from a process to a resource in a resource allocation graph means:",o:["A. The process is currently waiting for that resource.","B. The process is currently ready waiting for that resource.","C. The process is currently blocked waiting for that resource.","D. The process is currently running for that resource."],a:["A"]},{q:"If the wait-for graph contains a cycle ______",o:["A. then a deadlock does not exist","B. then a deadlock exists","C. then the system is in a safe state","D. either deadlock exists or the system is in a safe state"],a:["B"]},{q:"What is the primary objective of Deadlock Avoidance techniques?",o:["A. To resolve deadlocks after they occur","B. To preemptively avoid potential deadlocks","C. To require processes to request resources in advance","D. To identify deadlocks and take corrective action","E. To ignore the occurrence of deadlocks"],a:["B"]},{q:"Which algorithm is commonly used to determine if the resource allocation state is safe?",o:["A. Dijkstra's Algorithm","B. Banker's Algorithm","C. Kruskal's Algorithm","D. Floyd-Warshall Algorithm"],a:["B"]},{q:"In the Banker's algorithm, purpose of the 'maximum demand' matrix?",o:["A. To specify the number of instances of each resource currently held by each process.","B. To record the maximum resources each process may need during its execution.","C. To list the resources currently available in the system.","D. To identify deadlocked processes."],a:["B"]},{q:"Who is responsible for the Banker's algorithm?",o:["A. Dijkstra","B. Zobel","C. Newton","D. Ostrich"],a:["A"]},{q:"Which recovery method can lead to data inconsistency when re-executed?",o:["A. Recovery through rollback","B. Killing processes","C. Preemption","D. Checkpointing","E. None of the others"],a:["A"]},{q:"Every time a request for allocation cannot be granted immediately, the detection algorithm identifies ______.",o:["A. the set of processes that have been deadlocked","B. the set of processes in the deadlock queue","C. the specific process that caused the deadlock","D. the set of processes that caused the deadlock"],a:["A"]},{q:"What is a preemptable resource?",o:["A. One that can be taken away from the process owning it with no ill effects","B. One that can be taken away from the process owning it with ill effects","C. One that cannot be taken away from the process owning it with no ill effects","D. One that cannot be taken away from the process owning it with ill effects"],a:["A"]},{q:"What is a nonpreemptable resource?",o:["A. One that can be taken away from its current owner with potentially causing failure.","B. One that cannot be taken away from its current owner with potentially causing failure.","C. One that can be taken away from its current owner without potentially causing failure.","D. One that cannot be taken away from its current owner without potentially causing failure."],a:["D"]},{q:"If a Blu-ray recorder is suddenly taken away from a process, the Blu-ray gets garbled. This indicates:",o:["A. It's an Un-preemptable resource","B. It's a Preemptable resource","C. It's a Non-sharable resource","D. It's a Non-preemptable resource"],a:["D"]},{q:"Which of the following statements regarding deadlock is correct?",o:["A. Allocation is a logical process while acquisition is its physical implementation.","B. Banker's Algorithm is used to guarantee absolute mutual exclusion during resource acquisition.","C. A combination of semaphore and mutex ensures safe resource allocation.","D. Kernel is responsible for exclusive resource acquisition by a process while IPC takes care of safe resource allocation among multiple processes."],a:["D"]},{q:"Which tool is used for both Deadlock Detection & Recovery and Deadlock Avoidance?",o:["A. Resource Request Matrix","B. Resource Allocation Matrix","C. Resource Graph","D. Pie chart"],a:["C"]},{q:"What is the Ostrich algorithm?",o:["A. A deadlock recovery algorithm","B. A deadlock dealing algorithm (pretend there is no deadlock)","C. A deadlock detection algorithm","D. A deadlock avoidance algorithm"],a:["B"]},{q:"A problem closely related to deadlock and livelock is ____",o:["A. Starvation","B. Communication","C. Two-phase locking","D. Prevention"],a:["A"]},{q:"In OS, how does livelock differ from deadlock?",o:["A. In deadlock, processes make progress; in livelock, they do not.","B. In livelock, processes make progress; in deadlock, they do not.","C. Deadlock and livelock are the same.","D. Livelock is the process before becoming deadlock."],a:["B"],x:"In deadlock: processes do not run. In livelock: processes run but make no progress."},{q:"The number of resources requested by a process ______",o:["A. must always be less than the total number of resources available in the system","B. must not exceed the total number of resources available in the system","C. must always be equal to the total number of resources available in the system","D. must exceed the total number of resources available in the system"],a:["B"]},{q:"Which deadlock condition does 'Take resources away' attack?",o:["A. Hold and wait","B. Mutual exclusion","C. No preemption","D. Circular wait"],a:["C"]},{q:"Which condition, if not present, can help prevent deadlocks?",o:["A. Mutual exclusion","B. Hold and wait","C. No preemption","D. Circular wait"],a:["D"]},{q:"Differentiate Type 1 and Type 2 hypervisors. Which is generally more efficient for enterprise environments?",o:["A. Type 1 hypervisors, as they run directly on hardware","B. Type 2 hypervisors, as they offer more flexibility.","C. Type 1 hypervisors, for simpler management than Type 2","D. Both types are equally efficient in enterprises"],a:["A"]},{q:"A VMM (Virtual Machine Monitor) is also known as:",o:["A. Hypovisor","B. hypervisor","C. shell","D. console"],a:["B"]},{q:"In a thin client setup, where is most of the software and data processing performed?",o:["A. Locally on the thin client device.","B. On a central server or cloud infrastructure.","C. On a central server or client infrastructure.","D. On a dedicated network switch."],a:["B"]},{q:"What is the output of: echo $((5 / 2 * 2)) ?",o:["A. 1","B. 5","C. 4","D. 2"],a:["C"],x:"5/2=2 (integer division), 2×2=4"},{q:"In Linux, what key combination stops the ping command in the terminal?",o:["A. Ctrl+Break","B. Ctrl+D","C. Ctrl+C","D. Ctrl+Z"],a:["C"]},{q:"/etc/passwd entry: 'john:x:1002:John Henry::bin/bash'. Choose the correct statement:",o:["A. Username = john and userid = 1002","B. Username = John Henry and userid = 1002","C. Username = john and userid = 1000","D. Username = John Henry and userid = 1000"],a:["A"]},{q:"A logical address is described as:",o:["A. A logical address representing the exact location of data in memory.","B. A logical address generated by the CPU, also known as a virtual address.","C. A logical address translated directly by the MMU.","D. A logical address used by the OS to allocate memory."],a:["B"]},{q:"What is the address that the main memory unit sees and manipulates called?",o:["A. Physical address","B. Address space","C. Physical space","D. Logical address"],a:["A"]},{q:"Which statement accurately describes a page fault in memory paging?",o:["A. A situation where a page is removed from main memory to secondary storage.","B. An error occurring when accessing data that is not present in the page table.","C. A condition when the page table is corrupted due to excessive fragmentation.","D. An interrupt that occurs when accessing a page not currently in main memory."],a:["D"]},{q:"In a file's metadata, what does file size typically represent?",o:["A. The physical size of the storage medium.","B. The number of characters in the file.","C. The number of pages in the file.","D. The amount of space the file occupies on the storage medium."],a:["D"]}];
+<footer>
+  <div class="container">
+    <div class="footer-badges">
+      <span class="badge">Đề thi thực tế</span>
+      <span class="badge">198 câu hỏi</span>
+      <span class="badge">Tanenbaum 4th Ed.</span>
+    </div>
+    <div class="footer-owner">Developed by <span>MapuT</span></div>
+    <div class="footer-sub">Operating Systems Quiz · Bộ đề gốc đầy đủ · All rights reserved</div>
+  </div>
+</footer>
 
-let questions=[],currentIdx=0,selectedAnswers=[],answered=false,score=0,wrongCount=0,skipCount=0,history=[],chosenCount=10;
-const welcomeScreen=document.getElementById('welcomeScreen'),quizSection=document.getElementById('quizSection'),resultScreen=document.getElementById('resultScreen');
-document.getElementById('totalInfo').textContent=`Ngân hàng: ${Q.length} câu hỏi`;
-document.getElementById('modeGrid').addEventListener('click',e=>{const c=e.target.closest('.mode-card');if(!c)return;document.querySelectorAll('.mode-card').forEach(x=>x.classList.remove('active'));c.classList.add('active');chosenCount=parseInt(c.dataset.count)});
-document.getElementById('startBtn').addEventListener('click',()=>{const s=[...Q].sort(()=>Math.random()-0.5);questions=chosenCount===0?s:s.slice(0,Math.min(chosenCount,s.length));welcomeScreen.classList.add('hide');quizSection.style.display='block';document.getElementById('statTotal').textContent=questions.length;currentIdx=0;score=0;wrongCount=0;skipCount=0;history=[];loadQuestion()});
-function loadQuestion(){const q=questions[currentIdx];answered=false;selectedAnswers=[];const card=document.getElementById('questionCard');card.style.animation='none';card.offsetHeight;card.style.animation='slideIn 0.4s ease both';document.getElementById('qNumber').textContent=`QUESTION ${String(currentIdx+1).padStart(2,'0')} / ${questions.length}`;document.getElementById('qText').textContent=q.q;const multi=q.m||q.a.length>1;document.getElementById('multiBadge').innerHTML=multi?'<span class="multi-badge">✓ Nhiều đáp án đúng</span>':'';const container=document.getElementById('optionsContainer');container.innerHTML='';q.o.forEach(opt=>{const letter=opt.charAt(0),text=opt.slice(3),btn=document.createElement('button');btn.className='option-btn';btn.innerHTML=`<span class="option-letter">${letter}</span><span style="flex:1">${text}</span><span class="option-icon"></span>`;btn.addEventListener('click',()=>selectOption(btn,letter,multi));container.appendChild(btn)});document.getElementById('explanation').className='explanation';document.getElementById('statCurrent').textContent=currentIdx+1;document.getElementById('statCorrect').textContent=score;document.getElementById('statWrong').textContent=wrongCount;const pct=Math.round(currentIdx/questions.length*100);document.getElementById('progressFill').style.width=pct+'%';document.getElementById('progressLabel').textContent=`Câu ${currentIdx+1} / ${questions.length}`;document.getElementById('progressPct').textContent=pct+'%';document.getElementById('submitBtn').disabled=true;document.getElementById('submitBtn').style.display='inline-flex';document.getElementById('nextBtn').style.display='none';document.getElementById('skipBtn').style.display='inline-flex'}
-function selectOption(btn,letter,multi){if(answered)return;if(!multi){document.querySelectorAll('.option-btn').forEach(b=>b.classList.remove('selected'));selectedAnswers=[letter];btn.classList.add('selected')}else{const idx=selectedAnswers.indexOf(letter);if(idx>-1){selectedAnswers.splice(idx,1);btn.classList.remove('selected')}else{selectedAnswers.push(letter);btn.classList.add('selected')}}document.getElementById('submitBtn').disabled=selectedAnswers.length===0}
-document.getElementById('submitBtn').addEventListener('click',()=>{if(answered||selectedAnswers.length===0)return;answered=true;const q=questions[currentIdx];const correct=q.a.slice().sort().join('')===selectedAnswers.slice().sort().join('');if(correct)score++;else wrongCount++;history.push({q,selected:[...selectedAnswers],correct});document.querySelectorAll('.option-btn').forEach(btn=>{const letter=btn.querySelector('.option-letter').textContent;const isCorrect=q.a.includes(letter);const isSelected=selectedAnswers.includes(letter);btn.disabled=true;if(isSelected&&isCorrect){btn.classList.add('correct');btn.querySelector('.option-icon').textContent='✓'}else if(isSelected&&!isCorrect){btn.classList.add('wrong');btn.querySelector('.option-icon').textContent='✗'}else if(!isSelected&&isCorrect){btn.classList.add('reveal-correct');btn.querySelector('.option-icon').textContent='✓'}});if(q.x){const el=document.getElementById('explanation');el.textContent='💡 '+q.x;el.classList.add('show')}document.getElementById('statCorrect').textContent=score;document.getElementById('statWrong').textContent=wrongCount;document.getElementById('submitBtn').style.display='none';document.getElementById('skipBtn').style.display='none';document.getElementById('nextBtn').style.display='inline-flex';document.getElementById('nextBtn').textContent=currentIdx<questions.length-1?'Câu tiếp →':'Xem kết quả →'});
-document.getElementById('skipBtn').addEventListener('click',()=>{skipCount++;history.push({q:questions[currentIdx],selected:[],correct:false,skipped:true});proceed()});
-document.getElementById('nextBtn').addEventListener('click',proceed);
-function proceed(){currentIdx++;if(currentIdx>=questions.length)showResult();else loadQuestion()}
-function showResult(){quizSection.style.display='none';resultScreen.classList.add('show');const total=questions.length,pct=Math.round(score/total*100);document.getElementById('resultScore').textContent=pct+'%';document.getElementById('resultLabel').textContent=`${score} / ${total} câu đúng`;document.getElementById('rCorrect').textContent=score;document.getElementById('rWrong').textContent=wrongCount;document.getElementById('rSkip').textContent=skipCount;let emoji,rank,rankColor;if(pct>=90){emoji='🏆';rank='XUẤT SẮC';rankColor='linear-gradient(135deg,#fbbf24,#f59e0b)'}else if(pct>=75){emoji='🎉';rank='GIỎI';rankColor='linear-gradient(135deg,#4ade80,#16a34a)'}else if(pct>=60){emoji='👍';rank='KHÁ';rankColor='linear-gradient(135deg,#60a5fa,#2563eb)'}else if(pct>=40){emoji='📚';rank='TRUNG BÌNH';rankColor='linear-gradient(135deg,#fbbf24,#d97706)'}else{emoji='💪';rank='CẦN CỐ GẮNG';rankColor='linear-gradient(135deg,#f87171,#dc2626)'}document.getElementById('resultEmoji').textContent=emoji;const rb=document.getElementById('rankBadge');rb.textContent=rank;rb.style.background=rankColor;rb.style.color='#fff'}
-document.getElementById('reviewBtn').addEventListener('click',()=>{const section=document.getElementById('reviewSection'),list=document.getElementById('reviewList');if(section.style.display==='block'){section.style.display='none';return}section.style.display='block';list.innerHTML='';history.forEach((h,i)=>{const div=document.createElement('div');div.className=`review-item ${h.correct?'r-correct':'r-wrong'}`;const qText=h.q.q.length>120?h.q.q.slice(0,120)+'…':h.q.q;let answersHtml='';if(h.skipped){answersHtml='<span class="review-ans user-wrong">Bỏ qua</span>'}else{h.selected.forEach(s=>{const cls=h.q.a.includes(s)?'user-right':'user-wrong';answersHtml+=`<span class="review-ans ${cls}">Chọn: ${s}</span>`});if(!h.correct){h.q.a.forEach(a=>{if(!h.selected.includes(a))answersHtml+=`<span class="review-ans correct-ans">Đúng: ${a}</span>`})}}div.innerHTML=`<div class="review-q"><span class="review-num">Q${i+1}</span><span>${qText}</span></div><div class="review-answers">${answersHtml}</div>`;list.appendChild(div)})});
-document.getElementById('restartBtn').addEventListener('click',()=>{currentIdx=0;score=0;wrongCount=0;skipCount=0;history=[];questions=[];resultScreen.classList.remove('show');document.getElementById('reviewSection').style.display='none';welcomeScreen.classList.remove('hide')});
+<script>
+// ═══════════════════════════════════════════════════════
+//  AUDIO
+// ═══════════════════════════════════════════════════════
+const AC = new (window.AudioContext||window.webkitAudioContext)();
+function snd(t){
+  try{
+    const cfg={click:{f:600,w:'sine',d:.08,v:.15},correct:{f:[523,659,784],w:'sine',d:.15,v:.2},
+      wrong:{f:[300,200],w:'square',d:.2,v:.1},next:{f:440,w:'triangle',d:.1,v:.12},
+      start:{f:[261,329,392,523],w:'sine',d:.1,v:.15},finish:{f:[523,587,659,784],w:'sine',d:.12,v:.2},
+      sel:{f:800,w:'sine',d:.05,v:.1},timeout:{f:[200,150],w:'sawtooth',d:.3,v:.1}};
+    const c=cfg[t]||cfg.click;
+    if(Array.isArray(c.f)){
+      c.f.forEach((f,i)=>{
+        const o=AC.createOscillator(),g=AC.createGain();
+        o.connect(g);g.connect(AC.destination);
+        o.type=c.w;o.frequency.value=f;
+        g.gain.setValueAtTime(c.v,AC.currentTime+i*c.d);
+        g.gain.exponentialRampToValueAtTime(.001,AC.currentTime+i*c.d+c.d*1.5);
+        o.start(AC.currentTime+i*c.d);o.stop(AC.currentTime+i*c.d+c.d*2);
+      });
+    } else {
+      const o=AC.createOscillator(),g=AC.createGain();
+      o.connect(g);g.connect(AC.destination);
+      o.type=c.w;o.frequency.value=c.f;
+      g.gain.setValueAtTime(c.v,AC.currentTime);
+      g.gain.exponentialRampToValueAtTime(.001,AC.currentTime+c.d*2);
+      o.start();o.stop(AC.currentTime+c.d*2);
+    }
+  }catch(e){}
+}
+document.addEventListener('click',()=>{if(AC.state==='suspended')AC.resume();},{once:true});
+
+// ═══════════════════════════════════════════════════════
+//  ALL 198 QUESTIONS FROM THE EXAM DOCUMENT
+// ═══════════════════════════════════════════════════════
+const QS = [
+// ─── BATCH 1: Original quiz set (50 questions) ────────
+{id:1,ch:'Ch.1',tp:'OS Functions',q:'Which of the following is NOT a function of an operating system?',opts:['Resource Management','Process Management','Memory Management','Transistors Management'],ans:[3],ex:'OS quản lý resources, processes, memory, I/O và files. Transistors là linh kiện phần cứng, không phải chức năng OS.'},
+{id:2,ch:'Ch.1',tp:'OS Architecture',q:'In what scenario would a microkernel-based OS structure be advantageous compared to a monolithic structure?',opts:['When direct hardware access is necessary for user applications','When isolation between user and kernel space is crucial','When a layered approach complicates system performance','When centralized system control is required'],ans:[1],ex:'Microkernel tốt nhất khi cần cô lập cao — services chạy ở user space, crash không ảnh hưởng toàn OS.'},
+{id:3,ch:'Ch.1',tp:'CPU Registers',q:'What special registers are visible to the programmer? (Chọn tất cả đáp án đúng)',opts:['MAR (Memory Address Register)','Program Counter (PC)','Stack Pointer (SP)','PSW (Program Status Word)'],ans:[1,2,3],multi:true,ex:'PC: địa chỉ lệnh tiếp theo. SP: đỉnh stack. PSW: condition codes, CPU mode, priority. MAR là internal register không visible.'},
+{id:4,ch:'Ch.2',tp:'CPU Scheduling',q:'Which part of the OS is responsible for deciding which process should run when and for how long?',opts:['CPU Scheduler','Disk Scheduler','Memory Manager','File System','Network Manager'],ans:[0],ex:'CPU Scheduler (short-term scheduler) chọn process từ ready queue để chạy trên CPU.'},
+{id:5,ch:'Ch.5',tp:'I/O',q:'In I/O Devices, the software that talks to a controller, giving commands and accepting responses, is called ______.',opts:['Device driver','DMA','Device interface','Interrupt'],ans:[0],ex:'Device driver là phần mềm OS giao tiếp với device controller cụ thể.'},
+{id:6,ch:'Ch.1',tp:'OS Concepts',q:'Which statement is FALSE about operating systems?',opts:['OS is a type of system software','OS is a type of application','The OS as an Extended Machine','The OS as a Resource Manager'],ans:[1],ex:'OS là system software, không phải application. Application chạy trên OS, không phải ngược lại.'},
+{id:7,ch:'Ch.1',tp:'System Calls',q:'For efficient process handling and termination operations, which group of system calls is essential?',opts:['Process creation and termination','File reading and writing','Directory management','Miscellaneous system calls'],ans:[0],ex:'fork(), exec(), exit(), waitpid() là các system calls cho process management.'},
+{id:8,ch:'Ch.2',tp:'Threads',q:'Compare threads in user space vs kernel. Which statement is most accurate?',opts:['User-space threads offer faster context switching; kernel threads have direct hardware access','Kernel threads provide better synchronization','User-space threads allow better multitasking; kernel threads prone to deadlocks','User-space threads have limited system resource access; kernel threads efficiently manage I/O'],ans:[0],ex:'User-space threads: context switch không cần syscall (nhanh hơn). Kernel threads: true parallelism, handle I/O blocking correctly.'},
+{id:9,ch:'Ch.2',tp:'Scheduling',q:'Which algorithm operates in PREEMPTIVE scheme ONLY?',opts:['First Come First Served','Shortest Job First','Round Robin','Priority'],ans:[2],ex:'Round Robin là preemptive by design — mỗi process chỉ chạy 1 quantum rồi bị preempt. FCFS không preemptive. SJF có thể cả hai.'},
+{id:10,ch:'Ch.2',tp:'IPC',q:'What is Interprocess Communication (IPC)?',opts:['Allows processes to communicate and synchronize when using same address space','Allows processes to communicate AND synchronize their actions','Allows processes only to synchronize without communication','Allows processes only to communicate without synchronizing'],ans:[1],ex:'IPC bao gồm tất cả cơ chế để processes trao đổi thông tin VÀ đồng bộ: shared memory, message passing, semaphores, signals.'},
+{id:11,ch:'Ch.2',tp:'Scheduling',q:'FCFS: Processes arrive P2, P3, P1. Burst: P1=24, P2=3, P3=3. Calculate average waiting time.',opts:['3','30','27','9','6','2'],ans:[0],ex:'P2 wait=0, P3 wait=3, P1 wait=6. Total=9, Average=9/3=3.'},
+{id:12,ch:'Ch.2',tp:'Process States',q:'What triggers a transition from "Blocked" state to "Ready" state?',opts:['Completion of an I/O operation','User input request','Process termination','CPU scheduler selection'],ans:[0],ex:'Process chuyển từ Blocked → Ready khi sự kiện mà nó đang chờ xảy ra — thường là I/O hoàn thành.'},
+{id:13,ch:'Ch.2',tp:'Threads',q:'When threads are managed in user space, what does each process need to track threads?',opts:['User space table','Kernel table','Thread table','Process table'],ans:[2],ex:'Mỗi process có thread table riêng (trong user space) chứa: thread state, PC, SP, registers — tương tự process table của kernel.'},
+{id:14,ch:'Ch.2',tp:'IPC',q:'Message passing system allows processes to ______',opts:['Communicate without sharing the same address space','Communicate by resorting to shared data','Share data','Name the recipient or sender'],ans:[0],ex:'Message passing dùng trong microkernel và distributed systems — không cần shared memory. Giao tiếp qua send()/receive().'},
+{id:15,ch:'Ch.2',tp:'Scheduling',q:'Which scheduling algorithm allocates CPU first to the process that requests first?',opts:['First-come, first-served scheduling','Shortest job scheduling','Priority scheduling','Multi-level queue'],ans:[0],ex:'FCFS (First-Come First-Served): đơn giản nhất, theo thứ tự đến. Có thể gây convoy effect.'},
+{id:16,ch:'Ch.2',tp:'IPC',q:'Critically assess IPC primitives: impact on system stability and performance.',opts:['IPC primitives eliminate all deadlock scenarios','IPC primitives address synchronization but introduce overhead and scalability challenges','IPC primitives minimally impact stability but greatly enhance performance','IPC primitives enhance scalability without performance trade-offs'],ans:[1],ex:'IPC primitives giải quyết synchronization nhưng có chi phí: message copying, synchronization overhead, potential deadlock nếu dùng sai.'},
+{id:17,ch:'Ch.2',tp:'Process Creation',q:'What are the four main events that cause processes to be created? (Chọn 4)',opts:['System initialization','Execution of process-creation syscall by running process','System that interacts with users','A user request to create new process','Initiation of a batch job'],ans:[0,1,3,4],multi:true,ex:'4 nguyên nhân: (1) system boot, (2) process gọi fork(), (3) user double-click/request, (4) batch job submitted. Opt C mô tả shell, không phải nguyên nhân tạo process.'},
+{id:18,ch:'Ch.2',tp:'Synchronization',q:'Analyze dining philosophers and semaphores/mutexes.',opts:['Dining philosophers shows need for thread priorities','Semaphores allow multiple processes to access CS simultaneously','Dining philosophers demonstrates shared resources managed by semaphores/mutexes can lead to deadlock without proper synchronization','Semaphores are ineffective for dining philosophers'],ans:[2],ex:'Dining Philosophers: dù có semaphores bảo vệ từng nĩa, circular waiting vẫn gây deadlock. Cần proper ordering hoặc monitor.'},
+{id:19,ch:'Ch.3',tp:'Memory Allocation',q:'Holes: 16MB, 4MB, 12MB, 28MB, 9MB, 22MB, 12MB, 18MB. Worst fit for 12MB request takes which hole?',opts:['18 MB','28 MB','12 MB','16 MB'],ans:[1],ex:'Worst Fit luôn chọn hole LỚN NHẤT. Hole lớn nhất là 28MB.'},
+{id:20,ch:'Ch.3',tp:'Swapping',q:'Higher priority process arrives → swap out lower priority process. When done, swap back. This is called:',opts:['Roll out, roll in','Priority swapping','Pull in, push out','Pull out, push in'],ans:[0],ex:'"Roll out, roll in": biến thể của swapping dùng cho priority-based scheduling.'},
+{id:21,ch:'Ch.3',tp:'Segmentation',q:'What is the purpose of a segment table in a segmented memory system?',opts:['Store contents of disk pages','Map segment numbers to physical addresses','Manage CPU cache memory','Control I/O operations'],ans:[1],ex:'Segment table ánh xạ (segment number, offset) → physical address. Mỗi entry có base address và limit.'},
+{id:22,ch:'Ch.3',tp:'TLB',q:'The percentage of times a page number is found in the TLB is known as _______',opts:['Miss ratio','Miss percent','Hit ratio','Hit percent'],ans:[2],ex:'TLB hit ratio = % lần TLB tìm thấy mapping. Thường đạt 99%+ nhờ locality of reference.'},
+{id:23,ch:'Ch.3',tp:'Paging',q:'When there is a large logical address space, the best way of paging would be _______',opts:['Not to page','A two-level paging algorithm','The page table itself','A single-level paging algorithm'],ans:[1],ex:'Two-level (multilevel) paging: chia page table thành tree — chỉ cần cấp phát phần cần thiết, tiết kiệm bộ nhớ.'},
+{id:24,ch:'Ch.3',tp:'Memory Allocation',q:'______ searches the entire list and takes the SMALLEST hole that is adequate.',opts:['Best fit','Next fit','Worst fit','First fit'],ans:[0],ex:'Best Fit tìm hole nhỏ nhất đủ lớn. Giảm lãng phí nhưng tạo nhiều mảnh vụn nhỏ.'},
+{id:25,ch:'Ch.3',tp:'Swapping',q:'The ______ swaps processes in and out of memory.',opts:['CPU','CPU manager','Memory manager','User'],ans:[2],ex:'Memory Manager (medium-term scheduler) xử lý swapping processes giữa RAM và disk.'},
+{id:26,ch:'Ch.3',tp:'Page Replacement',q:'Main advantage of Clock Algorithm over Second Chance Algorithm:',opts:['Clock eliminates need to move pages around, reducing overhead','Clock increases implementation complexity','Clock guarantees fewer page faults','Clock uses more memory'],ans:[0],ex:'Clock dùng danh sách vòng với con trỏ — không cần di chuyển pages trong list, giảm overhead.'},
+{id:27,ch:'Ch.4',tp:'File Systems',q:'Files are ______ units of information created by processes.',opts:['Physical','Logical','Sequential','Conditional'],ans:[1],ex:'Files là logical units — abstraction ẩn đi chi tiết vật lý của storage media.'},
+{id:28,ch:'Ch.4',tp:'File Types',q:'Which file is a sequence of bytes organized into blocks understandable by the system\'s linker?',opts:['Text file','Object file','Source file','Executable file'],ans:[1],ex:'Object file: compiled code trong format (ELF) mà linker hiểu, chứa symbol tables, relocation info, code segments.'},
+{id:29,ch:'Ch.4',tp:'Directories',q:'How does a relative path differ from an absolute path?',opts:['Relative paths always start from root','Relative paths are shorter','Relative paths depend on current working directory','Relative paths contain only file extensions'],ans:[2],ex:'Relative path: vị trí tương đối so với current directory. Absolute path: bắt đầu từ root (/).'},
+{id:30,ch:'Ch.4',tp:'Disk Management',q:'Linked list of disk blocks, 1-KB block, 32-bit block number. How many block addresses per management block?',opts:['255','1024','32','128'],ans:[0],ex:'1KB = 1024 bytes. 32-bit pointer = 4 bytes. 1024/4 = 256 entries, trừ 1 cho pointer đến block tiếp theo = 255.'},
+{id:31,ch:'Ch.4',tp:'Disk Structure',q:'The first block of every disk partition is called:',opts:['Boot block','Free block','Super block','MBR'],ans:[2],ex:'Superblock: block đầu tiên của partition, chứa metadata FS: type, size, number of inodes, free block count.'},
+{id:32,ch:'Ch.5',tp:'I/O Hardware',q:'The hardware mechanism that allows a device to notify the CPU is called ____.',opts:['Interrupt','Polling','Driver','Controlling'],ans:[0],ex:'Interrupt: tín hiệu hardware làm CPU dừng và xử lý event từ device. Hiệu quả hơn polling (busy wait).'},
+{id:33,ch:'Ch.5',tp:'RAID',q:'Which RAID level provides disk striping WITHOUT fault tolerance?',opts:['RAID 0','RAID 1','RAID 2','RAID 5','RAID 6'],ans:[0],ex:'RAID 0: chỉ striping để tăng performance, không có redundancy. Một disk hỏng = mất tất cả data.'},
+{id:34,ch:'Ch.5',tp:'I/O Software',q:'What is the goal of uniform naming in file and device management?',opts:['Make file names unique to each device','Limit file names to specific format','Differentiate names based on device type','Ensure name is a simple string/integer, independent of the device'],ans:[3],ex:'Uniform naming: files và devices dùng cùng naming convention. Trong Unix, devices là files trong /dev/.'},
+{id:35,ch:'Ch.5',tp:'DMA',q:'In DMA transfer cycle, what two modes can many buses operate in?',opts:['Word-at-a-time mode and byte mode','Word-at-a-time mode and block mode','Word-at-a-time mode and bit mode','Word-at-a-time mode and page mode'],ans:[1],ex:'DMA: Word-at-a-time (steal một cycle cho một word) và Block mode (acquire bus, transfer toàn block, release).'},
+{id:36,ch:'Ch.5',tp:'DMA',q:'What addresses are typically used by most DMA controllers for transmission?',opts:['Logical memory','Abstract memory','Virtual memory','Physical memory'],ans:[3],ex:'DMA controllers dùng physical memory addresses — truyền thẳng giữa device và RAM, bypass address translation.'},
+{id:37,ch:'Ch.6',tp:'Deadlock',q:'The number of resources requested by a process ______',opts:['Must always be less than total resources available','Must NOT exceed total resources available in the system','Must always be equal to total resources available','Must exceed total resources available'],ans:[1],ex:'Process chỉ có thể request tối đa số tài nguyên có trong hệ thống. Request nhiều hơn thì không bao giờ được thỏa mãn.'},
+{id:38,ch:'Ch.6',tp:'Deadlock',q:'Which of the following is NOT a method to PREVENT deadlocks?',opts:['Attacking Mutual Exclusion Condition','Use Banker\'s Algorithm','Attacking Hold and Wait Condition','Attacking No Preemption Condition','Attacking Circular Wait Condition'],ans:[1],ex:'Banker\'s Algorithm là AVOIDANCE (tránh), không phải PREVENTION (ngăn). Prevention tấn công các điều kiện Coffman.'},
+{id:39,ch:'Ch.6',tp:'Deadlock',q:'A problem closely related to deadlock and livelock is ____',opts:['Starvation','Communication','Two-phase locking','Prevention'],ans:[0],ex:'Starvation: process bị từ chối tài nguyên vô thời hạn. Khác deadlock (toàn bộ đóng băng) — system vẫn tiến triển nhưng process đó bị bỏ qua.'},
+{id:40,ch:'Ch.5',tp:'Disk Scheduling',q:'In disk scheduling, which algorithm is considered the FAIREST but may lead to high seek times?',opts:['FCFS','SSTF','SCAN','C-SCAN'],ans:[0],ex:'FCFS: công bằng nhất (theo thứ tự đến) nhưng arm có thể di chuyển nhiều vì requests phân bổ ngẫu nhiên trên disk.'},
+{id:41,ch:'Ch.7',tp:'Virtualization',q:'Evaluate the role of memory virtualization in a virtualized environment.',opts:['It isolates processes leading to reduced performance','It enhances resource allocation efficiency, improving system performance','It complicates memory management, decreasing performance','It only impacts I/O performance'],ans:[1],ex:'Memory virtualization: memory ballooning, transparent page sharing, memory overcommit → cải thiện hiệu quả phân bổ tài nguyên.'},
+{id:42,ch:'Ch.1',tp:'Memory Types',q:'______ is programmed at the factory and cannot be changed afterward.',opts:['RAM','ROM','EEPROM','CMOS'],ans:[1],ex:'ROM (Read-Only Memory): lập trình từ nhà máy, non-volatile, không thể thay đổi. Dùng cho BIOS/firmware.'},
+{id:43,ch:'Ch.1',tp:'System Calls',q:'What is the purpose of the TRAP instruction in a system call?',opts:['To switch from user mode to kernel mode','To call a function from the library','To determine a specific address in memory','To check input parameters before execution'],ans:[0],ex:'TRAP/INT/SYSCALL: atomically chuyển CPU từ user mode sang kernel mode, nhảy đến điểm nhập cố định của OS.'},
+{id:44,ch:'Ch.2',tp:'Process Memory',q:'UNIX processes have memory divided into: Data segment, Stack segment, and ______.',opts:['Text segment','Heap segment','Program segment','None of these'],ans:[0],ex:'3 segments UNIX: Text (code), Data (global/static vars + heap), Stack (local vars, function calls). Text chứa executable instructions.'},
+{id:45,ch:'Ch.1',tp:'CPU',q:'What is the purpose of a pipeline in a CPU?',opts:['Increase speed by executing multiple instruction stages simultaneously','Reduce number of instructions','Combine all instructions into one operation','Execute instructions randomly'],ans:[0],ex:'Pipeline: overlap các stages (fetch, decode, execute) của các instructions khác nhau → tăng throughput.'},
+{id:46,ch:'Ch.2',tp:'Threads',q:'How do threads enable efficient resource sharing?',opts:['By allowing threads to share resources within the same address space','By isolating resources for each thread','By restricting access to shared resources','By creating separate address spaces for each thread'],ans:[0],ex:'Tất cả threads trong một process chia sẻ address space, open files, và resources → communication nhanh hơn IPC.'},
+{id:47,ch:'Ch.2',tp:'Process Management',q:'If a process fails, most OS write the error information to a ______',opts:['New file','Old file','Another running process','Log file'],ans:[3],ex:'System logs (syslog/Event Log) ghi lại thông tin lỗi để administrators có thể debug sau.'},
+{id:48,ch:'Ch.1',tp:'OS Architecture',q:'Compare monolithic and client-server OS structures.',opts:['Monolithic integrates all in single layer; client-server distributes across multiple components','Monolithic promotes scalability better than client-server','Client-server offers more efficient communication','Monolithic has modular architecture'],ans:[0],ex:'Monolithic: tất cả OS code trong kernel space. Client-server: OS services là server processes, apps là clients.'},
+{id:49,ch:'Ch.1',tp:'History',q:'The simple model of CPU instructions being retrieved from memory and run:',opts:['Round-robin scheduling','First-come, first-served','Shortest job first','Priority Scheduling'],ans:[1],ex:'Câu hỏi về scheduler xử lý theo thứ tự đến = FCFS.'},
+{id:50,ch:'Ch.2',tp:'Process',q:'In Unix, which system call creates a new process?',opts:['create','fork','new','exec'],ans:[1],ex:'fork(): tạo process con là bản sao của parent. Return 0 trong child, PID của child trong parent.'},
+
+// ─── BATCH 2: Second exam set (148 new questions) ─────
+{id:51,ch:'Ch.3',tp:'Virtual Memory',q:'In virtual memory, a solution adopted in the 1960s was to split programs into little pieces called ____.',opts:['Overlays','Pages','Page table','Page fault'],ans:[0],ex:'Overlays (1960s): lập trình viên chia chương trình thành các phần vừa với RAM, load thủ công từng phần khi cần. Virtual memory tự động hóa điều này.'},
+{id:52,ch:'Ch.1',tp:'Memory Types',q:'______ is programmed at the factory and cannot be changed afterward. (Câu về non-volatile)',opts:['RAM','ROM','EEPROM','CMOS'],ans:[1],ex:'ROM: non-volatile, không thể modify sau khi xuất xưởng. EEPROM có thể erase bằng điện; CMOS volatile.'},
+{id:53,ch:'Ch.2',tp:'Scheduling',q:'The interval from the time of submission of a process to the time of completion is termed as ______',opts:['Waiting time','Turnaround time','Response time','Throughput'],ans:[1],ex:'Turnaround time = completion time – submission time. Bao gồm: thời gian chờ + CPU time + I/O time.'},
+{id:54,ch:'Ch.2',tp:'Scheduling',q:'A preemptive version of Shortest Job First (SJF) is ___.',opts:['Shortest Process Next','First-Come, First-Served','Shortest Remaining Time Next','Shortest Used Time'],ans:[2],ex:'SRTN (Shortest Remaining Time Next): phiên bản preemptive của SJF. Khi process mới đến với burst ngắn hơn current, preempt.'},
+{id:55,ch:'Ch.2',tp:'Scheduling',q:'When several equally important jobs are waiting in the input queue, the scheduler picks by:',opts:['Round-robin scheduling','First-come, first-served','Shortest job first','Guaranteed Scheduling','Priority Scheduling'],ans:[1],ex:'Với jobs có equal importance/priority, FCFS là tự nhiên nhất — ai đến trước được phục vụ trước.'},
+{id:56,ch:'Ch.2',tp:'Threads',q:'What is the main difference between a process and a thread?',opts:['Threads share the same memory space, while processes do not','Processes are faster than threads','Processes can only execute one task while threads execute multiple','Threads are independent of processes'],ans:[0],ex:'Threads trong cùng process chia sẻ address space, files, heap. Mỗi thread có riêng: stack, PC, registers.'},
+{id:57,ch:'Ch.2',tp:'Scheduling',q:'SJF Scheduling: P1=10, P2=1, P3=2, P4=4, P5=5. What is the average waiting time?',opts:['4.6','6.2','5.2','4.2'],ans:[0],ex:'SJF order: P2(1), P3(2), P4(4), P5(5), P1(10). Wait: P2=0, P3=1, P4=3, P5=7, P1=12. Total=23, Average=23/5=4.6.'},
+{id:58,ch:'Ch.3',tp:'Virtual Memory',q:'In the context of virtual memory, what does "thrashing" refer to?',opts:['When a process is spending more time paging than executing','When a process is terminated unexpectedly','When a process is using more memory than allocated','When a process is waiting for I/O operations'],ans:[0],ex:'Thrashing: process có quá ít frames → liên tục page fault → OS tốn nhiều thời gian swap hơn thực thi → hiệu năng sụp đổ.'},
+{id:59,ch:'Ch.2',tp:'Processes',q:'With ______ only one process can execute at a time. With ______ more than one process can run simultaneously each on a different processor.',opts:['Multiprocessing, Multiprogramming','Multiprogramming, Uniprocessing','Multiprogramming, Multiprocessing','Uniprogramming, Multiprocessing'],ans:[3],ex:'Uniprogramming: chỉ 1 process chạy. Multiprocessing: nhiều process chạy thật sự song song trên nhiều CPUs.'},
+{id:60,ch:'Ch.3',tp:'Page Replacement',q:'What is the primary goal of a page replacement algorithm?',opts:['To increase CPU speed','To minimize disk I/O operations','To increase number of processes in memory','To simplify memory management'],ans:[1],ex:'Mục tiêu chính: minimize page faults → minimize disk I/O (vì disk rất chậm so với RAM).'},
+{id:61,ch:'Ch.3',tp:'Page Tables',q:'A multilevel page table is preferred over a single level page table because ______.',opts:['It helps reduce page faults','It is required by TLB','It helps reduce the size of page table needed','It reduces memory access time'],ans:[2],ex:'Single-level PT cho 32-bit address = 4MB liên tục. Multilevel PT chia thành tree — chỉ allocate phần cần thiết.'},
+{id:62,ch:'Ch.3',tp:'Virtual Memory',q:'In a paging system, what is the term for data stored in secondary storage not currently in main memory?',opts:['Cache','Page table','Disk image','Swap space'],ans:[3],ex:'Swap space (paging file/area): vùng trên disk dùng để lưu pages khi RAM đầy. Cũng gọi là backing store.'},
+{id:63,ch:'Ch.3',tp:'Page Tables',q:'What is another name for the Modified Bit that reflects the page\'s state?',opts:['Referenced Bit','Access Bit','Dirty Bit','Clear Bit'],ans:[2],ex:'Dirty bit (Modified bit): được set bởi hardware khi page bị ghi. Khi evict: dirty page phải write back to disk; clean page có thể discard.'},
+{id:64,ch:'Ch.3',tp:'Paging',q:'What is paging in virtual memory in operating systems?',opts:['A technique for managing disk storage','A method for managing memory by dividing it into fixed-size blocks','A process for controlling CPU scheduling','A mechanism for handling network communication'],ans:[1],ex:'Paging: chia RAM thành frames và virtual address space thành pages có cùng kích thước. OS ánh xạ pages → frames qua page table.'},
+{id:65,ch:'Ch.3',tp:'Paging',q:'What is the benefit of using paging in virtual memory systems?',opts:['Enhanced CPU performance','Improved disk storage management','Efficient memory utilization','Faster network communication'],ans:[2],ex:'Paging: không cần contiguous allocation → hiệu quả sử dụng bộ nhớ hơn, giảm external fragmentation.'},
+{id:66,ch:'Ch.3',tp:'Virtual Memory',q:'Most virtual memory systems use a technique called ______?',opts:['Page Fault','Page Frames','Page Table','Paging'],ans:[3],ex:'Paging là kỹ thuật phổ biến nhất cho virtual memory — chia memory thành fixed-size units.'},
+{id:67,ch:'Ch.4',tp:'Directories',q:'In a Unix-like operating system, what does the tilde (~) character represent in a path?',opts:['The home directory of the current user','The parent directory','The current directory','The root directory'],ans:[0],ex:'~ = home directory của current user. cd ~ hoặc cd đưa bạn về /home/username.'},
+{id:68,ch:'Ch.4',tp:'File Types',q:'Which of the following file extensions is used for compressed archives?',opts:['.mpg','.bak','.zip','.gif'],ans:[2],ex:'.zip: compressed archive format. .bak = backup, .mpg = video, .gif = image.'},
+{id:69,ch:'Ch.4',tp:'File Systems',q:'Log-structured file systems: analyze significance for file-system performance.',opts:['LFS optimizes disk usage but has higher write latencies due to large-unit writing','LFS minimizes write latencies by writing data in large units and improves disk usage','LFS has no impact on write latencies and disk usage','LFS slows disk usage by writing in small units'],ans:[1],ex:'LFS: tất cả writes được append tuần tự → write performance tốt. Garbage collection cần thiết để reclaim space.'},
+{id:70,ch:'Ch.4',tp:'Disk Management',q:'Consider a 4-TB disk using 4-KB blocks and free-list method. How many block addresses in one block?',opts:['1024 addresses','256 addresses','512 addresses','2048 addresses','128 addresses'],ans:[0],ex:'4KB = 4096 bytes. 32-bit address = 4 bytes. 4096/4 = 1024 addresses.'},
+{id:71,ch:'Ch.4',tp:'File Permissions',q:'Which file attribute specifies who can access the file and in what way?',opts:['Protection','Password','Creator','Owner'],ans:[0],ex:'Protection attribute định nghĩa access control: ai được đọc, ghi, thực thi file.'},
+{id:72,ch:'Ch.4',tp:'Directories',q:'What is an absolute path in operating systems?',opts:['A path that starts from the root directory','A path relative to current working directory','A path that includes only the file name','A path used for network communication'],ans:[0],ex:'Absolute path: bắt đầu từ root directory (/). Ví dụ: /home/user/documents/file.txt'},
+{id:73,ch:'Ch.4',tp:'File Types',q:'In UNIX, which type of file is used to model disks?',opts:['Regular files','Character special files','Block special files','Directories'],ans:[2],ex:'Block special files (/dev/sda, /dev/sdb): đại diện block devices (disks). Character special files (/dev/tty): đại diện character devices (terminals).'},
+{id:74,ch:'Ch.4',tp:'File Access',q:'What kind of file access did early operating systems provide?',opts:['Linear access','Unsequential access','Random access','Sequential access'],ans:[3],ex:'Early OS chỉ hỗ trợ sequential access — đọc file từ đầu đến cuối theo thứ tự. Random access xuất hiện sau.'},
+{id:75,ch:'Ch.5',tp:'Disk Scheduling',q:'SSF scheduling: cylinders 98,37,14,65,67, head initially at 53. What is the disk arm motion?',opts:['53, 65, 67, 37, 14, 98','53, 37, 14, 65, 67, 98','53, 14, 37, 65, 67, 98','53, 98, 67, 65, 37, 14'],ans:[0],ex:'SSF (Shortest Seek First): từ 53 → gần nhất là 65 (d=12) → 67 (d=2) → 37 (d=30) → 14 (d=23) → 98 (d=84).'},
+{id:76,ch:'Ch.5',tp:'Disk Scheduling',q:'Disk arm motion: 53, 98, 37, 14, 65, 67. Which algorithm?',opts:['FCFS','SSF','SJF','Elevator'],ans:[0],ex:'Thứ tự phục vụ giống thứ tự requests (98,37,14,65,67) → FCFS.'},
+{id:77,ch:'Ch.5',tp:'I/O',q:'In UNIX, how are devices like USB sticks integrated into the file-system hierarchy?',opts:['Devices are not integrated and require separate commands','Devices are assigned unique identifiers','Devices can be mounted on directories, allowing files to be copied via path names','Devices require special software'],ans:[2],ex:'mount: gắn device vào một directory trong cây thư mục. Sau đó access qua regular file paths.'},
+{id:78,ch:'Ch.5',tp:'I/O Software',q:'What is the function of the user application layer in the I/O system?',opts:['To make system calls and handle I/O','To manage device drivers','To communicate with hardware','To perform actual I/O operations'],ans:[0],ex:'User application layer: gọi các I/O functions chuẩn (printf, fread...) và system calls để request I/O từ OS.'},
+{id:79,ch:'Ch.5',tp:'Disk Scheduling',q:'SSF scheduling, cylinder 11, new requests: 1,36,16,34,9,12. Total head movements?',opts:['61','111','60','108'],ans:[0],ex:'Từ 11: →12(1) →9(3) →16(7) →1(15) →34(33) →36(2). Tổng = 1+3+7+15+33+2 = 61.'},
+{id:80,ch:'Ch.5',tp:'Disk',q:'Which operation in stable storage writes and verifies a block on both drives until successful?',opts:['Stable read','Crash recovery','Stable write','Data synchronization'],ans:[2],ex:'Stable write: ghi và verify block trên cả 2 disk. Đảm bảo atomic write — hoặc thành công hoàn toàn hoặc có thể recover.'},
+{id:81,ch:'Ch.6',tp:'Deadlock',q:'What is the primary objective of Deadlock Avoidance techniques?',opts:['Resolve deadlocks after they occur','Preemptively avoid potential deadlocks','Require processes to request resources in advance','Identify deadlocks and take corrective action','Ignore deadlocks'],ans:[1],ex:'Deadlock Avoidance: kiểm tra trước khi cấp resource xem có dẫn đến unsafe state không. Banker\'s Algorithm là ví dụ.'},
+{id:82,ch:'Ch.6',tp:'Deadlock',q:'Which recovery method can lead to data inconsistency when re-executed in case of deadlock?',opts:['Recovery through rollback','Killing processes','Preemption','Checkpointing','None of the others'],ans:[0],ex:'Rollback: cuộn lại process về checkpoint trước đó. Khi re-execute, kết quả có thể khác → data inconsistency.'},
+{id:83,ch:'Ch.6',tp:'Deadlock',q:'Every time a request for allocation cannot be granted immediately, the detection algorithm identifies ______.',opts:['The set of processes that have been deadlocked','The set of processes in the deadlock queue','The specific process that caused the deadlock','The set of processes that caused the deadlock'],ans:[0],ex:'Detection algorithm: xác định tập hợp tất cả processes đang trong trạng thái deadlock (không chỉ nguyên nhân).'},
+{id:84,ch:'Ch.2',tp:'Synchronization',q:'Which statement best describes a "race condition"?',opts:['Multiple processes access and manipulate shared data concurrently','A process is stuck in an infinite loop','A process waits indefinitely for an event','A process exceeds its allocated memory'],ans:[0],ex:'Race condition: kết quả phụ thuộc vào thứ tự interleaving của concurrent operations trên shared data.'},
+{id:85,ch:'Ch.6',tp:'Deadlock',q:'Analyze the significance of the hold-and-wait condition in resource deadlock.',opts:['Hold-and-wait allows processes to request without considering safety','Processes must wait for all resources to be available before starting','Hold-and-wait can cause processes to indefinitely hold resources while waiting, influencing deadlock prevention by attacking this condition','Hold-and-wait mandates resources be released once process completes'],ans:[2],ex:'Hold-and-wait: process giữ resources trong khi chờ thêm. Prevention: require request tất cả resources cùng lúc, hoặc release tất cả trước khi request thêm.'},
+{id:86,ch:'Ch.1',tp:'Linux',q:'Assuming /etc/passwd entry: john:x:1002:John Henry::bin/bash. Which statement is correct?',opts:['Username = john and userid = 1002','Username = John Henry and userid = 1002','Username = john and userid = 1000','Username = John Henry and userid = 1000'],ans:[0],ex:'/etc/passwd format: username:password:UID:GID:GECOS:home:shell. john = username, 1002 = UID.'},
+{id:87,ch:'Ch.7',tp:'Virtualization',q:'Differentiate Type 1 and Type 2 hypervisors. Which is generally more efficient for enterprise?',opts:['Type 1, as they run directly on hardware','Type 2, as they offer more flexibility','Type 1, for simpler management than Type 2','Both types are equally efficient'],ans:[0],ex:'Type 1 (bare-metal): chạy trực tiếp trên hardware, không có host OS overhead → hiệu năng cao hơn cho production servers.'},
+{id:88,ch:'Ch.1',tp:'History',q:'The first general-purpose electronic computer ENIAC had 18,000 vacuum tubes and consumed ______ watts.',opts:['1,400,000','140,000','14,000','1,400'],ans:[1],ex:'ENIAC: tiêu thụ khoảng 140kW = 140,000 watts. Chiếm diện tích 1800 sq ft.'},
+{id:89,ch:'Ch.1',tp:'OS Concepts',q:'What is the primary purpose of an operating system?',opts:['To execute application programs','To provide a user-friendly interface','To manage hardware resources and provide services to software','To create computer games'],ans:[2],ex:'OS: quản lý hardware resources (CPU, RAM, disk, I/O) và cung cấp services cho software thông qua system calls.'},
+{id:90,ch:'Ch.1',tp:'CPU',q:'The PSW (Program Status Word) register contains:',opts:['All of the above','IR (Instruction Register)','PC (Program Counter)','Condition code bits, CPU priority, mode (user/kernel), other control bits'],ans:[3],ex:'PSW: condition codes (N, Z, C, V flags), CPU privilege level, interrupt enable bits, và other processor state bits.'},
+{id:91,ch:'Ch.1',tp:'Linux',q:'In Linux, the command ps -aux gives the equivalent of which Windows function?',opts:['Start/shutdown','Start/Run input CMD','Open program Task Manager','Open Add/Remove program'],ans:[2],ex:'ps -aux: hiển thị tất cả processes đang chạy, tương đương Task Manager trong Windows.'},
+{id:92,ch:'Ch.1',tp:'OS Concepts',q:'Which of the following is NOT a part of the operating system?',opts:['Performance monitor','Input/output control program','Job control program','Supervisor'],ans:[0],ex:'Performance monitor là application tool để theo dõi hệ thống, không phải thành phần cốt lõi của OS.'},
+{id:93,ch:'Ch.3',tp:'Page Replacement',q:'In the FIFO page replacement algorithm, what data structure implements the replacement queue?',opts:['Stack','Queue','Linked list','Array'],ans:[1],ex:'FIFO: page vào trước sẽ ra trước → Queue (FIFO data structure) là phù hợp nhất.'},
+{id:94,ch:'Ch.2',tp:'Scheduling',q:'In preemptive priority scheduling, when a process arrives, its priority is compared with ______.',opts:['All processes','Currently running process','Parent process','Init process'],ans:[1],ex:'Preemptive priority: process mới đến được so sánh với CURRENT running process. Nếu priority cao hơn → preempt.'},
+{id:95,ch:'Ch.2',tp:'Processes',q:'CPU utilization: 4GB RAM, OS uses 2GB, processes are 1024MB, idle waiting I/O 50% of time. CPU utilization?',opts:['75%','90%','1%','50%'],ans:[0],ex:'Available RAM = 2GB = 2048MB, each process = 1024MB → 2 processes. CPU util = 1 - (0.5)^2 = 1 - 0.25 = 75%.'},
+{id:96,ch:'Ch.2',tp:'Processes',q:'In computer OS, how are processes understood?',opts:['A program saved on disk','A program loaded into memory and the CPU is executing','A program loads into primary or secondary memory','A program loaded on disk'],ans:[1],ex:'Process = program trong trạng thái thực thi — đã được load vào RAM và CPU đang thực thi.'},
+{id:97,ch:'Ch.2',tp:'Processes',q:'Which of the following actions does the OS take to execute a new process?',opts:['Provide immediate CPU for process','Deliver the resources must be process','Create immediate PCB blocks for process','Provide immediate Register for process'],ans:[2],ex:'OS tạo PCB (Process Control Block) ngay khi tạo process mới — đây là action đầu tiên và cần thiết nhất.'},
+{id:98,ch:'Ch.3',tp:'Paging',q:'Which memory management technique divides memory into fixed-sized partitions for varying process sizes?',opts:['Paging Management','Contiguous Allocation','Segmentation','Virtual Memory Management'],ans:[0],ex:'Paging: chia physical memory thành fixed-size frames và virtual space thành pages cùng kích thước.'},
+{id:99,ch:'Ch.3',tp:'Memory Allocation',q:'Memory blocks B1-B6: 300,600,380,200,750,125 KB. Processes P1-P5: 115,500,350,200,375 KB. Best-fit for P5 (375KB)?',opts:['B5 (750KB)','B3 (380KB)','B4 (200KB)','B2 (600KB)'],ans:[0],ex:'Sau khi P1-P4 allocated: P1→B1(300), P2→B2(600), P3→B3(380), P4→B4(200). Còn lại: B5=750, B6=125. P5 375KB → Best fit = B5 (750KB).'},
+{id:100,ch:'Ch.3',tp:'Page Tables',q:'16-bit virtual address, 4-KB page size. How many indexes in a one-level page table?',opts:['16','4','8','64'],ans:[0],ex:'4KB = 2^12 → offset 12 bits. Virtual address 16 bit → page number = 16-12 = 4 bits → 2^4 = 16 entries trong PT.'},
+{id:101,ch:'Ch.3',tp:'Page Replacement',q:'LRU, 3 page frames. Reference string: 4,7,6,1,7,6,1,2,7,2. Total page faults?',opts:['2','4','6','7'],ans:[2],ex:'Trace: 4F,7F,6F | 1F(evict4) | 7H,6H,1H | 2F(evict7) | 7F(evict6) | 2H. 6 page faults.'},
+{id:102,ch:'Ch.3',tp:'Paging',q:'When creating a new process in a paging system, when is the page table created?',opts:['Process creation time','Process execution time','Page fault time','Process termination time'],ans:[0],ex:'Page table được tạo khi process được tạo — OS cần biết address space structure trước khi chạy bất kỳ instruction nào.'},
+{id:103,ch:'Ch.4',tp:'File Systems',q:'In Windows 95, maximum partition size with FAT-32 and 16 KB block size?',opts:['1TB','2TB','512MB','128MB'],ans:[1],ex:'FAT32 với 16KB block: 2^28 clusters × 16KB ≈ 4TB. Windows 95 giới hạn ở 2TB vì implementation constraints.'},
+{id:104,ch:'Ch.4',tp:'File Systems',q:'Which OS uses the > symbol as a separator in its file path structure?',opts:['Windows','UNIX','MULTICS','Linux'],ans:[2],ex:'MULTICS dùng > làm path separator. Ví dụ: >usr>ast>mailbox. Unix dùng /, Windows dùng \\.'},
+{id:105,ch:'Ch.4',tp:'File Types',q:'In a file structure, what type is used on mainframes for commercial data processing: organized records?',opts:['Byte sequence','Record sequence','Unstructured','Tree of records'],ans:[1],ex:'Record sequence: file là chuỗi fixed-length records. Dùng trên mainframes IBM cho commercial data processing (ngân hàng, bảo hiểm).'},
+{id:106,ch:'Ch.4',tp:'File Access',q:'In file access system, random access requires two methods to specify where to start reading:',opts:['Write and Read','Write and Seek','Read and Seek','Read and Write'],ans:[2],ex:'Random access: Read (đọc data) + Seek (di chuyển pointer đến vị trí muốn đọc). Ví dụ: lseek() rồi read() trong Unix.'},
+{id:107,ch:'Ch.3',tp:'Memory Allocation',q:'Memory: 10MB, 18MB, 9MB, 14MB holes. Best Fit for 11MB, 2MB, 9MB, 8MB requests:',opts:['14MB, 3MB, 10MB, 9MB','18MB, 7MB, 10MB, 9MB','14MB, 3MB, 9MB, 10MB','18MB, 7MB, 9MB, 10MB'],ans:[1],ex:'11MB → 14MB (best fit, sau còn 3MB). 2MB → 18MB (còn 16MB). 9MB → 9MB exact. 8MB → 10MB (còn 2MB).'},
+{id:108,ch:'Ch.4',tp:'Disk Structure',q:'Sector 0 of the disk is called the ____ and is used to boot the computer.',opts:['DMA','MBR','FAT','NTFS'],ans:[1],ex:'MBR (Master Boot Record): sector 0 của disk. Chứa bootloader code (446 bytes) + partition table (64 bytes) + signature.'},
+{id:109,ch:'Ch.4',tp:'File Systems',q:'What is fragmentation in the context of file-system implementation?',opts:['A technique for managing directory structures','The allocation of memory for file storage','The splitting of files or free space into smaller, non-contiguous blocks','The arrangement of files on storage devices'],ans:[2],ex:'Fragmentation: files hoặc free space bị chia thành các blocks nhỏ, rải rác — làm chậm truy cập sequential.'},
+{id:110,ch:'Ch.5',tp:'DMA',q:'In DMA transfer cycle, the operation where DMA acquires the bus, performs a series of transfers, then releases is called:',opts:['Fly-by mode','Word-at-a-time mode','Burst mode','Caching mode'],ans:[2],ex:'Burst mode: DMA acquire bus, transfer toàn bộ block, release bus. Cho throughput cao nhất nhưng block CPU access.'},
+{id:111,ch:'Ch.5',tp:'Interrupts',q:'An interrupt has 4 properties: PC saved; all previous instructions completed; no later instructions finished; execution state known. Type?',opts:['Imprecise interrupt','Synchronous interrupt','Sequential interrupt','Precise interrupt'],ans:[3],ex:'Precise interrupt: 4 properties đảm bảo OS có thể restart instruction tại interrupt point. Essential cho virtual memory.'},
+{id:112,ch:'Ch.5',tp:'Disk Scheduling',q:'SSF scheduling: cylinders 98,37,14,65,67, head at 53. Order is: 53,65,67,37,14,98. Which algorithm?',opts:['Elevator','SSF','SJF','FCFS'],ans:[1],ex:'SSF (Shortest Seek First): chọn cylinder gần nhất với head. 53→65(12)→67(2)→37(30)→14(23)→98(84).'},
+{id:113,ch:'Ch.5',tp:'Clocks',q:'Which type of clock keeps track of current time and date and is typically battery-powered?',opts:['System clock','CPU clock','Real-time clock (RTC)','Network clock'],ans:[2],ex:'RTC (Real-Time Clock): chip battery-powered, duy trì time/date khi máy tắt. OS đọc RTC lúc boot để set system time.'},
+{id:114,ch:'Ch.6',tp:'Deadlock',q:'If the wait-for graph contains a cycle ______',opts:['then a deadlock does not exist','then a deadlock exists','then the system is in a safe state','either deadlock exists or system is in safe state'],ans:[1],ex:'Với single-instance resources: cycle trong wait-for graph ↔ deadlock (necessary and sufficient condition).'},
+{id:115,ch:'Ch.6',tp:'Deadlock',q:'What does "no preemption" imply in the context of deadlocks?',opts:['Resources can be preempted from one process to another','Resources cannot be preempted once allocated','Processes can be terminated to free resources','Resources are allocated in a circular manner'],ans:[1],ex:'No preemption condition: resources chỉ được release tự nguyện bởi process đang giữ. OS không thể "lấy lại".'},
+{id:116,ch:'Ch.6',tp:'Deadlock',q:'Which algorithm determines if the resource allocation state is safe or not?',opts:['Dijkstra\'s Algorithm','Banker\'s Algorithm','Kruskal\'s Algorithm','Floyd-Warshall Algorithm'],ans:[1],ex:'Banker\'s Algorithm (Dijkstra, 1965): kiểm tra safe state bằng cách tìm safe sequence — ordering mà tất cả processes có thể hoàn thành.'},
+{id:117,ch:'Ch.6',tp:'Deadlock',q:'How does livelock differ from deadlock?',opts:['In deadlock, processes make progress; in livelock, they do not','In livelock, processes make progress; in deadlock, they do not','Deadlock and livelock are the same','Livelock is the process before becoming deadlock'],ans:[1],ex:'Livelock: processes đang chạy và respond to nhau nhưng không tiến triển. Deadlock: processes hoàn toàn đóng băng.'},
+{id:118,ch:'Ch.3',tp:'Page Tables',q:'Which information bit in the page table entry indicates types of access permitted?',opts:['Present/absent bit','Caching disabled','Protection bit','Modified bit'],ans:[2],ex:'Protection bit: xác định loại access được phép: read, write, execute. Trên x86: User/Supervisor bit, Read/Write bit, No-Execute bit.'},
+{id:119,ch:'Ch.1',tp:'OS Types',q:'An OS is the ______ system because it is characterized by having time as a key parameter.',opts:['Real-time','Handheld','Multiprocessor','None of other choice'],ans:[0],ex:'Real-time OS: thời gian là tham số quan trọng, must respond within strict deadlines. Hard RT: miss deadline = failure.'},
+{id:120,ch:'Ch.1',tp:'OS Concepts',q:'Select the correct statement about Windows OS.',opts:['Mouse is unique tool to interface between user and computer','Windows does not provide work in network environment','The Windows OS is viewed as an object that performs tasks','The Windows OS has a graphical interface'],ans:[3],ex:'Windows có GUI (Graphical User Interface). Mouse không unique (keyboard, touch cũng interface). Windows hỗ trợ networking.'},
+{id:121,ch:'Ch.1',tp:'Memory',q:'Main memory is usually called _____.',opts:['RAM','ROM','EEPROM','CMOS'],ans:[0],ex:'RAM (Random Access Memory): main memory, volatile, fast. Còn gọi là "core memory" từ thời dùng ferrite cores.'},
+{id:122,ch:'Ch.1',tp:'Shell',q:'What is the output of: echo $(5 / 2 * 2)?',opts:['1','5','4','2'],ans:[2],ex:'Bash arithmetic: 5/2=2 (integer division), 2*2=4. Kết quả là 4.'},
+{id:123,ch:'Ch.2',tp:'Scheduling',q:'In batch systems, which goal maximizes the number of jobs completed per hour?',opts:['Throughput','Turnaround time','CPU utilization','Fairness'],ans:[0],ex:'Throughput = số jobs hoàn thành per unit time. Là mục tiêu chính của batch systems.'},
+{id:124,ch:'Ch.2',tp:'Threads',q:'What is the purpose of the pthread_join function in Pthreads?',opts:['Create and initialize a thread attribute structure','Wait for a specific thread to exit','Release the CPU and let another thread run','Terminate the calling thread'],ans:[1],ex:'pthread_join(tid, &retval): block calling thread cho đến khi thread tid kết thúc. Prevents zombie threads.'},
+{id:125,ch:'Ch.2',tp:'Process Termination',q:'Which of the following is a VOLUNTARY reason for process termination?',opts:['Fatal error','Error exit','Killed by another process','System crash'],ans:[1],ex:'Voluntary termination: process tự quyết định terminate. Error exit = process phát hiện lỗi và gọi exit(). Fatal error = involuntary.'},
+{id:126,ch:'Ch.2',tp:'Scheduling',q:'In interactive systems, what does "proportionality" refer to?',opts:['Ensuring processes get equal CPU time','Meeting users\' expectations in terms of performance','Completing as many jobs as possible','Predicting system behavior under load'],ans:[1],ex:'Proportionality: response time tương xứng với độ phức tạp perceived bởi user. Download 1GB nên mất lâu hơn open app.'},
+{id:127,ch:'Ch.2',tp:'Process States',q:'What are the basic states of a process?',opts:['Running, Ready, and Blocked','Running, Blocked, and Exit','Create, Running, and Exit','Create, Running, and Blocked'],ans:[0],ex:'3 basic states: Running (đang dùng CPU), Ready (muốn dùng CPU, đang chờ), Blocked (đang chờ I/O hoặc event).'},
+{id:128,ch:'Ch.2',tp:'Synchronization',q:'What defines a critical section in Windows OS?',opts:['Code where processor gives priority to multiple threads simultaneously','Code where hardware interrupts are disabled','Code segment that only one thread can execute at a time to avoid data inconsistency','Part of kernel where system processes have higher priority'],ans:[2],ex:'Critical section: đoạn code truy cập shared resources — phải đảm bảo mutual exclusion, chỉ 1 thread chạy tại một thời điểm.'},
+{id:129,ch:'Ch.2',tp:'Scheduling',q:'Which of the following is NOT a scheduling algorithm in Batch Systems?',opts:['First-Come, First-Served','Shortest Job First','Shortest Remaining Time Next','Round-Robin'],ans:[3],ex:'Round-Robin là cho interactive systems (cần fairness và response time). Batch systems dùng FCFS, SJF, SRTN.'},
+{id:130,ch:'Ch.3',tp:'MMU',q:'What is the role of the Memory Management Unit (MMU) in a computer system?',opts:['MMU translates virtual addresses into physical addresses','It controls allocation of memory','It manages paging and swapping','It is a data structure for virtual memory management'],ans:[0],ex:'MMU: hardware unit thực hiện virtual-to-physical address translation. Kiểm tra page table và protection bits trên mỗi memory access.'},
+{id:131,ch:'Ch.3',tp:'Memory',q:'Given P1=8KB, P2=4KB, P3=16KB using base/limit registers. Values for P3?',opts:['Base: 8KB, Limit: 24KB','Base: 8KB, Limit: 28KB','Base: 12KB, Limit: 16KB','Base: 12KB, Limit: 28KB'],ans:[3],ex:'P1: base=0, P2: base=8KB, P3: base=12KB (0+8+4). Limit = size = 16KB. Typical convention: limit = base+size-1 hoặc size. Đáp án D: base=12, limit value=28 (12+16).'},
+{id:132,ch:'Ch.3',tp:'Memory',q:'What memory management technique uses a binary representation where each bit corresponds to an allocation unit?',opts:['Bitmap','Linked List','Paging','Partition'],ans:[0],ex:'Bitmap (bit vector): mỗi bit đại diện một block/frame. 0=free, 1=allocated. Compact, efficient scanning.'},
+{id:133,ch:'Ch.3',tp:'Virtual Memory',q:'What technique is NOT used in the implementation of Virtual Memory?',opts:['Paging','Mapping','Segmentation','Partition'],ans:[3],ex:'Virtual memory dùng Paging và/hoặc Segmentation với address mapping. Partition (fixed-size memory division) không phải kỹ thuật VM.'},
+{id:134,ch:'Ch.3',tp:'Page Replacement',q:'With 3 page frames (FIFO), reference string 1,2,3,4,1,2 — how many page faults?',opts:['6','4','5','3'],ans:[0],ex:'FIFO trace: 1F,2F,3F | 4F(evict1) | 1F(evict2) | 2F(evict3). 6 page faults.'},
+{id:135,ch:'Ch.3',tp:'Page Tables',q:'What is the primary disadvantage of a fixed-size page table?',opts:['Limits number of pages a process can have','Results in excessive memory consumption','Requires complex page replacement','Leads to inefficient page allocation'],ans:[1],ex:'Fixed-size single-level PT cho 32-bit address = 4MB RAM per process, chỉ cho page table — quá lãng phí.'},
+{id:136,ch:'Ch.3',tp:'Segmentation',q:'What is segmentation with paging, and how does it enhance memory management?',opts:['Managing multiple segments simultaneously','A method combining flexibility of segmentation with efficiency of paging','A scheme using fixed-size pages to allocate memory','A scheduling algorithm for thread management'],ans:[1],ex:'Kết hợp: segments cung cấp logical protection và sharing; pages trong segments cho phép non-contiguous allocation.'},
+{id:137,ch:'Ch.4',tp:'File Operations',q:'Which file extension is used for backup files?',opts:['bak','zip','txt','o'],ans:[0],ex:'.bak: conventional extension cho backup files. .zip: compressed, .txt: text, .o: object file.'},
+{id:138,ch:'Ch.4',tp:'File Operations',q:'What should the file operation do to free up internal table space when all accesses have completed?',opts:['Close','Delete','Append','Seek'],ans:[0],ex:'Close(): giải phóng file descriptor và internal table entry. Flush buffers, release locks.'},
+{id:139,ch:'Ch.4',tp:'Directories',q:'When a directory has been read, it should be closed to free up internal table space. The call is ____.',opts:['close','closedir','delete','opendir'],ans:[1],ex:'closedir(): đóng DIR stream mở bởi opendir(). Tương tự close() cho files nhưng dành cho directories.'},
+{id:140,ch:'Ch.4',tp:'Booting',q:'When the computer is booted, what is used to read in and execute?',opts:['BIOS, Boot Block','CPU, BIOS','BIOS, MBR','MBR, BIOS'],ans:[2],ex:'Boot sequence: BIOS (từ ROM/flash) initialize hardware → đọc MBR từ sector 0 → MBR bootloader load OS kernel.'},
+{id:141,ch:'Ch.4',tp:'Directories',q:'In Linux, what is the primary purpose of the /etc directory?',opts:['Store temporary files','Manage system boot files','House system configuration files and scripts','Store user home directories'],ans:[2],ex:'/etc: system configuration directory. /etc/passwd, /etc/hosts, /etc/fstab... Không nên lưu binaries hay user data ở đây.'},
+{id:142,ch:'Ch.5',tp:'I/O',q:'What is the purpose of Direct Memory Access (DMA) in I/O hardware?',opts:['To manage device controllers','To allocate memory for device drivers','To enable devices to transfer data to and from memory without CPU intervention','To provide user interfaces for I/O devices'],ans:[2],ex:'DMA: device tự transfer data giữa RAM và device, không cần CPU xử lý từng byte → CPU free cho tasks khác.'},
+{id:143,ch:'Ch.5',tp:'I/O Hardware',q:'In data communication and I/O, besides converting bit stream to bytes, what else does the controller do?',opts:['Perform any error correction necessary','Convert sequence bit stream to block of bytes','Connecting I/O devices','Perform read and write bit stream'],ans:[0],ex:'Controller: (1) convert serial bits → bytes, (2) error correction (ECC). ECC có thể correct single-bit errors và detect multi-bit errors.'},
+{id:144,ch:'Ch.5',tp:'I/O Hardware',q:'I/O units often consist of mechanical and electronic components. The electronic component is called:',opts:['Device controller or I/O devices','Device controller or adapter','Digital or terminal','Digital or I/O devices'],ans:[1],ex:'Device controller (hoặc adapter): electronic component giao tiếp với CPU. Physical device = mechanical component.'},
+{id:145,ch:'Ch.5',tp:'I/O',q:'______ include every peripheral unit: disks, clocks, keyboards, displays, etc.',opts:['I/O devices','Memory','CPU','Software'],ans:[0],ex:'I/O devices: tất cả thiết bị ngoại vi. Bao gồm block devices (disk) và character devices (keyboard, terminal).'},
+{id:146,ch:'Ch.5',tp:'DMA',q:'What types of operations is DMA useful for?',opts:['Transfers large and fast data between memory and I/O devices','Transfers large and slow data between memory and I/O devices','Transfers slow and small data','Transfers small data between memory and cache'],ans:[0],ex:'DMA: tối ưu cho large, high-throughput transfers (disk, network, audio) — chi phí setup DMA không đáng kể so với data size.'},
+{id:147,ch:'Ch.5',tp:'I/O Software',q:'Which is NOT a responsibility of Device-Independent I/O Software layer?',opts:['Uniform interfacing for device drivers','Allocating and releasing dedicated devices','Providing device-independent block size','Allocating port numbers to I/O devices','Error handling','Buffering'],ans:[3],ex:'Allocating port numbers là trách nhiệm của network layer, không phải device-independent I/O software.'},
+{id:148,ch:'Ch.5',tp:'I/O Software',q:'In device-independent I/O software, what happens to characters arriving while user buffer page is being brought from disk?',opts:['Buffer is full, there is no place to put them','Buffer is ready, there is more places to put them','Buffer is clear, there is more places to put them'],ans:[0],ex:'Double buffering problem: khi buffer đang được brought in từ disk, nếu thêm data đến → buffer đầy → không có chỗ.'},
+{id:149,ch:'Ch.5',tp:'RAID',q:'What are the weaknesses of RAID 0?',opts:['Requires highest number of disks','There is no data recovery mechanism','Unit of data transmitted is at BIT level','Does not improve read/write speeds'],ans:[1],ex:'RAID 0 weakness: NO fault tolerance — một disk hỏng mất tất cả data. Không có parity hay mirroring.'},
+{id:150,ch:'Ch.5',tp:'Clocks',q:'Which is NOT one of the usual duties of Clock Software?',opts:['Maintaining time of day','Helping processes run longer than they are allowed','Accounting for CPU usage','Handling alarm system calls','Profiling, monitoring, statistics gathering'],ans:[1],ex:'Clock software KHÔNG giúp processes chạy lâu hơn — ngược lại, clock interrupt là cơ chế để preempt processes (timer interrupt = quantum expires).'},
+{id:151,ch:'Ch.6',tp:'Deadlock',q:'What is a preemptable resource?',opts:['The one that can be taken away from the process owning it with no ill effects','The one that can be taken away with ill effects','The one that cannot be taken away with no ill effects','The one that cannot be taken away with ill effects'],ans:[0],ex:'Preemptable resource: có thể lấy lại từ process mà không gây vấn đề. Ví dụ: memory (có thể swap out), CPU (context switch).'},
+{id:152,ch:'Ch.6',tp:'Deadlock',q:'Which statement regarding deadlock is correct?',opts:['Allocation is logical while acquisition is physical','Banker\'s Algorithm guarantees absolute mutual exclusion','A combination of semaphore and mutex ensures safe resource allocation','Kernel is responsible for exclusive resource acquisition; IPC takes care of safe allocation'],ans:[3],ex:'Kernel: quản lý exclusive resource acquisition (hardware devices). IPC mechanisms: đảm bảo safe allocation giữa các processes.'},
+{id:153,ch:'Ch.6',tp:'Deadlock',q:'In deadlock, what is the mutual exclusion condition?',opts:['Processes holding resources can request new resources','Resources cannot be forcibly taken away','Must be circular list of processes each waiting for resource held by next','Each resource is either assigned to exactly one process or is available'],ans:[3],ex:'Mutual exclusion: mỗi resource được assign cho ĐÚNG MỘT process tại một thời điểm, hoặc available.'},
+{id:154,ch:'Ch.6',tp:'Deadlock',q:'What does a resource allocation graph represent in deadlock detection?',opts:['Number of resources allocated to each process','A graph depicting processes, resources, and their relationships','Chart showing execution order','Diagram of CPU scheduling'],ans:[1],ex:'RAG (Resource Allocation Graph): nodes = processes (circles) và resources (squares). Arc process→resource = request; resource→process = allocation.'},
+{id:155,ch:'Ch.6',tp:'Deadlock',q:'Who is responsible for the Banker\'s algorithm?',opts:['Dijkstra','Zobel','Newton','Ostrich'],ans:[0],ex:'Banker\'s Algorithm được đề xuất bởi Edsger Dijkstra năm 1965 — cùng người phát hiện Dining Philosophers problem.'},
+{id:156,ch:'Ch.6',tp:'Deadlock',q:'What is the Ostrich algorithm for deadlock?',opts:['A deadlock recovery algorithm','A deadlock dealing algorithm (ignore it)','A deadlock detection algorithm','A deadlock avoidance algorithm'],ans:[1],ex:'Ostrich Algorithm: phớt lờ deadlock như đà điểu chúi đầu xuống cát. Dùng trong thực tế vì deadlock rất hiếm và chi phí prevention/detection cao.'},
+{id:157,ch:'Ch.6',tp:'Deadlock',q:'Which tool is used for both Deadlock Detection & Recovery AND Deadlock Avoidance?',opts:['Resource Request Matrix','Resource Allocation Matrix','Resource Allocation Graph','Pie chart'],ans:[2],ex:'RAG: dùng cho detection (tìm cycle = deadlock) và avoidance (Banker\'s algorithm dùng graph để check safe states).'},
+{id:158,ch:'Ch.6',tp:'Deadlock',q:'In Banker\'s Algorithm, what is the purpose of the "maximum demand" matrix?',opts:['Number of resource instances currently held by each process','Maximum resources each process may need during execution','Resources currently available in the system','Identify deadlocked processes'],ans:[1],ex:'MAX matrix: khai báo tối đa số resources mỗi process có thể cần. NEED = MAX - ALLOCATED.'},
+{id:159,ch:'Ch.6',tp:'Deadlock',q:'In resource allocation models, what does an arc directed from a PROCESS to a RESOURCE mean?',opts:['The process is currently waiting for that resource','The process is currently ready waiting for that resource','The process is currently blocked waiting for that resource','The process is currently running for that resource'],ans:[0],ex:'Arc process→resource = request arc: process đang waiting/requesting resource đó.'},
+{id:160,ch:'Ch.7',tp:'Virtualization',q:'A VMM (Virtual Machine Monitor) creates the illusion of multiple virtual machines. VMM is also known as:',opts:['Hypovisor','Hypervisor','Shell','Console'],ans:[1],ex:'Hypervisor (= VMM): phần mềm tạo và quản lý virtual machines, ảo hóa hardware cho guest OSes.'},
+{id:161,ch:'Ch.1',tp:'OS Modes',q:'What is NOT an operating system mode?',opts:['System mode','User mode','Kernel mode','Supervisor mode'],ans:[0],ex:'OS có 2 modes: Kernel mode (= supervisor mode, privileged) và User mode. "System mode" không phải tên chuẩn.'},
+{id:162,ch:'Ch.1',tp:'History',q:'Which early OS was designed for the UNIVAC I computer?',opts:['MS-DOS','UNIX','COBOL','EDVAC'],ans:[3],ex:'EDVAC: một trong những computers đầu tiên có stored-program. Univac I (1951) là commercial computer đầu tiên. Note: COBOL là programming language.'},
+{id:163,ch:'Ch.1',tp:'Hardware',q:'The ______ was invented to attach slow I/O devices (keyboard, mouse) to the computer.',opts:['ISA','PCI','DMI','USB'],ans:[3],ex:'USB (Universal Serial Bus): thiết kế để thay thế nhiều loại connectors cho slow I/O devices (keyboard, mouse, printer). Plug-and-play, hot-swappable.'},
+{id:164,ch:'Ch.1',tp:'Linux',q:'In the Linux OS, which key combination stops the ping command in terminal?',opts:['Ctrl+Break','Ctrl+D','Ctrl+C','Ctrl+Z'],ans:[2],ex:'Ctrl+C: gửi SIGINT signal → terminate running foreground process. Ctrl+D = EOF. Ctrl+Z = SIGTSTP (suspend).'},
+{id:165,ch:'Ch.1',tp:'Multiprocessors',q:'Many popular OSes run on multiprocessors. Main advantage of multiprocessor systems?',opts:['Increase throughput','Decrease throughput','Low-speed communication','Reduced reliability'],ans:[0],ex:'Multiprocessors: tăng throughput (nhiều CPU = nhiều jobs cùng lúc), tăng reliability (nếu một CPU hỏng, hệ thống vẫn chạy).'},
+{id:166,ch:'Ch.2',tp:'OS Concepts',q:'A key concept in all operating systems is the ____.',opts:['Files','Process','Input/Output','The Shell'],ans:[1],ex:'Process là khái niệm trung tâm của mọi OS hiện đại. Tất cả chức năng OS đều xoay quanh việc quản lý processes.'},
+{id:167,ch:'Ch.1',tp:'OS Architecture',q:'What is NOT the main feature of a monolithic system?',opts:['Information hiding: every procedure hidden from every other','OS runs as single program in kernel mode','The OS is organized as a hierarchy','OS written as collection of procedures linked into single executable'],ans:[2],ex:'OS organized as hierarchy = đặc điểm của LAYERED system, không phải monolithic. Monolithic = one big program.'},
+{id:168,ch:'Ch.2',tp:'Scheduling',q:'In Round-Robin scheduling, what happens when a process runs out of its time quantum?',opts:['Switches from running to a ready state','Switches from running to a blocked state','Switches from running to suspended-ready','Switches from running to suspended'],ans:[0],ex:'Round-Robin: khi quantum hết, process bị preempt và chuyển sang ready state (cuối ready queue), không blocked.'},
+{id:169,ch:'Ch.2',tp:'Processes',q:'In the Windows OS, which statement is true about the blocked state of a process?',opts:['Waiting for event triggered by CPU scheduling','Waiting for an event that has not happened yet','Waiting to I/O AND waiting for event that has not happened','CPU and Memory are waiting to other events'],ans:[2],ex:'Blocked state: process đang chờ I/O completion HOẶC đang chờ event (signal, lock, timer). Không thể chạy cho dù CPU rảnh.'},
+{id:170,ch:'Ch.2',tp:'Synchronization',q:'When using Critical Regions solution, which condition is NOT necessary?',opts:['Processes entering CS must set their speed or number of CPUs','Two processes not in CS at same time','Process outside cannot prevent others from entering','Processes do not wait indefinitely to enter CS'],ans:[0],ex:'4 điều kiện CR: mutual exclusion, progress (không block mãi), bounded wait, và no speed assumption. Option A (set speed/CPUs) là KHÔNG cần thiết.'},
+{id:171,ch:'Ch.3',tp:'Memory Allocation',q:'Memory blocks: 600K,500K,200K,300K. Processes P1=250K,P2=420K,P3=150K,P4=450K. Best-fit allocation?',opts:['P1→B4, P2→B2, P3→B3, P4→B1','P1→B4, P2→B1, P3→B3, P4→B2','P1→B1, P2→B2, P3→B4, B4 not allocated','P1→B1, P2→B2, P3→B3, B4 not allocated'],ans:[0],ex:'Best fit: P1(250K)→B4(300K), P2(420K)→B2(500K), P3(150K)→B3(200K), P4(450K)→B1(600K).'},
+{id:172,ch:'Ch.3',tp:'Memory Allocation',q:'Free memory: 10,4,15,18,7,9,13,20 KB. Process 12KB placed into 20KB block. Which algorithm?',opts:['Worst-fit','First-fit','Best-fit','Next-fit'],ans:[0],ex:'Process 12KB vào block 20KB (lớn nhất) = Worst Fit. Best fit sẽ chọn 13KB. First fit sẽ chọn 15KB (đầu tiên đủ lớn).'},
+{id:173,ch:'Ch.3',tp:'Page Replacement',q:'In which page replacement algorithm can page fault rate INCREASE when number of frames INCREASES?',opts:['FIFO','LRU','NRU','OPT'],ans:[0],ex:'Belady\'s Anomaly: chỉ xảy ra với FIFO. LRU và OPT là "stack algorithms" — thêm frames KHÔNG BAO GIỜ tăng page faults.'},
+{id:174,ch:'Ch.3',tp:'Page Replacement',q:'Optimal page replacement, 4 frames. Reference string: 7,0,1,2,0,3,0. How many page faults?',opts:['5','6','4','7'],ans:[0],ex:'OPT trace: 7F,0F,1F,2F | 0H | 3F(evict 7 - used latest) | 0H. 5 page faults.'},
+{id:175,ch:'Ch.4',tp:'File Systems',q:'In file sharing, B links to C\'s file by creating new file containing the path name. Type of linking?',opts:['Synchronous Linking','Symbolic Linking','Traditional (hard) Linking','Synthetic Linking'],ans:[1],ex:'Symbolic link (soft link): file chứa PATH của target. Cross filesystem. Nếu target deleted → broken link. Hard link: trỏ đến inode.'},
+{id:176,ch:'Ch.4',tp:'File Access',q:'Which file access method is often used to optimize access to LARGE files?',opts:['Sequential access','Direct access','Indexed access','Linked access'],ans:[2],ex:'Indexed access: index block chứa pointers. O(1) random access. Dùng cho databases và large file systems.'},
+{id:177,ch:'Ch.4',tp:'File Systems',q:'In Windows 95, maximum partition size with FAT-16 and 4 KB block size?',opts:['128MB','256MB','512MB','1024MB'],ans:[1],ex:'FAT16: max 65536 clusters × 4KB = 256MB. Đây là lý do FAT32 được tạo ra để support disks lớn hơn.'},
+{id:178,ch:'Ch.4',tp:'Disk',q:'In the original IBM PC 360-KB floppy disk, how many sectors per track?',opts:['4','8','9','12'],ans:[2],ex:'360KB floppy: 40 tracks × 9 sectors/track × 2 sides × 512 bytes = 368,640 bytes ≈ 360KB.'},
+{id:179,ch:'Ch.5',tp:'I/O Hardware',q:'In programmed I/O, who manages all aspects of data transfer?',opts:['The I/O device','The DMA controller','The CPU','The interrupt handler'],ans:[2],ex:'Programmed I/O (busy-wait): CPU hoàn toàn kiểm soát, poll device status register liên tục cho đến khi done.'},
+{id:180,ch:'Ch.5',tp:'I/O',q:'In memory-mapped I/O, to prevent software infinite loops waiting for device, what can be done?',opts:['Selectively able caching','Selectively disable buffer','Selectively able buffer','Selectively disable caching'],ans:[3],ex:'Selectively disable caching cho device registers: prevent CPU từ caching "device ready" check → mỗi read là fresh read từ hardware.'},
+{id:181,ch:'Ch.5',tp:'I/O',q:'What are the three basic ways IO operations can be performed? (Choose 3)',opts:['Programmed I/O','Memory-mapped I/O','Interrupt-driven I/O','I/O using DMA'],ans:[0,2,3],multi:true,ex:'3 cách: (1) Programmed I/O (CPU polling), (2) Interrupt-driven I/O (device ngắt khi done), (3) DMA (device tự transfer, ngắt khi xong). Memory-mapped I/O là cách địa chỉ device registers, không phải cách thực hiện I/O.'},
+{id:182,ch:'Ch.5',tp:'I/O Software',q:'How many layers are there in the I/O software system?',opts:['3','4','5','6'],ans:[1],ex:'4 layers: (1) Interrupt handlers, (2) Device drivers, (3) Device-independent I/O software, (4) User-space I/O software.'},
+{id:183,ch:'Ch.5',tp:'RAID',q:'RAID level ______ works worst with OS that habitually asks for data one sector at a time.',opts:['0','1','2','3'],ans:[0],ex:'RAID 0 (striping): nếu đọc từng sector một, arm phải nhảy giữa các disks → không benefit từ striping, có thể worst case.'},
+{id:184,ch:'Ch.5',tp:'I/O',q:'In a thin client setup, where is most software and data processing performed?',opts:['Locally on the thin client device','On a central server or cloud infrastructure','On a central server or client infrastructure','On a dedicated network switch'],ans:[1],ex:'Thin client: lightweight terminal, hầu hết processing tại central server/cloud. Client chỉ xử lý display và input.'},
+{id:185,ch:'Ch.6',tp:'Deadlock',q:'Which resource allocation method can help prevent deadlocks by requiring processes to request and hold all necessary resources at once?',opts:['Contiguous allocation','Clustered allocation','Linked allocation','Resource allocation (request-all-at-once)'],ans:[0],ex:'Request-all-at-once (= contiguous allocation trong context này): prevent Hold-and-Wait. Process request tất cả resources cần trước khi bắt đầu.'},
+{id:186,ch:'Ch.4',tp:'File Systems',q:'How would the path usr>ast>mailbox be written in MULTICS?',opts:['usr\\ast\\mailbox','>usr>ast>mailbox','/usr/ast/mailbox','usr\\ast\\mailbox'],ans:[1],ex:'MULTICS dùng > làm directory separator, với > ở đầu chỉ absolute path. UNIX dùng / để đơn giản hóa.'},
+{id:187,ch:'Ch.1',tp:'OS Types',q:'In the OS zoo, what is the main priority of time-sharing over a multiprogramming system?',opts:['Cost of managing smaller processes','Increase CPU performance','Response time is smaller','Reduce burst time of process'],ans:[2],ex:'Time-sharing: chia CPU theo lượt nhỏ (quantum) cho nhiều users → mỗi user cảm thấy có máy riêng → response time nhỏ.'},
+{id:188,ch:'Ch.1',tp:'History',q:'In the first generation of computers, what OS did users use?',opts:['This stage does not have an operating system','Users use the FM operating system','Users use the OS/360 operating system','Users use the UNIX operating system'],ans:[0],ex:'Thế hệ 1 (1945-55): không có OS! Lập trình bằng plugboard, máy chỉ chạy một job tại một thời điểm, không có software layers.'},
+{id:189,ch:'Ch.1',tp:'CPU',q:'What is the simple model of instructions being retrieved from memory and run by the CPU?',opts:['Fetch, decode, and execute','Fetch, execute, and decode','Decode, fetch, and execute','Execute, decode, and fetch'],ans:[0],ex:'Fetch-Decode-Execute cycle: (1) Fetch instruction từ memory vào IR, (2) Decode để xác định operation và operands, (3) Execute.'},
+{id:190,ch:'Ch.1',tp:'OS Architecture',q:'A simple structuring model for a monolithic system includes:',opts:['Main procedure','Service procedures','Utility procedures','All of the above'],ans:[3],ex:'Monolithic structure: (1) Main procedure gọi service procedures, (2) Service procedures thực hiện syscalls, (3) Utility procedures hỗ trợ service procedures.'},
+{id:191,ch:'Ch.2',tp:'Processes',q:'What is a process in context of computer systems?',opts:['A sequence of activities carried out by OS','A method of scheduling CPU tasks for optimal performance including current register values','A method of scheduling CPU tasks','An instance of an executing program, including current PC, registers, and variables'],ans:[3],ex:'Process = program đang thực thi. Bao gồm: code (text), data, stack, PC, registers, và tất cả process state.'},
+{id:192,ch:'Ch.2',tp:'Process Termination',q:'In which OS is the system call for voluntary process termination referred to as ExitProcess?',opts:['UNIX','Windows','macOS','Linux'],ans:[1],ex:'Windows: ExitProcess(exitCode) để terminate process. Unix/Linux/macOS: exit(status) là POSIX standard call.'},
+{id:193,ch:'Ch.2',tp:'IPC',q:'What problem does using semaphores help to solve in Producer-Consumer?',opts:['Deadlock','Lost-wakeup problem','Process termination','Memory allocation'],ans:[1],ex:'Lost-wakeup problem: nếu consumer kiểm tra buffer rỗng rồi bị preempt trước khi sleep(), producer có thể wakeup() không ai → consumer ngủ mãi. Semaphore giải quyết bằng atomic P/V.'},
+{id:194,ch:'Ch.2',tp:'Threads',q:'Which best describes relationship between threads within a single process?',opts:['Threads are completely independent','Threads share the same memory space but have their own registers','Threads are separate and isolated','Threads are tightly integrated with their own separate memory space'],ans:[1],ex:'Threads: chia sẻ code, data, heap, open files. Mỗi thread có riêng: PC, registers, stack. Context switch threads nhanh hơn processes.'},
+{id:195,ch:'Ch.3',tp:'Page Replacement',q:'FIFO, 4 page frames, reference string: 0,1,7,2,3,2,7,1,0,3. How many page faults?',opts:['4 pages','5 pages','6 pages','7 pages'],ans:[2],ex:'FIFO trace: 0F,1F,7F,2F | 3F(evict0) | 2H | 7H | 1H | 0F(evict1) | 3H. 6 page faults.'},
+{id:196,ch:'Ch.3',tp:'Page Tables',q:'Virtual address 0x00403008 with 10-bit PT1, 10-bit PT2, offset. Find PT1, PT2, offset.',opts:['PT1=1; PT2=3; offset=8','PT1=1; PT2=1; offset=8','PT1=4; PT2=3; offset=8','PT1=4; PT2=1; offset=8'],ans:[0],ex:'0x00403008 = 0000 0000 01 | 00 0000 0011 | 0000 0000 1000. PT1=1, PT2=3, offset=0x008=8.'},
+{id:197,ch:'Ch.3',tp:'Segmentation',q:'What is the primary advantage of segmented memory over paging in memory management?',opts:['Simplified address translation','Efficient use of memory space','Reduced overhead in memory management','Elimination of fragmentation'],ans:[1],ex:'Segmentation advantage: segments có kích thước biến đổi khớp với logical structure (code, data, stack) → efficient use. Nhược điểm: external fragmentation.'},
+{id:198,ch:'Ch.4',tp:'File Systems',q:'Consider two statements about LFS and Journaling FS. Which is correct?',opts:['Both Statement 1 (LFS appends all changes) and Statement 2 (Journaling writes log first) are TRUE','Both are FALSE','Statement 1 true, Statement 2 false','Statement 1 false, Statement 2 true'],ans:[0],ex:'LFS: appends all changes sequentially to log. Journaling: writes log entry TRƯỚC khi thực hiện operation. Cả hai đúng.'},
+];
+
+// ═══════════════════════════════════════════════════════
+//  APP STATE
+// ═══════════════════════════════════════════════════════
+let state = {
+  cfg: {ch:'all', num:'10', time:'30', mode:'practice'},
+  quiz: {qs:[], cur:0, answers:[], startTime:null, timer:null, tLeft:0, score:0, answered:false},
+  bank: {page:1, search:'', ch:'all'},
+  history: JSON.parse(localStorage.getItem('os_missing_hist')||'[]'),
+};
+let selOpts = new Set();
+
+// ═══════════════════════════════════════════════════════
+//  HELPERS
+// ═══════════════════════════════════════════════════════
+function showSection(id){
+  snd('click');
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  const tabs=['home','quiz','bank','stats'];
+  document.querySelectorAll('.nav-tab').forEach((t,i)=>{if(tabs[i]===id)t.classList.add('active')});
+  if(id==='bank')renderBank();
+  if(id==='stats')renderStats();
+  if(id==='home')updateHome();
+}
+
+function toast(msg,type='info',dur=2800){
+  const el=document.getElementById('toast');
+  el.textContent=msg;el.className=`toast ${type} show`;
+  setTimeout(()=>el.classList.remove('show'),dur);
+}
+
+function setChFilter(el){
+  snd('click');
+  document.querySelectorAll('#chapterFilter .config-opt').forEach(o=>o.classList.remove('active'));
+  el.classList.add('active');
+  state.cfg.ch = el.dataset.ch;
+  updatePoolInfo();
+}
+
+function setCfg(type, el){
+  snd('click');
+  const row = el.closest('.config-row');
+  row.querySelectorAll('.config-opt').forEach(o=>o.classList.remove('active'));
+  el.classList.add('active');
+  state.cfg[type] = el.dataset.val;
+  if(type==='num') updatePoolInfo();
+}
+
+function updatePoolInfo(){
+  let pool = QS.filter(q=> state.cfg.ch==='all' || q.ch===state.cfg.ch || (state.cfg.ch==='Ch.7+' && !['Ch.1','Ch.2','Ch.3','Ch.4','Ch.5','Ch.6'].includes(q.ch)));
+  const n = state.cfg.num==='all' ? pool.length : Math.min(parseInt(state.cfg.num), pool.length);
+  document.getElementById('poolInfo').textContent = `Pool: ${pool.length} câu → Sẽ thi: ${n} câu`;
+}
+
+function updateHome(){
+  const h = state.history;
+  document.getElementById('hTotal').textContent = QS.length;
+  document.getElementById('hAttempts').textContent = h.length;
+  if(h.length>0) document.getElementById('hBest').textContent = Math.max(...h.map(x=>x.pct))+'%';
+}
+
+// ═══════════════════════════════════════════════════════
+//  QUIZ ENGINE
+// ═══════════════════════════════════════════════════════
+function startQuiz(){
+  snd('start');
+  let pool = QS.filter(q => {
+    if(state.cfg.ch==='all') return true;
+    if(state.cfg.ch==='Ch.7+') return !['Ch.1','Ch.2','Ch.3','Ch.4','Ch.5','Ch.6'].includes(q.ch);
+    return q.ch === state.cfg.ch;
+  });
+  pool = pool.sort(()=>Math.random()-0.5);
+  const n = state.cfg.num==='all' ? pool.length : Math.min(parseInt(state.cfg.num), pool.length);
+  state.quiz.qs = pool.slice(0, n);
+  state.quiz.cur = 0;
+  state.quiz.answers = [];
+  state.quiz.startTime = Date.now();
+  state.quiz.score = 0;
+
+  document.getElementById('quizSelector').style.display='none';
+  document.getElementById('quizResults').style.display='none';
+  document.getElementById('quizReview').style.display='none';
+  document.getElementById('quizEngine').style.display='block';
+
+  if(parseInt(state.cfg.time)>0) document.getElementById('timerEl').style.display='block';
+  else document.getElementById('timerEl').style.display='none';
+
+  renderQ();
+}
+
+function renderQ(){
+  const q = state.quiz.qs[state.quiz.cur];
+  const idx = state.quiz.cur;
+  const total = state.quiz.qs.length;
+  state.quiz.answered = false;
+  selOpts.clear();
+
+  document.getElementById('pFill').style.width = `${(idx/total)*100}%`;
+  document.getElementById('qCtr').textContent = `${idx+1}/${total}`;
+  document.getElementById('qTitleBar').textContent = `${q.ch} · ${q.tp}`;
+  document.getElementById('qBadge').textContent = `Q${idx+1} · ${q.ch} · ${q.tp}`;
+  document.getElementById('qText').textContent = q.q;
+  document.getElementById('feedbackEl').className='feedback';
+  document.getElementById('feedbackEl').style.display='none';
+  document.getElementById('btnCheck').style.display='block';
+  document.getElementById('btnCheck').disabled = true;
+  document.getElementById('btnNext').style.display='none';
+
+  const correct = state.quiz.answers.filter(a=>a.correct).length;
+  document.getElementById('scoreTrack').textContent = idx>0 ? `✓ ${correct}/${idx}` : '';
+
+  document.getElementById('optsCont').innerHTML = q.opts.map((o,i)=>`
+    <div class="option${q.multi?' multi':''}" id="oo${i}" onclick="pickOpt(${i})">
+      <div class="option-key">${String.fromCharCode(65+i)}</div>
+      <div class="option-text">${o}</div>
+    </div>
+  `).join('');
+
+  clearInterval(state.quiz.timer);
+  const t = parseInt(state.cfg.time);
+  if(t>0){
+    state.quiz.tLeft = t;
+    tickTimer();
+    state.quiz.timer = setInterval(()=>{
+      state.quiz.tLeft--;
+      tickTimer();
+      if(state.quiz.tLeft<=0){
+        clearInterval(state.quiz.timer);
+        snd('timeout');
+        if(!state.quiz.answered) autoCheck();
+      }
+    },1000);
+  }
+}
+
+function tickTimer(){
+  const t = state.quiz.tLeft;
+  const el = document.getElementById('timerEl');
+  el.textContent = `⏱ ${t}s`;
+  if(t<=10) el.classList.add('urgent');
+  else el.classList.remove('urgent');
+}
+
+function pickOpt(i){
+  if(state.quiz.answered) return;
+  snd('sel');
+  const q = state.quiz.qs[state.quiz.cur];
+  if(q.multi){
+    const el=document.getElementById(`oo${i}`);
+    if(selOpts.has(i)){selOpts.delete(i);el.classList.remove('selected');}
+    else{selOpts.add(i);el.classList.add('selected');}
+  } else {
+    selOpts.clear();
+    document.querySelectorAll('.option').forEach(o=>o.classList.remove('selected'));
+    document.getElementById(`oo${i}`).classList.add('selected');
+    selOpts.add(i);
+  }
+  document.getElementById('btnCheck').disabled = selOpts.size===0;
+}
+
+function autoCheck(){ selOpts.clear(); checkAnswer(true); }
+
+function checkAnswer(auto=false){
+  if(state.quiz.answered) return;
+  clearInterval(state.quiz.timer);
+  state.quiz.answered = true;
+  const q = state.quiz.qs[state.quiz.cur];
+  const selected = [...selOpts];
+  const correct = JSON.stringify(selected.sort()) === JSON.stringify(q.ans.sort());
+  if(correct) state.quiz.score++;
+  state.quiz.answers.push({q, selected, correct});
+
+  q.opts.forEach((_,i)=>{
+    const el=document.getElementById(`oo${i}`);
+    el.classList.add('disabled');
+    if(q.ans.includes(i)) el.classList.add('correct');
+    else if(selected.includes(i)) el.classList.add('wrong');
+  });
+
+  if(state.cfg.mode==='practice'){
+    const fb=document.getElementById('feedbackEl');
+    if(correct){
+      fb.innerHTML=`<strong>✓ Chính xác!</strong> ${q.ex||''}`;
+      fb.className='feedback correct-fb';
+      snd('correct');
+    } else {
+      const cl = q.ans.map(i=>String.fromCharCode(65+i)+'. '+q.opts[i]).join('; ');
+      fb.innerHTML=`<strong>✗ Sai!</strong> Đáp án: ${cl}. ${q.ex||''}`;
+      fb.className='feedback wrong-fb';
+      snd('wrong');
+    }
+    fb.style.display='block';
+  } else {
+    snd(correct?'correct':'wrong');
+  }
+
+  document.getElementById('btnCheck').style.display='none';
+  document.getElementById('btnNext').style.display='block';
+  document.getElementById('btnNext').textContent = state.quiz.cur < state.quiz.qs.length-1 ? 'Tiếp →' : 'Kết quả →';
+}
+
+function nextQ(){
+  snd('next');
+  selOpts.clear();
+  state.quiz.cur++;
+  if(state.quiz.cur >= state.quiz.qs.length) showResults();
+  else renderQ();
+}
+
+function showResults(){
+  clearInterval(state.quiz.timer);
+  snd('finish');
+  document.getElementById('quizEngine').style.display='none';
+  document.getElementById('quizResults').style.display='block';
+  const total=state.quiz.qs.length, cor=state.quiz.score;
+  const pct=Math.round((cor/total)*100);
+  const elapsed=Math.round((Date.now()-state.quiz.startTime)/1000);
+  const C=396, off=C-(pct/100)*C;
+  const fill=document.getElementById('sRingFill');
+  const color=pct>=80?'#10b981':pct>=60?'#f59e0b':'#ef4444';
+  fill.style.stroke=color;fill.style.strokeDashoffset=C;
+  setTimeout(()=>{fill.style.strokeDashoffset=off;},100);
+  document.getElementById('sPct').textContent=pct+'%';
+  document.getElementById('sPct').style.color=color;
+  document.getElementById('rC').textContent=cor;
+  document.getElementById('rW').textContent=total-cor;
+  document.getElementById('rT').textContent=total;
+  document.getElementById('rTime').textContent=elapsed+'s';
+  const grades=[{t:90,g:'🏆 Xuất sắc!'},{t:75,g:'🎯 Giỏi!'},{t:60,g:'📚 Khá'},{t:0,g:'💪 Cần ôn thêm'}];
+  document.getElementById('rGrade').textContent=grades.find(g=>pct>=g.t).g;
+  state.history.unshift({date:new Date().toLocaleString('vi'),pct,correct:cor,total,elapsed,ch:state.cfg.ch});
+  state.history=state.history.slice(0,20);
+  localStorage.setItem('os_missing_hist',JSON.stringify(state.history));
+  updateHome();
+}
+
+function reviewAnswers(){
+  snd('click');
+  document.getElementById('quizResults').style.display='none';
+  document.getElementById('quizReview').style.display='block';
+  document.getElementById('reviewCont').innerHTML = state.quiz.answers.map((a,i)=>`
+    <div class="review-item">
+      <div class="bank-topic">${a.q.ch} · ${a.q.tp}</div>
+      <div class="review-q">${i+1}. ${a.q.q}</div>
+      <div class="review-options">
+        ${a.q.opts.map((o,j)=>`
+          <div class="review-opt ${a.q.ans.includes(j)?'correct-opt':''} ${a.selected.includes(j)&&!a.q.ans.includes(j)?'selected-wrong':''}">
+            ${String.fromCharCode(65+j)}. ${o} ${a.q.ans.includes(j)?'✓':''} ${a.selected.includes(j)&&!a.q.ans.includes(j)?'✗':''}
+          </div>
+        `).join('')}
+      </div>
+      ${a.q.ex?`<div class="review-explain">💡 ${a.q.ex}</div>`:''}
+    </div>
+  `).join('');
+}
+
+function backToRes(){ snd('click'); document.getElementById('quizReview').style.display='none'; document.getElementById('quizResults').style.display='block'; }
+function restartQ(){ snd('click'); document.getElementById('quizResults').style.display='none'; startQuiz(); }
+function backToSel(){
+  snd('click'); clearInterval(state.quiz.timer);
+  document.getElementById('quizResults').style.display='none';
+  document.getElementById('quizEngine').style.display='none';
+  document.getElementById('quizReview').style.display='none';
+  document.getElementById('quizSelector').style.display='block';
+}
+function exitQuiz(){
+  snd('click');
+  if(confirm('Thoát bài thi?')){
+    clearInterval(state.quiz.timer);
+    document.getElementById('quizEngine').style.display='none';
+    document.getElementById('quizSelector').style.display='block';
+  }
+}
+
+// ═══════════════════════════════════════════════════════
+//  BANK
+// ═══════════════════════════════════════════════════════
+const BPAGE=12;
+let bankState={page:1,search:'',ch:'all'};
+
+function filterBank(){
+  bankState.search=document.getElementById('searchInp').value.toLowerCase();
+  bankState.ch=document.getElementById('chSelect').value;
+  bankState.page=1;
+  renderBank();
+}
+
+function renderBank(){
+  let filtered=QS.filter(q=>{
+    const chOk = bankState.ch==='all' || q.ch===bankState.ch || (bankState.ch==='Ch.7+' && !['Ch.1','Ch.2','Ch.3','Ch.4','Ch.5','Ch.6'].includes(q.ch));
+    const sOk = !bankState.search || q.q.toLowerCase().includes(bankState.search) || q.tp.toLowerCase().includes(bankState.search) || q.ch.toLowerCase().includes(bankState.search);
+    return chOk && sOk;
+  });
+  document.getElementById('bTotal').textContent=QS.length;
+  document.getElementById('bFiltered').textContent=filtered.length;
+  const pages=Math.ceil(filtered.length/BPAGE);
+  const items=filtered.slice((bankState.page-1)*BPAGE, bankState.page*BPAGE);
+  document.getElementById('bankCont').innerHTML = items.map(q=>`
+    <div class="bank-item">
+      <div class="bank-topic">${q.ch} · ${q.tp}</div>
+      <div class="bank-q">Q${q.id}. ${q.q}</div>
+      <div class="bank-opts">
+        ${q.opts.map((o,i)=>`<div class="bank-opt ${q.ans.includes(i)?'correct-ans':''}">${String.fromCharCode(65+i)}. ${o}${q.ans.includes(i)?' ✓':''}</div>`).join('')}
+      </div>
+    </div>
+  `).join('') || '<div style="text-align:center;color:var(--muted);padding:40px">Không tìm thấy</div>';
+  const pg=document.getElementById('bankPag');
+  pg.innerHTML='';
+  for(let i=1;i<=Math.min(pages,15);i++){
+    const b=document.createElement('button');
+    b.className=`page-btn${i===bankState.page?' active':''}`;
+    b.textContent=i;
+    b.onclick=()=>{snd('click');bankState.page=i;renderBank();};
+    pg.appendChild(b);
+  }
+}
+
+// ═══════════════════════════════════════════════════════
+//  STATS
+// ═══════════════════════════════════════════════════════
+function renderStats(){
+  const h=state.history;
+  document.getElementById('st1').textContent=h.length;
+  if(h.length>0){
+    document.getElementById('st2').textContent=Math.max(...h.map(x=>x.pct))+'%';
+    document.getElementById('st3').textContent=Math.round(h.reduce((s,x)=>s+x.pct,0)/h.length)+'%';
+    document.getElementById('st4').textContent=h.reduce((s,x)=>s+x.total,0);
+  }
+  const list=document.getElementById('histList');
+  if(!h.length){list.innerHTML='<div style="text-align:center;color:var(--muted);padding:30px">Chưa có lịch sử</div>';return;}
+  list.innerHTML=h.map(x=>`
+    <div class="bank-item" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
+      <div>
+        <div style="font-size:13px;font-weight:600">${x.date}</div>
+        <div style="font-size:11px;color:var(--muted)">Chương: ${x.ch} · ${x.total} câu · ${x.elapsed}s</div>
+      </div>
+      <div style="font-family:'Space Mono',monospace;font-size:18px;font-weight:700;color:${x.pct>=80?'var(--accent3)':x.pct>=60?'var(--warning)':'var(--danger)'}">${x.pct}%</div>
+    </div>
+  `).join('');
+}
+
+function clearHist(){
+  if(!confirm('Xóa toàn bộ lịch sử?'))return;
+  snd('click');state.history=[];
+  localStorage.removeItem('os_missing_hist');
+  renderStats();updateHome();
+  toast('Đã xóa lịch sử','success');
+}
+
+// ═══════════════════════════════════════════════════════
+//  INIT
+// ═══════════════════════════════════════════════════════
+window.addEventListener('load',()=>{
+  setTimeout(()=>{
+    document.getElementById('loadingScreen').classList.add('fade-out');
+    setTimeout(()=>document.getElementById('loadingScreen').style.display='none',500);
+  },1000);
+  updateHome();
+  updatePoolInfo();
+  document.getElementById('bTotal').textContent=QS.length;
+  document.getElementById('bFiltered').textContent=QS.length;
+});
 </script>
 </body>
 </html>
