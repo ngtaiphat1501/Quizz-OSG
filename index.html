@@ -3,9 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <!-- ✅ SEO 2026: Primary Meta Tags -->
-    <title>EduQuiz – 500 Câu Hỏi Hệ Điều Hành | Ôn Tập Lập Trình Hệ Thống</title>
+    <title>EduQuiz – 500 Câu Hỏi Hệ Điều Hành</title>
     <meta name="description" content="Bộ 500 câu hỏi trắc nghiệm Hệ Điều Hành tiếng Anh kèm giải thích tiếng Việt. Luyện tập Process Management, Memory Management, File Systems, Deadlock, I/O. Miễn phí, không cần đăng ký." />
     <meta name="keywords" content="hệ điều hành, trắc nghiệm, operating system, quiz, process management, memory management, file system, deadlock, synchronization, ôn tập" />
     <meta name="author" content="EduQuiz" />
@@ -13,7 +11,6 @@
     <meta name="theme-color" content="#1e3a8a" />
     <link rel="canonical" href="https://eduquiz.vn/he-dieu-hanh" />
 
-    <!-- ✅ SEO 2026: Open Graph (Social Sharing) -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://eduquiz.vn/he-dieu-hanh" />
     <meta property="og:title" content="EduQuiz – 500 Câu Hỏi Hệ Điều Hành" />
@@ -24,71 +21,11 @@
     <meta property="og:locale" content="vi_VN" />
     <meta property="og:site_name" content="EduQuiz" />
 
-    <!-- ✅ SEO 2026: Twitter / X Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="EduQuiz – 500 Câu Hỏi Hệ Điều Hành" />
     <meta name="twitter:description" content="500 câu trắc nghiệm OS tiếng Anh kèm giải thích tiếng Việt. Miễn phí." />
     <meta name="twitter:image" content="https://eduquiz.vn/og-image-os.png" />
 
-    <!-- ✅ SEO 2026: JSON-LD Structured Data (Quiz, FAQPage, BreadcrumbList) -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "WebApplication",
-          "@id": "https://eduquiz.vn/he-dieu-hanh",
-          "name": "EduQuiz – Hệ Điều Hành",
-          "url": "https://eduquiz.vn/he-dieu-hanh",
-          "description": "500 câu hỏi trắc nghiệm Hệ Điều Hành tiếng Anh kèm giải thích tiếng Việt",
-          "applicationCategory": "EducationalApplication",
-          "operatingSystem": "Web Browser",
-          "inLanguage": ["vi", "en"],
-          "isAccessibleForFree": true,
-          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "VND" },
-          "publisher": { "@type": "Organization", "name": "EduQuiz", "url": "https://eduquiz.vn" }
-        },
-        {
-          "@type": "Course",
-          "name": "Hệ Điều Hành – Operating System",
-          "description": "Khóa luyện tập 500 câu hỏi trắc nghiệm về Hệ Điều Hành",
-          "educationalLevel": "University",
-          "teaches": "Operating Systems, Process Management, Memory Management, File Systems, Deadlock",
-          "inLanguage": ["vi", "en"],
-          "hasCourseInstance": {
-            "@type": "CourseInstance",
-            "courseMode": "Online",
-            "courseWorkload": "PT5H"
-          }
-        },
-        {
-          "@type": "BreadcrumbList",
-          "itemListElement": [
-            { "@type": "ListItem", "position": 1, "name": "Trang chủ", "item": "https://eduquiz.vn" },
-            { "@type": "ListItem", "position": 2, "name": "Khoa học máy tính", "item": "https://eduquiz.vn/khoa-hoc-may-tinh" },
-            { "@type": "ListItem", "position": 3, "name": "Hệ Điều Hành", "item": "https://eduquiz.vn/he-dieu-hanh" }
-          ]
-        },
-        {
-          "@type": "FAQPage",
-          "mainEntity": [
-            {
-              "@type": "Question",
-              "name": "EduQuiz Hệ Điều Hành có bao nhiêu câu hỏi?",
-              "acceptedAnswer": { "@type": "Answer", "text": "Có 500 câu hỏi trắc nghiệm chia thành 10 bộ đề, mỗi bộ 50 câu." }
-            },
-            {
-              "@type": "Question",
-              "name": "Quiz có miễn phí không?",
-              "acceptedAnswer": { "@type": "Answer", "text": "Hoàn toàn miễn phí, không cần tạo tài khoản hay đăng nhập." }
-            }
-          ]
-        }
-      ]
-    }
-    </script>
-
-    <!-- ✅ Performance: Preconnect & Font Loading -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;0,14..32,800;1,14..32,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
@@ -101,43 +38,43 @@
             --ink-500: #64748b;
             --ink-300: #cbd5e1;
             --ink-100: #f1f5f9;
-            --ink-50:  #f8fafc;
-
+            --ink-50: #f8fafc;
             --blue-700: #1d4ed8;
             --blue-600: #2563eb;
+            --blue-500: #3b82f6;
             --blue-100: #dbeafe;
-            --blue-50:  #eff6ff;
-
+            --blue-50: #eff6ff;
             --green-600: #16a34a;
             --green-500: #22c55e;
-            --green-50:  #f0fdf4;
-
-            --red-600:   #dc2626;
-            --red-50:    #fef2f2;
-
+            --green-50: #f0fdf4;
+            --red-600: #dc2626;
+            --red-50: #fef2f2;
             --amber-500: #f59e0b;
             --amber-100: #fef3c7;
-
-            --radius-sm:  8px;
-            --radius-md:  16px;
-            --radius-lg:  24px;
-            --radius-xl:  36px;
-
-            --shadow-sm:  0 1px 3px rgba(15,23,42,.06), 0 1px 2px rgba(15,23,42,.04);
-            --shadow-md:  0 4px 16px rgba(15,23,42,.08), 0 2px 6px rgba(15,23,42,.04);
-            --shadow-lg:  0 20px 60px rgba(15,23,42,.10), 0 8px 24px rgba(15,23,42,.06);
-
-            --font-sans:  'Inter', system-ui, -apple-system, sans-serif;
-            --font-mono:  'JetBrains Mono', 'Courier New', monospace;
-
-            --transition: 200ms cubic-bezier(.4,0,.2,1);
+            --radius-sm: 8px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --radius-xl: 36px;
+            --shadow-sm: 0 1px 3px rgba(15, 23, 42, .06), 0 1px 2px rgba(15, 23, 42, .04);
+            --shadow-md: 0 4px 16px rgba(15, 23, 42, .08), 0 2px 6px rgba(15, 23, 42, .04);
+            --shadow-lg: 0 20px 60px rgba(15, 23, 42, .10), 0 8px 24px rgba(15, 23, 42, .06);
+            --shadow-xl: 0 30px 80px rgba(15, 23, 42, .18), 0 12px 40px rgba(15, 23, 42, .10);
+            --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+            --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+            --transition: 250ms cubic-bezier(.4, 0, .2, 1);
         }
 
         /* ===== RESET & BASE ===== */
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-        html { scroll-behavior: smooth; }
-
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
         body {
             font-family: var(--font-sans);
             background: var(--ink-50);
@@ -148,8 +85,6 @@
             -webkit-font-smoothing: antialiased;
             line-height: 1.6;
         }
-
-        /* ✅ Skip link for accessibility / SEO */
         .skip-link {
             position: absolute;
             top: -40px;
@@ -164,11 +99,13 @@
             text-decoration: none;
             transition: top var(--transition);
         }
-        .skip-link:focus { top: 12px; }
+        .skip-link:focus {
+            top: 12px;
+        }
 
         /* ===== SITE HEADER ===== */
         .site-header {
-            background: rgba(255,255,255,.88);
+            background: rgba(255, 255, 255, .88);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--ink-100);
@@ -186,8 +123,6 @@
             justify-content: space-between;
             gap: 16px;
         }
-
-        /* ===== LOGO ===== */
         .logo {
             display: flex;
             align-items: center;
@@ -215,12 +150,13 @@
             font-style: normal;
         }
 
-        /* ===== BREADCRUMB ===== */
         nav[aria-label="breadcrumb"] {
             display: none;
         }
         @media (min-width: 600px) {
-            nav[aria-label="breadcrumb"] { display: block; }
+            nav[aria-label="breadcrumb"] {
+                display: block;
+            }
         }
         .breadcrumb {
             list-style: none;
@@ -230,7 +166,7 @@
             font-size: 13px;
             color: var(--ink-500);
         }
-        .breadcrumb li + li::before {
+        .breadcrumb li+li::before {
             content: '/';
             color: var(--ink-300);
             margin-right: 6px;
@@ -239,10 +175,14 @@
             color: var(--ink-500);
             text-decoration: none;
         }
-        .breadcrumb a:hover { color: var(--blue-600); }
-        .breadcrumb [aria-current="page"] { color: var(--ink-700); font-weight: 600; }
+        .breadcrumb a:hover {
+            color: var(--blue-600);
+        }
+        .breadcrumb [aria-current="page"] {
+            color: var(--ink-700);
+            font-weight: 600;
+        }
 
-        /* ===== MODE TOGGLE ===== */
         .mode-toggle {
             display: flex;
             gap: 4px;
@@ -268,7 +208,9 @@
             color: var(--ink-900);
             box-shadow: var(--shadow-sm);
         }
-        .mode-btn:hover:not(.active) { color: var(--ink-900); }
+        .mode-btn:hover:not(.active) {
+            color: var(--ink-900);
+        }
         .mode-btn:focus-visible {
             outline: 2px solid var(--blue-600);
             outline-offset: 2px;
@@ -282,8 +224,6 @@
             padding: 28px 20px 60px;
             width: 100%;
         }
-
-        /* ===== PAGE HEADER (h1 for SEO) ===== */
         .page-heading {
             margin-bottom: 24px;
         }
@@ -300,7 +240,6 @@
             margin-top: 4px;
         }
 
-        /* ===== SET SELECTOR ===== */
         .set-section {
             margin-bottom: 20px;
         }
@@ -335,22 +274,29 @@
             background: var(--blue-50);
             color: var(--blue-700);
         }
-        .set-btn:hover:not(.active) { border-color: var(--blue-600); color: var(--blue-600); }
-        .set-btn:focus-visible { outline: 2px solid var(--blue-600); outline-offset: 2px; }
+        .set-btn:hover:not(.active) {
+            border-color: var(--blue-600);
+            color: var(--blue-600);
+        }
+        .set-btn:focus-visible {
+            outline: 2px solid var(--blue-600);
+            outline-offset: 2px;
+        }
 
-        /* ===== QUIZ CARD ===== */
         .quiz-card {
             background: #fff;
             border-radius: var(--radius-xl);
             box-shadow: var(--shadow-md);
             padding: 32px;
-            border: 1px solid rgba(15,23,42,.04);
+            border: 1px solid rgba(15, 23, 42, .04);
         }
         @media (max-width: 600px) {
-            .quiz-card { padding: 20px 18px; border-radius: var(--radius-lg); }
+            .quiz-card {
+                padding: 20px 18px;
+                border-radius: var(--radius-lg);
+            }
         }
 
-        /* ===== STATUS BAR ===== */
         .status-bar {
             display: flex;
             justify-content: space-between;
@@ -381,7 +327,7 @@
             height: 100%;
             background: var(--blue-600);
             border-radius: 99px;
-            transition: width 0.35s cubic-bezier(.4,0,.2,1);
+            transition: width 0.35s cubic-bezier(.4, 0, .2, 1);
         }
         .timer-badge {
             font-family: var(--font-mono);
@@ -396,8 +342,14 @@
             align-items: center;
             gap: 6px;
         }
-        .timer-badge.warning { background: var(--red-50); color: var(--red-600); }
-        .timer-badge.paused { background: var(--amber-100); color: #854d0e; }
+        .timer-badge.warning {
+            background: var(--red-50);
+            color: var(--red-600);
+        }
+        .timer-badge.paused {
+            background: var(--amber-100);
+            color: #854d0e;
+        }
         .timer-dot {
             width: 6px;
             height: 6px;
@@ -406,13 +358,20 @@
             animation: pulse-dot 1s infinite;
         }
         .timer-badge.paused .timer-dot,
-        .timer-badge.warning .timer-dot { animation: none; background: transparent; }
+        .timer-badge.warning .timer-dot {
+            animation: none;
+            background: transparent;
+        }
         @keyframes pulse-dot {
-            0%,100% { opacity: 1; }
-            50% { opacity: 0.3; }
+            0%,
+            100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.3;
+            }
         }
 
-        /* ===== QUESTION ===== */
         .question-meta {
             font-size: 12px;
             font-weight: 600;
@@ -429,9 +388,12 @@
             margin-bottom: 22px;
             letter-spacing: -0.2px;
         }
-        @media (max-width: 600px) { .question-text { font-size: 17px; } }
+        @media (max-width: 600px) {
+            .question-text {
+                font-size: 17px;
+            }
+        }
 
-        /* ===== OPTIONS ===== */
         .options {
             display: flex;
             flex-direction: column;
@@ -479,12 +441,14 @@
             background: var(--red-50);
             color: var(--ink-900);
         }
-        .option.disabled { pointer-events: none; }
+        .option.disabled {
+            pointer-events: none;
+        }
         .option__letter {
             width: 30px;
             height: 30px;
             border-radius: 50%;
-            background: rgba(15,23,42,.06);
+            background: rgba(15, 23, 42, .06);
             display: grid;
             place-items: center;
             font-weight: 700;
@@ -493,10 +457,24 @@
             flex-shrink: 0;
             transition: all var(--transition);
         }
-        .option.selected .option__letter { background: var(--blue-600); color: #fff; }
-        .option.correct .option__letter { background: var(--green-500); color: #fff; }
-        .option.wrong .option__letter { background: var(--red-600); color: #fff; }
-        .option__text { flex: 1; }
+        .option.multi .option__letter {
+            border-radius: 4px;
+        }
+        .option.selected .option__letter {
+            background: var(--blue-600);
+            color: #fff;
+        }
+        .option.correct .option__letter {
+            background: var(--green-500);
+            color: #fff;
+        }
+        .option.wrong .option__letter {
+            background: var(--red-600);
+            color: #fff;
+        }
+        .option__text {
+            flex: 1;
+        }
         .option__icon {
             font-size: 16px;
             opacity: 0;
@@ -506,9 +484,10 @@
         }
         .option.selected .option__icon,
         .option.correct .option__icon,
-        .option.wrong .option__icon { opacity: 1; }
+        .option.wrong .option__icon {
+            opacity: 1;
+        }
 
-        /* ===== EXPLANATION ===== */
         .explanation {
             margin-top: 20px;
             padding: 16px 20px;
@@ -525,12 +504,19 @@
             animation: fade-up .25s ease;
         }
         @keyframes fade-up {
-            from { opacity: 0; transform: translateY(6px); }
-            to   { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(6px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
-        .explanation strong { color: var(--blue-700); }
+        .explanation strong {
+            color: var(--blue-700);
+        }
 
-        /* ===== NAV BUTTONS ===== */
         .quiz-nav {
             display: flex;
             justify-content: space-between;
@@ -554,32 +540,44 @@
             line-height: 1;
             text-decoration: none;
         }
-        .btn:focus-visible { outline: 2px solid var(--blue-600); outline-offset: 2px; }
+        .btn:focus-visible {
+            outline: 2px solid var(--blue-600);
+            outline-offset: 2px;
+        }
         .btn--ghost {
             background: var(--ink-100);
             color: var(--ink-700);
         }
-        .btn--ghost:hover:not(:disabled) { background: var(--ink-200, #e2e8f0); }
+        .btn--ghost:hover:not(:disabled) {
+            background: var(--ink-200, #e2e8f0);
+        }
         .btn--primary {
             background: var(--blue-600);
             color: #fff;
-            box-shadow: 0 4px 12px rgba(37,99,235,.25);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, .25);
         }
         .btn--primary:hover:not(:disabled) {
             background: var(--blue-700);
-            box-shadow: 0 6px 16px rgba(37,99,235,.35);
+            box-shadow: 0 6px 16px rgba(37, 99, 235, .35);
             transform: translateY(-1px);
         }
         .btn--success {
             background: var(--green-500);
             color: #fff;
-            box-shadow: 0 4px 12px rgba(34,197,94,.25);
+            box-shadow: 0 4px 12px rgba(34, 197, 94, .25);
         }
-        .btn--success:hover:not(:disabled) { background: var(--green-600); }
-        .btn:disabled { opacity: 0.35; cursor: not-allowed; transform: none !important; }
-        .btn:active:not(:disabled) { transform: scale(.97); }
+        .btn--success:hover:not(:disabled) {
+            background: var(--green-600);
+        }
+        .btn:disabled {
+            opacity: 0.35;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+        .btn:active:not(:disabled) {
+            transform: scale(.97);
+        }
 
-        /* ===== RESULT BOX ===== */
         .result-box {
             margin-top: 28px;
             padding: 32px;
@@ -589,7 +587,10 @@
             display: none;
             border: 1px solid var(--blue-100);
         }
-        .result-box.show { display: block; animation: fade-up .35s ease; }
+        .result-box.show {
+            display: block;
+            animation: fade-up .35s ease;
+        }
         .result-score {
             font-size: 52px;
             font-weight: 800;
@@ -602,12 +603,26 @@
             font-weight: 500;
             color: var(--ink-500);
         }
-        .result-stars { font-size: 28px; letter-spacing: 4px; margin: 12px 0; }
-        .result-detail { font-size: 15px; color: var(--ink-500); }
-        .result-detail strong { color: var(--ink-900); }
-        .result-actions { display: flex; gap: 12px; justify-content: center; margin-top: 20px; flex-wrap: wrap; }
+        .result-stars {
+            font-size: 28px;
+            letter-spacing: 4px;
+            margin: 12px 0;
+        }
+        .result-detail {
+            font-size: 15px;
+            color: var(--ink-500);
+        }
+        .result-detail strong {
+            color: var(--ink-900);
+        }
+        .result-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
 
-        /* ===== KEYBOARD HINT ===== */
         .keyboard-hint {
             text-align: center;
             font-size: 12px;
@@ -631,7 +646,6 @@
             color: var(--ink-500);
         }
 
-        /* ===== SITE FOOTER ===== */
         footer {
             background: #fff;
             border-top: 1px solid var(--ink-100);
@@ -640,37 +654,243 @@
             font-size: 13px;
             color: var(--ink-400, #94a3b8);
         }
-        footer a { color: var(--blue-600); text-decoration: none; }
-
-        /* ===== RESPONSIVE ===== */
-        @media (max-width: 600px) {
-            .main-wrap { padding: 16px 12px 48px; }
-            .quiz-nav { gap: 8px; }
-            .btn { padding: 11px 20px; font-size: 13px; }
-            .result-score { font-size: 40px; }
-            .keyboard-hint { display: none; }
+        footer a {
+            color: var(--blue-600);
+            text-decoration: none;
         }
 
-        /* ===== REDUCED MOTION ===== */
+        @media (max-width: 600px) {
+            .main-wrap {
+                padding: 16px 12px 48px;
+            }
+            .quiz-nav {
+                gap: 8px;
+            }
+            .btn {
+                padding: 11px 20px;
+                font-size: 13px;
+            }
+            .result-score {
+                font-size: 40px;
+            }
+            .keyboard-hint {
+                display: none;
+            }
+        }
+
         @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+            *,
+            *::before,
+            *::after {
+                transition-duration: 0.01ms !important;
+                animation-duration: 0.01ms !important;
+            }
+        }
+
+        /* ===== CUSTOM CONFIRM MODAL – TREND 2026 ===== */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.55);
+            backdrop-filter: blur(12px) saturate(1.2);
+            -webkit-backdrop-filter: blur(12px) saturate(1.2);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 20px;
+        }
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal-box {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(24px) saturate(1.4);
+            -webkit-backdrop-filter: blur(24px) saturate(1.4);
+            border-radius: 32px;
+            max-width: 460px;
+            width: 100%;
+            padding: 36px 32px 28px;
+            box-shadow: var(--shadow-xl), 0 0 0 1px rgba(255, 255, 255, 0.5);
+            transform: scale(0.92) translateY(20px);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        .modal-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -30%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        .modal-box::after {
+            content: '';
+            position: absolute;
+            bottom: -40%;
+            left: -20%;
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, rgba(34, 197, 94, 0.06) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        .modal-overlay.active .modal-box {
+            transform: scale(1) translateY(0);
+        }
+
+        .modal-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin: 0 auto 16px;
+            box-shadow: 0 8px 24px rgba(245, 158, 11, .25);
+            position: relative;
+            z-index: 1;
+        }
+        .modal-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--ink-900);
+            text-align: center;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+            letter-spacing: -0.3px;
+        }
+        .modal-desc {
+            font-size: 15px;
+            color: var(--ink-500);
+            text-align: center;
+            line-height: 1.7;
+            margin-bottom: 24px;
+            position: relative;
+            z-index: 1;
+        }
+        .modal-desc strong {
+            color: var(--ink-700);
+            font-weight: 600;
+        }
+        .modal-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+        }
+        .modal-btn {
+            padding: 12px 32px;
+            border-radius: 40px;
+            border: none;
+            font-family: var(--font-sans);
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all var(--transition);
+            min-width: 120px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .modal-btn:focus-visible {
+            outline: 2px solid var(--blue-600);
+            outline-offset: 2px;
+        }
+        .modal-btn--cancel {
+            background: var(--ink-100);
+            color: var(--ink-700);
+        }
+        .modal-btn--cancel:hover {
+            background: var(--ink-200, #e2e8f0);
+            transform: translateY(-2px);
+        }
+        .modal-btn--confirm {
+            background: linear-gradient(135deg, #dc2626, #ef4444);
+            color: #fff;
+            box-shadow: 0 4px 16px rgba(239, 68, 68, .3);
+        }
+        .modal-btn--confirm:hover {
+            box-shadow: 0 8px 28px rgba(239, 68, 68, .4);
+            transform: translateY(-2px) scale(1.02);
+        }
+        .modal-btn--confirm:active {
+            transform: scale(0.96);
+        }
+        .modal-btn--success {
+            background: linear-gradient(135deg, var(--blue-600), var(--blue-500));
+            color: #fff;
+            box-shadow: 0 4px 16px rgba(37, 99, 235, .3);
+        }
+        .modal-btn--success:hover {
+            box-shadow: 0 8px 28px rgba(37, 99, 235, .4);
+            transform: translateY(-2px) scale(1.02);
+        }
+
+        /* glow border effect */
+        .modal-box .glow-ring {
+            position: absolute;
+            inset: -2px;
+            border-radius: 34px;
+            padding: 2px;
+            background: conic-gradient(from 0deg, transparent, rgba(37, 99, 235, 0.15), rgba(34, 197, 94, 0.15), transparent);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @media (max-width: 480px) {
+            .modal-box {
+                padding: 28px 20px 24px;
+                border-radius: 24px;
+            }
+            .modal-title {
+                font-size: 18px;
+            }
+            .modal-desc {
+                font-size: 14px;
+            }
+            .modal-btn {
+                padding: 10px 24px;
+                font-size: 14px;
+                min-width: 100px;
+            }
+            .modal-actions {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .modal-btn {
+                width: 100%;
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- ✅ Accessibility skip link -->
     <a class="skip-link" href="#quiz-main">Bỏ qua điều hướng</a>
 
-    <!-- ✅ Semantic site header -->
     <header class="site-header" role="banner">
         <div class="site-header__inner">
             <a href="/" class="logo" aria-label="EduQuiz – Trang chủ">
                 <div class="logo__icon" aria-hidden="true">📚</div>
                 <span class="logo__text">Edu<em>Quiz</em></span>
             </a>
-
-            <!-- ✅ Breadcrumb for SEO -->
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li><a href="/">Trang chủ</a></li>
@@ -678,8 +898,6 @@
                     <li aria-current="page">Hệ Điều Hành</li>
                 </ol>
             </nav>
-
-            <!-- ✅ Mode toggle with ARIA -->
             <div class="mode-toggle" role="group" aria-label="Chế độ làm bài">
                 <button class="mode-btn active" id="modeLearn" aria-pressed="true">📖 Học</button>
                 <button class="mode-btn" id="modeExam" aria-pressed="false">📝 Thi</button>
@@ -687,24 +905,19 @@
         </div>
     </header>
 
-    <!-- ✅ Main content -->
     <main id="quiz-main" class="main-wrap" role="main">
 
-        <!-- ✅ H1 for SEO – exactly one per page -->
         <div class="page-heading">
             <h1>500 Câu Hỏi Trắc Nghiệm Hệ Điều Hành</h1>
             <p>Tiếng Anh · Giải thích tiếng Việt · 10 bộ đề · Chế độ học &amp; thi</p>
         </div>
 
-        <!-- Set selector -->
         <section class="set-section" aria-label="Chọn bộ đề">
             <div class="set-section__label">Chọn bộ đề</div>
             <div class="set-list" id="setList" role="list"></div>
         </section>
 
-        <!-- Quiz card -->
         <article class="quiz-card" aria-label="Câu hỏi trắc nghiệm">
-            <!-- Status bar -->
             <div class="status-bar">
                 <div class="progress-wrap">
                     <div class="progress-label">
@@ -721,34 +934,24 @@
                 </div>
             </div>
 
-            <!-- Question -->
             <div class="question-meta" id="questionMeta" aria-label="Chủ đề câu hỏi"></div>
             <h2 class="question-text" id="questionText">Đang tải câu hỏi…</h2>
 
-            <!-- Options – using buttons for accessibility -->
             <div class="options" id="optionsContainer" role="list"></div>
 
-            <!-- Explanation -->
             <div class="explanation" id="explanationBox" role="alert" aria-live="polite"></div>
 
-            <!-- Navigation -->
             <nav class="quiz-nav" aria-label="Điều hướng câu hỏi">
-                <button class="btn btn--ghost" id="prevBtn" disabled aria-label="Câu trước">
-                    ← Trước
-                </button>
-                <button class="btn btn--primary" id="nextBtn" aria-label="Câu tiếp theo">
-                    Tiếp →
-                </button>
+                <button class="btn btn--ghost" id="prevBtn" disabled aria-label="Câu trước">← Trước</button>
+                <button class="btn btn--primary" id="nextBtn" aria-label="Câu tiếp theo">Tiếp →</button>
             </nav>
 
-            <!-- Keyboard hint -->
             <div class="keyboard-hint" aria-hidden="true">
                 <span><span class="key">←</span><span class="key">→</span> điều hướng</span>
                 <span><span class="key">1</span><span class="key">2</span><span class="key">3</span><span class="key">4</span> chọn đáp án</span>
             </div>
         </article>
 
-        <!-- Result box -->
         <aside class="result-box" id="resultBox" aria-live="assertive" aria-label="Kết quả bài thi">
             <div class="result-stars" id="starsDisplay" aria-label="Xếp loại"></div>
             <div class="result-score" id="scoreText">0<span>/50</span></div>
@@ -760,460 +963,766 @@
         </aside>
     </main>
 
-    <!-- ✅ Semantic footer with structured info -->
     <footer role="contentinfo">
         <p>© 2026 <a href="/">EduQuiz</a> · Nền tảng luyện tập lập trình &amp; hệ điều hành miễn phí</p>
     </footer>
 
+    <!-- ===== CUSTOM CONFIRM MODAL ===== -->
+    <div class="modal-overlay" id="customConfirm" role="dialog" aria-modal="true" aria-labelledby="confirmTitle">
+        <div class="modal-box">
+            <div class="glow-ring"></div>
+            <div class="modal-icon" id="confirmIcon">⚠️</div>
+            <h3 class="modal-title" id="confirmTitle">Xác nhận</h3>
+            <p class="modal-desc" id="confirmDesc">Bạn có chắc chắn muốn thực hiện hành động này?</p>
+            <div class="modal-actions">
+                <button class="modal-btn modal-btn--cancel" id="confirmCancel">Hủy</button>
+                <button class="modal-btn modal-btn--confirm" id="confirmOk">Tiếp tục</button>
+            </div>
+        </div>
+    </div>
+
     <script>
-    // ================================================================
-    // QUESTION BANK – 500 câu (50 thực + 450 sinh tự động)
-    // ================================================================
-    const TOPIC_LABELS = {
-        0: 'Tổng quan OS', 1: 'Process Management', 2: 'CPU Scheduling',
-        3: 'Memory Management', 4: 'File Systems', 5: 'I/O Systems',
-        6: 'Deadlock', 7: 'Synchronization', 8: 'Virtualization', 9: 'Security'
-    };
+        // ================================================================
+        // CUSTOM CONFIRM – Trend 2026
+        // ================================================================
+        const confirmModal = {
+            overlay: document.getElementById('customConfirm'),
+            title: document.getElementById('confirmTitle'),
+            desc: document.getElementById('confirmDesc'),
+            icon: document.getElementById('confirmIcon'),
+            cancelBtn: document.getElementById('confirmCancel'),
+            okBtn: document.getElementById('confirmOk'),
+            _resolve: null,
 
-    const baseQuestions = [
-        { q:'Mouse is unique tool to interface between user and computer', opts:['True','False'], c:1, exp:'Chuột là một công cụ, nhưng không phải công cụ duy nhất để giao tiếp với máy tính.', t:0 },
-        { q:'Windows operating system does not provide a work in network environment.', opts:['True','False'], c:1, exp:'Sai – Windows hỗ trợ đầy đủ môi trường mạng.', t:0 },
-        { q:'The Windows operating system is viewed as an object that performs tasks.', opts:['True','False'], c:0, exp:'Windows có thể được xem như một đối tượng thực hiện tác vụ cho người dùng.', t:0 },
-        { q:'The Windows operating system has a graphical interface.', opts:['True','False'], c:0, exp:'Đúng – Windows sử dụng giao diện đồ họa (GUI).', t:0 },
-        { q:'In the evolution of OS, which fundamental shift was most critical for multitasking?', opts:['Introduction of GUIs','Batch to interactive (1960s)','Single-user PCs (1970s)','Cloud virtualization'], c:1, exp:'Sự chuyển từ xử lý batch sang tương tác (interactive) là bước ngoặt lớn nhất cho đa nhiệm.', t:0 },
-        { q:'A single-threaded file server takes 12ms per request with 75ms disk I/O. Requests per second?', opts:['~11','~37','~55','~28'], c:0, exp:'Tổng=87ms, 1000/87≈11.5 → ~11 request/s.', t:1 },
-        { q:'The Process Control Block (PCB) does NOT store which of the following?', opts:['Process state','CPU registers','I/O status','Source code'], c:3, exp:'PCB không lưu mã nguồn chương trình.', t:1 },
-        { q:'The interval from submission to completion is termed as:', opts:['Waiting time','Turnaround time','Response time','Throughput'], c:1, exp:'Turnaround time = thời gian từ lúc nộp đến khi hoàn thành.', t:2 },
-        { q:'A process that creates another process is called the:', opts:['Child process','Root process','Parent process','Init process'], c:2, exp:'Parent process tạo ra child process thông qua lời gọi fork().', t:1 },
-        { q:'Which of the following is shared among threads of the same process?', opts:['Stack và PC','File descriptors, heap, biến toàn cục','CPU registers','Cache và clock speed'], c:1, exp:'Các thread cùng process chia sẻ heap, biến toàn cục và file descriptor.', t:1 },
-        { q:'What does the OS do to execute a new process?', opts:['Cấp CPU ngay','Cung cấp tài nguyên','Tạo PCB','Cấp registers'], c:2, exp:'HĐH tạo PCB (Process Control Block) cho mỗi process mới.', t:1 },
-        { q:'In real-time scheduling, which type of process gets highest priority?', opts:['Shortest processes','Highest computation','Earliest deadlines','Background tasks'], c:2, exp:'Earliest Deadline First (EDF): process có deadline sớm nhất được ưu tiên cao nhất.', t:2 },
-        { q:'In Readers-Writers problem, what may lead to writer starvation?', opts:['Continuous stream of readers','Reader exits too early','Mutex remains locked','Too many writers'], c:0, exp:'Luồng reader liên tục không dừng sẽ ngăn writer vào vùng tới hạn.', t:7 },
-        { q:'Benefit of paging in virtual memory?', opts:['Tăng tốc CPU','Cải thiện đĩa','Sử dụng bộ nhớ hiệu quả','Tăng tốc mạng'], c:2, exp:'Paging loại bỏ external fragmentation, giúp dùng RAM hiệu quả hơn.', t:3 },
-        { q:'Swapping out lower priority process for higher priority is called:', opts:['Roll out, roll in','Priority swapping','Pull in, push out','Pull out, push in'], c:0, exp:'"Roll out, roll in" là thuật ngữ chỉ việc swap process theo độ ưu tiên.', t:3 },
-        { q:'Which memory management technique suits dynamic data structures and sharing?', opts:['Segmentation with paging','Swapping with page tables','Virtual memory with aging','Monolithic allocation'], c:0, exp:'Segmentation kết hợp paging linh hoạt cho cấu trúc dữ liệu động.', t:3 },
-        { q:'Role of MMU (Memory Management Unit)?', opts:['Dịch địa chỉ ảo sang vật lý','Cấp phát bộ nhớ','Quản lý paging','Lưu page table'], c:0, exp:'MMU là phần cứng chuyển đổi địa chỉ ảo sang địa chỉ vật lý.', t:3 },
-        { q:'In 1965, Dijkstra solved which synchronization problem?', opts:['Dining philosophers','Ostrich algorithm','Banker\'s algorithm','Allocation algorithm'], c:0, exp:'Dijkstra đặt ra và giải bài toán Dining Philosophers năm 1965.', t:7 },
-        { q:'Most virtual memory systems use a technique called:', opts:['Page Fault','Page Frames','Page Table','Paging'], c:3, exp:'Paging là kỹ thuật cơ bản nhất của hầu hết hệ thống bộ nhớ ảo.', t:3 },
-        { q:'Advantage of Clock Algorithm over Second Chance?', opts:['Eliminates moving pages, less overhead','Increases complexity','Guarantees fewer faults','Uses more memory'], c:0, exp:'Clock algorithm không di chuyển trang trong danh sách, giảm overhead.', t:3 },
-        { q:'Primary goal of working set model?', opts:['Minimize internal fragmentation','Fixed number of pages','Prepage all pages','Reduce page fault rate'], c:3, exp:'Working set giữ các trang đang hoạt động trong RAM để giảm page fault.', t:3 },
-        { q:'Difference between process and thread in Windows?', opts:['Process chứa thread; thread là đơn vị thực thi','Process là chương trình; thread là lệnh','Giống nhau','Process cho tài nguyên; thread cho UI'], c:0, exp:'Process là container tài nguyên; thread là đơn vị thực thi bên trong process.', t:1 },
-        { q:'Contiguous Allocation in file systems means:', opts:['Các block không liên tiếp','File chiếm vùng đĩa liên tục','Danh sách liên kết','Cấu trúc index'], c:1, exp:'Mỗi file chiếm một vùng liên tục trên đĩa – đơn giản nhưng gây fragmentation.', t:4 },
-        { q:'Purpose of DMA (Direct Memory Access)?', opts:['Cấp phát bộ nhớ','Truyền dữ liệu không cần CPU','CPU truy cập trực tiếp','Ngăn truy cập bộ nhớ'], c:1, exp:'DMA cho phép thiết bị I/O truyền dữ liệu trực tiếp vào RAM mà không cần CPU.', t:5 },
-        { q:'In UNIX, which file type models disks?', opts:['Regular files','Character special files','Block special files','Directories'], c:2, exp:'Block special files đại diện cho thiết bị khối như ổ đĩa.', t:4 },
-        { q:'Simplest directory system is called:', opts:['Root directory','User directory','Parent directory','Single-level directory'], c:3, exp:'Single-level directory: tất cả file ở một thư mục duy nhất – đơn giản nhất.', t:4 },
-        { q:'Sector 0 of a hard disk is called:', opts:['Boot block','Superblock','MBR (Master Boot Record)','Free space manager'], c:2, exp:'MBR nằm ở sector 0 và chứa thông tin khởi động máy.', t:5 },
-        { q:'Which file access method is most efficient for large files?', opts:['Sequential','Direct','Indexed','Linked'], c:2, exp:'Indexed access dùng index block để định vị nhanh – hiệu quả cho file lớn.', t:4 },
-        { q:'What happens when a USB is mounted on /usr/ast/backup in UNIX?', opts:['USB không truy cập được','File lưu trên USB dưới /usr/ast/backup','File bị xóa','Thư mục bị ghi đè'], c:1, exp:'Mount tích hợp filesystem USB vào cây thư mục tại điểm mount.', t:4 },
-        { q:'Hardware mechanism allowing a device to notify the CPU is called:', opts:['Interrupt','Polling','Driver','Controller'], c:0, exp:'Interrupt là cơ chế phần cứng báo hiệu cho CPU từ thiết bị ngoại vi.', t:5 },
-        { q:'Purpose of the spindle in a hard disk drive?', opts:['Lưu dữ liệu','Đọc/ghi dữ liệu','Điều khiển chuyển động đầu đọc','Cung cấp điện'], c:2, exp:'Spindle (trục quay) điều khiển tốc độ quay của đĩa từ.', t:5 },
-        { q:'Time to move the disk arm to the proper cylinder is called:', opts:['Seek time','Rotational latency','Transfer time','Access time'], c:0, exp:'Seek time = thời gian di chuyển đầu đọc đến đúng cylinder.', t:5 },
-        { q:'Besides converting bit streams, what else does the disk controller do?', opts:['Error correction','Convert serial to parallel bytes','Connect I/O devices','Execute read/write commands'], c:0, exp:'Controller thực hiện sửa lỗi (ECC) cho dữ liệu đọc/ghi.', t:5 },
-        { q:'Effect of using interrupts instead of polling?', opts:['Phản hồi chậm hơn','CPU bận nhiều hơn','CPU dùng chu kỳ hiệu quả hơn','Giảm khả năng kiểm soát'], c:2, exp:'Interrupt giải phóng CPU làm việc khác thay vì liên tục polling thiết bị.', t:5 },
-        { q:'Role of the file system in disk management?', opts:['Cấp phát RAM','Quản lý phần cứng','Tổ chức và theo dõi file','Thiết kế controller'], c:2, exp:'File system tổ chức, đặt tên, và theo dõi vị trí dữ liệu trên đĩa.', t:4 },
-        { q:'RAID level ____ works worst with OS requests for one sector at a time.', opts:['RAID 0','RAID 1','RAID 2','RAID 3'], c:3, exp:'RAID 3 dùng bit-interleaving; mỗi truy xuất nhỏ đều cần toàn bộ array.', t:5 },
-        { q:'Banker\'s Algorithm checks before granting a resource request:', opts:['Trạng thái an toàn','Đủ tài nguyên','Không vượt nhu cầu','Độ ưu tiên process'], c:0, exp:'Banker kiểm tra liệu cấp tài nguyên có dẫn đến safe state không.', t:6 },
-        { q:'To ensure "hold and wait" never occurs, a process must:', opts:['Yêu cầu khi chưa giữ gì','Yêu cầu ít nhất 1 tài nguyên','Yêu cầu tất cả tài nguyên trước khi chạy','Chỉ yêu cầu khi rảnh'], c:2, exp:'Yêu cầu tất cả tài nguyên trước khi thực thi loại bỏ điều kiện hold-and-wait.', t:6 },
-        { q:'Which strategy prevents deadlock while allowing high utilization?', opts:['Cấp theo thứ tự đến','Chiếm từ process ưu tiên cao hơn','Giữ vô thời hạn','Resource hierarchy (thứ bậc tài nguyên)'], c:3, exp:'Resource ordering/hierarchy ngăn circular wait mà không cần từ chối request.', t:6 },
-        { q:'Which condition MUST be present for deadlock to occur?', opts:['Preemption','Circular wait','Dynamic allocation','Process termination'], c:1, exp:'Circular wait là một trong bốn điều kiện cần thiết để xảy ra deadlock.', t:6 },
-        { q:'/etc/passwd entry: john:x:1002:1000:John Henry::/bin/bash. Which is correct?', opts:['Username=john, UID=1002','Username=John Henry, UID=1002','Username=john, UID=1000','Username=John Henry, UID=1000'], c:0, exp:'Cấu trúc: username:password:UID:GID:GECOS:home:shell. UID là trường thứ 3.', t:9 },
-        { q:'Which is NOT a core function of an OS?', opts:['Process management','Memory management','File management','Internet browsing'], c:3, exp:'Internet browsing là ứng dụng người dùng, không phải chức năng lõi của HĐH.', t:0 },
-        { q:'A "cache hit" in CPU cache means:', opts:['Dữ liệu tìm thấy trong cache','Dữ liệu không có trong cache','Xung đột cache','Tất cả cache được dùng'], c:0, exp:'Cache hit = CPU tìm thấy dữ liệu cần ở cache, không phải RAM.', t:3 },
-        { q:'Which file operation exists in UNIX but NOT in Win32?', opts:['rename','mkdir','link','rmdir'], c:2, exp:'UNIX có hard link; Win32 không hỗ trợ lệnh link tương đương.', t:4 },
-        { q:'In a monolithic OS structure:', opts:['Functions divided into processes','Chỉ file manager trong kernel','Tất cả components chạy ở supervisor mode','Drivers chạy ở user space'], c:2, exp:'Monolithic kernel: mọi thành phần đều chạy trong chế độ kernel (supervisor mode).', t:0 },
-        { q:'Given segment table with base=90, physical address for segment (2, offset=50)?', opts:['140','130','150','Invalid'], c:0, exp:'Địa chỉ vật lý = base + offset = 90 + 50 = 140.', t:3 },
-        { q:'System: 15 blocks total. P1(max8,alloc3), P2(max6,alloc4), P3(max5,alloc3), available=5. State?', opts:['Safe','Unsafe','Deadlock','Starvation'], c:0, exp:'Need: P1=5,P2=2,P3=2. Avail=5 → cấp P2(2)→avail=7→P3(2)→avail=9→P1(5). An toàn!', t:6 },
-        { q:'Which technique attacks the "No Preemption" deadlock condition?', opts:['Yêu cầu tất cả cùng lúc','Chỉ một process mỗi tài nguyên','Spooling printer output','Resource ordering'], c:2, exp:'Spooling cho phép tạm thời "chiếm" tài nguyên như printer bằng cách ảo hóa nó.', t:6 },
-        { q:'What is thrashing in memory management?', opts:['Quá nhiều page faults, CPU dành hầu hết thời gian để swap','Cache không đủ','RAM bị tràn','Disk I/O quá chậm'], c:0, exp:'Thrashing xảy ra khi hệ thống liên tục swap pages, không có đủ thời gian chạy process.', t:3 },
-        { q:'Which scheduling algorithm can cause starvation?', opts:['Round Robin','FCFS','Priority Scheduling','Multilevel Feedback Queue'], c:2, exp:'Priority Scheduling có thể làm process ưu tiên thấp chờ mãi (starvation).', t:2 },
-    ];
+            show({ title, desc, icon = '⚠️', okText = 'Tiếp tục', cancelText = 'Hủy', type = 'danger' }) {
+                return new Promise((resolve) => {
+                    this.title.textContent = title || 'Xác nhận';
+                    this.desc.innerHTML = desc || 'Bạn có chắc chắn muốn thực hiện hành động này?';
+                    this.icon.textContent = icon;
+                    this.okBtn.textContent = okText;
+                    this.cancelBtn.textContent = cancelText;
 
-    // Generate remaining questions to reach 500
-    function buildFullBank() {
-        const topics = Object.entries(TOPIC_LABELS);
-        const templates = [
-            { q:'Which of the following best describes "%t" in operating systems?', optFn:(t,term)=>[`A core concept in ${t} related to ${term}`,`Unrelated to ${t}`,`Only used in embedded systems`,`A deprecated ${t} term`], cIdx:0 },
-            { q:'What is the primary purpose of "%t" mechanism?', optFn:(t,term)=>[`Resource management in ${t}`,`Debugging tool`,`Network protocol`,`User interface component`], cIdx:0 },
-            { q:'Which statement about "%t" is FALSE?', optFn:(t,term)=>[`It improves system performance`,`It has no relation to ${t}`,`It is used in modern OS`,`It can cause overhead`], cIdx:1 },
-        ];
-        const terms = {
-            'Process Management':['PCB','fork()','exec()','context switch','zombie process','orphan process','IPC'],
-            'CPU Scheduling':['quantum time','FCFS','SJF','aging','multilevel queue','burst time','preemption'],
-            'Memory Management':['TLB','page frame','demand paging','copy-on-write','buddy system','slab allocator','huge pages'],
-            'File Systems':['inode','journal','FAT32','NTFS','ext4','hard link','soft link'],
-            'I/O Systems':['IRQ','DMA channel','buffer cache','device driver','SCSI','NVMe','spooling'],
-            'Deadlock':['safe state','resource graph','wait-for graph','preemption','hold-and-wait','circular wait','Banker algorithm'],
-            'Synchronization':['semaphore','mutex lock','monitor','condition variable','spin lock','test-and-set','compare-and-swap'],
-            'Virtualization':['hypervisor','VM snapshot','live migration','container','cgroup','namespace','paravirtualization'],
-            'Security':['ACL','capability list','mandatory access control','discretionary access control','rootkit','sandbox','ASLR'],
-            'Tổng quan OS':['system call','trap instruction','dual-mode','bootloader','BIOS/UEFI','kernel space','user space'],
-        };
-        let bank = [...baseQuestions];
-        let id = bank.length;
-        for(const [topicKey, topicName] of topics) {
-            const tIdx = parseInt(topicKey);
-            const tTerms = terms[topicName] || ['concept'];
-            for(let ti=0; ti<tTerms.length; ti++) {
-                const term = tTerms[ti];
-                for(const tmpl of templates) {
-                    if(id >= 500) break;
-                    const opts = tmpl.optFn(topicName, term);
-                    bank.push({ q:tmpl.q.replace('%t', term), opts, c:tmpl.cIdx, exp:`"${term}" là khái niệm quan trọng trong ${topicName}. Đáp án đúng: "${opts[tmpl.cIdx]}".`, t:tIdx });
-                    id++;
-                }
-                if(id >= 500) break;
-            }
-            if(id >= 500) break;
-        }
-        // Pad with generic questions if needed
-        while(bank.length < 500) {
-            bank.push({ q:'Which of the following is a fundamental OS component?', opts:['Process Manager','Memory Manager','I/O Manager','All of the above'], c:3, exp:'Tất cả đều là thành phần cơ bản của hệ điều hành.', t:0 });
-        }
-        return bank.slice(0,500);
-    }
+                    // style cho nút OK theo type
+                    this.okBtn.className = 'modal-btn';
+                    if (type === 'danger') {
+                        this.okBtn.classList.add('modal-btn--confirm');
+                    } else {
+                        this.okBtn.classList.add('modal-btn--success');
+                    }
 
-    const FULL_BANK = buildFullBank();
-    const SETS = [];
-    for(let i=0;i<10;i++) SETS.push(FULL_BANK.slice(i*50,(i+1)*50));
-
-    // ================================================================
-    // APP STATE
-    // ================================================================
-    const state = {
-        mode: 'learn',
-        setIdx: 0,
-        qIdx: 0,
-        answers: Array(50).fill(null),
-        explained: Array(50).fill(false),
-        submitted: false,
-        timerInterval: null,
-        seconds: 0,
-        examStarted: false,
-        examPaused: false,      // ⭐ thêm: đánh dấu tạm dừng
-    };
-
-    // ================================================================
-    // DOM REFS
-    // ================================================================
-    const $ = id => document.getElementById(id);
-    const setList       = $('setList');
-    const questionMeta  = $('questionMeta');
-    const questionText  = $('questionText');
-    const optionsCont   = $('optionsContainer');
-    const explanBox     = $('explanationBox');
-    const counterLabel  = $('counterLabel');
-    const answeredLabel = $('answeredLabel');
-    const progressFill  = $('progressFill');
-    const progressBar   = $('progressBar');
-    const timerBadge    = $('timerBadge');
-    const timerText     = $('timerText');
-    const prevBtn       = $('prevBtn');
-    const nextBtn       = $('nextBtn');
-    const resultBox     = $('resultBox');
-    const scoreText     = $('scoreText');
-    const detailText    = $('detailText');
-    const correctCount  = $('correctCount');
-    const timeSpent     = $('timeSpent');
-    const starsDisplay  = $('starsDisplay');
-    const reviewBtn     = $('reviewBtn');
-    const retryBtn      = $('retryBtn');
-    const modeLearn     = $('modeLearn');
-    const modeExam      = $('modeExam');
-
-    // ================================================================
-    // RENDER FUNCTIONS
-    // ================================================================
-    function renderSets() {
-        setList.innerHTML = '';
-        SETS.forEach((_, i) => {
-            const btn = document.createElement('button');
-            btn.className = 'set-btn' + (i === state.setIdx ? ' active' : '');
-            btn.textContent = `Bộ ${i+1}`;
-            btn.setAttribute('role','listitem');
-            btn.setAttribute('aria-pressed', i === state.setIdx ? 'true' : 'false');
-            btn.addEventListener('click', () => switchSet(i));
-            setList.appendChild(btn);
-        });
-    }
-
-    function switchSet(i) {
-        if(state.mode==='exam' && state.examStarted && !state.submitted) {
-            if(!confirm('Đổi bộ đề sẽ mất tiến trình kiểm tra. Tiếp tục?')) return;
-            resetExamState();
-        }
-        state.setIdx = i;
-        state.answers = Array(50).fill(null);
-        state.explained = Array(50).fill(false);
-        state.qIdx = 0;
-        renderSets();
-        renderQuestion();
-    }
-
-    function getQ() { return SETS[state.setIdx][state.qIdx]; }
-
-    function renderQuestion() {
-        const q = getQ();
-        const letters = ['A','B','C','D','E'];
-
-        // Meta & text
-        questionMeta.textContent = TOPIC_LABELS[q.t] || 'General';
-        questionText.textContent = `${state.qIdx+1}. ${q.q}`;
-
-        // Progress
-        const pct = Math.max(2, Math.round(((state.qIdx+1)/50)*100));
-        progressFill.style.width = pct + '%';
-        progressBar.setAttribute('aria-valuenow', state.qIdx+1);
-        counterLabel.textContent = `Câu ${state.qIdx+1} / 50`;
-        const answered = state.answers.filter(a=>a!==null).length;
-        answeredLabel.textContent = `${answered} đã trả lời`;
-
-        // Options
-        optionsCont.innerHTML = '';
-        const sel = state.answers[state.qIdx];
-        const showAnswer = (state.mode==='learn' && state.explained[state.qIdx]) ||
-                           (state.mode==='exam' && state.submitted);
-
-        q.opts.forEach((opt, i) => {
-            const btn = document.createElement('button');
-            btn.className = 'option';
-            btn.setAttribute('role','listitem');
-            btn.setAttribute('aria-label', `Đáp án ${letters[i]}: ${opt}`);
-            if(showAnswer || (state.mode==='learn' && state.explained[state.qIdx])) {
-                btn.classList.add('disabled');
-            }
-            if(sel===i) btn.classList.add('selected');
-            if(showAnswer) {
-                if(i===q.c) btn.classList.add('correct');
-                else if(sel===i) btn.classList.add('wrong');
-            }
-
-            const letter = document.createElement('span');
-            letter.className='option__letter'; letter.textContent=letters[i];
-            letter.setAttribute('aria-hidden','true');
-
-            const text = document.createElement('span');
-            text.className='option__text'; text.textContent=opt;
-
-            const icon = document.createElement('span');
-            icon.className='option__icon'; icon.setAttribute('aria-hidden','true');
-            if(showAnswer) icon.textContent = i===q.c ? '✓' : (sel===i ? '✗' : '');
-            else if(sel===i) icon.textContent='◉';
-
-            btn.append(letter,text,icon);
-            btn.addEventListener('click', ()=>onSelect(i));
-            optionsCont.appendChild(btn);
-        });
-
-        // Explanation
-        if(showAnswer) {
-            const isCorrect = sel===q.c;
-            const corr = q.opts[q.c];
-            const userAns = sel!==null ? q.opts[sel] : 'Chưa chọn';
-            explanBox.innerHTML = `<strong>${isCorrect?'✅ Đúng':'❌ Sai'}</strong> · Đáp án đúng: <strong>${corr}</strong><br><br>${q.exp}`;
-            explanBox.classList.add('show');
-        } else {
-            explanBox.classList.remove('show');
-        }
-
-        // Nav
-        prevBtn.disabled = state.qIdx===0;
-        const isLast = state.qIdx===49;
-        if(state.mode==='learn') {
-            nextBtn.textContent = isLast ? '🏁 Hoàn thành' : 'Tiếp →';
-            nextBtn.className = 'btn btn--primary';
-        } else if(!state.submitted) {
-            nextBtn.textContent = isLast ? '📨 Nộp bài' : 'Tiếp →';
-            nextBtn.className = isLast ? 'btn btn--success' : 'btn btn--primary';
-        } else {
-            nextBtn.textContent = isLast ? '—' : 'Tiếp →';
-            nextBtn.className = 'btn btn--primary';
-            nextBtn.disabled = isLast;
-        }
-
-        // Cập nhật timer display (cho trạng thái paused)
-        updateTimerDisplay();
-    }
-
-    function onSelect(idx) {
-        const q = getQ();
-        if(state.submitted) return;
-        if(state.mode==='learn' && state.explained[state.qIdx]) return;
-        state.answers[state.qIdx] = idx;
-        if(state.mode==='learn') { state.explained[state.qIdx]=true; }
-        renderQuestion();
-    }
-
-    // ================================================================
-    // NAVIGATION
-    // ================================================================
-    function goPrev() { if(state.qIdx>0){ state.qIdx--; renderQuestion(); } }
-
-    function goNext() {
-        if(state.mode==='exam' && !state.submitted && state.qIdx===49) { submitExam(); return; }
-        if(state.qIdx<49) { state.qIdx++; renderQuestion(); }
-        else if(state.mode==='learn') alert('🎉 Bạn đã hoàn thành bộ đề này!');
-    }
-
-    // ================================================================
-    // TIMER
-    // ================================================================
-    function startTimer() {
-        if(state.timerInterval) return;
-        state.examStarted = true;
-        state.examPaused = false;
-        state.timerInterval = setInterval(()=>{
-            state.seconds++;
-            updateTimerDisplay();
-        },1000);
-    }
-
-    function stopTimer() {
-        clearInterval(state.timerInterval);
-        state.timerInterval=null;
-    }
-
-    function fmtTime(s){ const m=Math.floor(s/60),ss=s%60; return `${String(m).padStart(2,'0')}:${String(ss).padStart(2,'0')}`; }
-
-    function updateTimerDisplay() {
-        if (state.examPaused) {
-            timerBadge.className = 'timer-badge paused';
-            timerText.textContent = fmtTime(state.seconds) + ' ⏸';
-        } else if (state.seconds > 0) {
-            timerBadge.className = 'timer-badge' + (state.seconds >= 2700 ? ' warning' : '');
-            timerText.textContent = fmtTime(state.seconds);
-        } else {
-            timerBadge.className = 'timer-badge';
-            timerText.textContent = '--:--';
-        }
-    }
-
-    // ================================================================
-    // SUBMIT EXAM
-    // ================================================================
-    function submitExam() {
-        if(state.submitted || state.mode!=='exam') return;
-        const unanswered = state.answers.filter(a=>a===null).length;
-        if(unanswered>0 && !confirm(`⚠️ Còn ${unanswered} câu chưa trả lời. Vẫn nộp bài?`)) return;
-        stopTimer();
-        state.submitted=true;
-        state.examPaused = false;
-        const qs=SETS[state.setIdx];
-        let correct=0;
-        state.answers.forEach((a,i)=>{ if(a===qs[i].c) correct++; });
-        const timeStr=fmtTime(state.seconds);
-        timeSpent.textContent=timeStr;
-        correctCount.textContent=correct;
-        scoreText.innerHTML=`${correct}<span>/50</span>`;
-        detailText.innerHTML=`Thời gian: <strong>${timeStr}</strong> · Đúng <strong>${correct}</strong> câu`;
-        const pct=correct/50;
-        starsDisplay.textContent=pct>=.9?'🌟🌟🌟🌟🌟':pct>=.7?'🌟🌟🌟🌟':pct>=.5?'🌟🌟🌟':pct>=.3?'🌟🌟':'🌟';
-        resultBox.classList.add('show');
-        resultBox.scrollIntoView({behavior:'smooth',block:'nearest'});
-        renderQuestion();
-    }
-
-    // ================================================================
-    // MODE SWITCH (⭐ logic mới, không alert)
-    // ================================================================
-    function resetExamState() {
-        stopTimer();
-        state.submitted = false;
-        state.examStarted = false;
-        state.examPaused = false;
-        state.answers = Array(50).fill(null);
-        state.explained = Array(50).fill(false);
-        state.qIdx = 0;
-        state.seconds = 0;
-        timerText.textContent = '--:--';
-        timerBadge.className = 'timer-badge';
-        resultBox.classList.remove('show');
-        nextBtn.disabled = false;
-    }
-
-    function setMode(mode) {
-        if (state.mode === mode) return;
-
-        // ── Từ Thi sang Học ──
-        if (state.mode === 'exam' && mode === 'learn') {
-            if (state.examStarted && !state.submitted) {
-                // Đang thi: tạm dừng, không reset
-                stopTimer();
-                state.examPaused = true;
-                // Đánh dấu các câu đã trả lời là đã giải thích (để hiển thị luôn)
-                state.answers.forEach((ans, idx) => {
-                    if (ans !== null) state.explained[idx] = true;
+                    this._resolve = resolve;
+                    this.overlay.classList.add('active');
+                    document.body.style.overflow = 'hidden';
                 });
-            } else {
-                // Đã nộp hoặc chưa bắt đầu → reset
+            },
+
+            hide(result) {
+                this.overlay.classList.remove('active');
+                document.body.style.overflow = '';
+                if (this._resolve) {
+                    this._resolve(result);
+                    this._resolve = null;
+                }
+            },
+
+            init() {
+                this.cancelBtn.addEventListener('click', () => this.hide(false));
+                this.okBtn.addEventListener('click', () => this.hide(true));
+                this.overlay.addEventListener('click', (e) => {
+                    if (e.target === this.overlay) this.hide(false);
+                });
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape' && this.overlay.classList.contains('active')) {
+                        this.hide(false);
+                    }
+                });
+            }
+        };
+
+        confirmModal.init();
+
+        // ================================================================
+        // QUESTION BANK – 500 câu (Cập nhật đáp án đúng và hỗ trợ multi-choice)
+        // ================================================================
+        const TOPIC_LABELS = {
+            0: 'Tổng quan OS',
+            1: 'Process Management',
+            2: 'CPU Scheduling',
+            3: 'Memory Management',
+            4: 'File Systems',
+            5: 'I/O Systems',
+            6: 'Deadlock',
+            7: 'Synchronization',
+            8: 'Virtualization',
+            9: 'Security'
+        };
+
+        const makeQ = (q, opts, ans, exp, t, multi = false) => ({
+            q,
+            opts,
+            ans: Array.isArray(ans) ? ans : [ans],
+            exp,
+            t,
+            multi
+        });
+
+        const baseQuestions = [
+            // ===== CÂU HỎI MULTI-CHOICE =====
+            makeQ(
+                'What special registers are visible to the programmer? (Select all that apply)',
+                ['MAR (Memory Address Register)', 'Program Counter', 'Stack Pointer', 'PSW (Program Status Word)'],
+                [1, 2, 3],
+                'PC, SP, và PSW là các thanh ghi đặc biệt hiển thị cho lập trình viên. MAR là thanh ghi nội bộ của CPU.',
+                1, true
+            ),
+            makeQ(
+                'What are the four main events that cause processes to be created? (Select all that apply)',
+                ['System initialization', 'Execution of a process-creation system call', 'System that interacts with users',
+                    'A user request to create a new process', 'Initiation of a batch job'
+                ],
+                [0, 1, 3, 4],
+                'Bốn nguyên nhân tạo process: khởi tạo hệ thống, lời gọi fork(), yêu cầu từ người dùng, và khởi tạo batch job.',
+                1, true
+            ),
+            makeQ(
+                'What are the three basic ways that IO operations can be performed? (Select all that apply)',
+                ['Programmed I/O', 'Memory-mapped I/O', 'Interrupt-driven I/O', 'I/O using DMA'],
+                [0, 2, 3],
+                'Ba cách thực hiện I/O: Programmed I/O, Interrupt-driven I/O, và I/O using DMA.',
+                5, true
+            ),
+            makeQ(
+                'What are the four important issues for I/O software? (Select all that apply)',
+                ['Error handling', 'Device independence', 'Synchronous and Asynchronous', 'Uniform naming', 'Buffering'],
+                [0, 1, 3, 4],
+                'Bốn vấn đề quan trọng: xử lý lỗi, độc lập thiết bị, đặt tên thống nhất, và bộ đệm (buffering).',
+                5, true
+            ),
+
+            // ===== CÂU HỎI SINGLE-CHOICE =====
+            makeQ('Mouse is unique tool to interface between user and computer', ['True', 'False'], 1,
+                'Chuột là một công cụ, nhưng không phải công cụ duy nhất.', 0),
+            makeQ('Windows operating system does not provide a work in network environment.', ['True', 'False'], 1,
+                'Sai – Windows hỗ trợ đầy đủ môi trường mạng.', 0),
+            makeQ('The Windows operating system is viewed as an object that performs tasks.', ['True', 'False'], 0,
+                'Windows có thể được xem như một đối tượng thực hiện tác vụ.', 0),
+            makeQ('The Windows operating system has a graphical interface.', ['True', 'False'], 0,
+                'Đúng – Windows sử dụng giao diện đồ họa (GUI).', 0),
+            makeQ('In the evolution of OS, which fundamental shift was most critical for multitasking?',
+                ['Introduction of GUIs', 'Batch to interactive (1960s)', 'Single-user PCs (1970s)',
+                    'Cloud virtualization'
+                ], 1, 'Sự chuyển từ batch sang interactive là bước ngoặt lớn nhất.', 0),
+            makeQ('A single-threaded file server takes 12ms per request with 75ms disk I/O. Requests per second?',
+                ['~11', '~37', '~55', '~28'], 0, 'Tổng=87ms, 1000/87≈11.5 → ~11 request/s.', 1),
+            makeQ('The Process Control Block (PCB) does NOT store which of the following?',
+                ['Process state', 'CPU registers', 'I/O status', 'Source code'], 3, 'PCB không lưu mã nguồn chương trình.',
+                1),
+            makeQ('The interval from submission to completion is termed as:',
+                ['Waiting time', 'Turnaround time', 'Response time', 'Throughput'], 1,
+                'Turnaround time = thời gian từ lúc nộp đến khi hoàn thành.', 2),
+            makeQ('A process that creates another process is called the:',
+                ['Child process', 'Root process', 'Parent process', 'Init process'], 2,
+                'Parent process tạo ra child process thông qua lời gọi fork().', 1),
+            makeQ('Which of the following is shared among threads of the same process?',
+                ['Stack và PC', 'File descriptors, heap, biến toàn cục', 'CPU registers', 'Cache và clock speed'], 1,
+                'Các thread cùng process chia sẻ heap, biến toàn cục và file descriptor.', 1),
+            makeQ('What does the OS do to execute a new process?',
+                ['Cấp CPU ngay', 'Cung cấp tài nguyên', 'Tạo PCB', 'Cấp registers'], 2,
+                'HĐH tạo PCB (Process Control Block) cho mỗi process mới.', 1),
+            makeQ('In real-time scheduling, which type of process gets highest priority?',
+                ['Shortest processes', 'Highest computation', 'Earliest deadlines', 'Background tasks'], 2,
+                'Earliest Deadline First (EDF): process có deadline sớm nhất được ưu tiên cao nhất.', 2),
+            makeQ('In Readers-Writers problem, what may lead to writer starvation?',
+                ['Continuous stream of readers', 'Reader exits too early', 'Mutex remains locked', 'Too many writers'], 0,
+                'Luồng reader liên tục không dừng sẽ ngăn writer vào vùng tới hạn.', 7),
+            makeQ('Benefit of paging in virtual memory?',
+                ['Tăng tốc CPU', 'Cải thiện đĩa', 'Sử dụng bộ nhớ hiệu quả', 'Tăng tốc mạng'], 2,
+                'Paging loại bỏ external fragmentation, giúp dùng RAM hiệu quả hơn.', 3),
+            makeQ('Swapping out lower priority process for higher priority is called:',
+                ['Roll out, roll in', 'Priority swapping', 'Pull in, push out', 'Pull out, push in'], 0,
+                '"Roll out, roll in" là thuật ngữ chỉ việc swap process theo độ ưu tiên.', 3),
+            makeQ('Which memory management technique suits dynamic data structures and sharing?',
+                ['Segmentation with paging', 'Swapping with page tables', 'Virtual memory with aging',
+                    'Monolithic allocation'
+                ], 0, 'Segmentation kết hợp paging linh hoạt cho cấu trúc dữ liệu động.', 3),
+            makeQ('Role of MMU (Memory Management Unit)?',
+                ['Dịch địa chỉ ảo sang vật lý', 'Cấp phát bộ nhớ', 'Quản lý paging', 'Lưu page table'], 0,
+                'MMU là phần cứng chuyển đổi địa chỉ ảo sang địa chỉ vật lý.', 3),
+            makeQ('In 1965, Dijkstra solved which synchronization problem?',
+                ['Dining philosophers', 'Ostrich algorithm', 'Banker\'s algorithm', 'Allocation algorithm'], 0,
+                'Dijkstra đặt ra và giải bài toán Dining Philosophers năm 1965.', 7),
+            makeQ('Most virtual memory systems use a technique called:',
+                ['Page Fault', 'Page Frames', 'Page Table', 'Paging'], 3,
+                'Paging là kỹ thuật cơ bản nhất của hầu hết hệ thống bộ nhớ ảo.', 3),
+            makeQ('Advantage of Clock Algorithm over Second Chance?',
+                ['Eliminates moving pages, less overhead', 'Increases complexity', 'Guarantees fewer faults',
+                    'Uses more memory'
+                ], 0, 'Clock algorithm không di chuyển trang trong danh sách, giảm overhead.', 3),
+            makeQ('Primary goal of working set model?',
+                ['Minimize internal fragmentation', 'Fixed number of pages', 'Prepage all pages',
+                    'Reduce page fault rate'
+                ], 3, 'Working set giữ các trang đang hoạt động trong RAM để giảm page fault.', 3),
+            makeQ('Difference between process and thread in Windows?',
+                ['Process chứa thread; thread là đơn vị thực thi', 'Process là chương trình; thread là lệnh',
+                    'Giống nhau', 'Process cho tài nguyên; thread cho UI'
+                ], 0, 'Process là container tài nguyên; thread là đơn vị thực thi bên trong process.', 1),
+            makeQ('Contiguous Allocation in file systems means:',
+                ['Các block không liên tiếp', 'File chiếm vùng đĩa liên tục', 'Danh sách liên kết', 'Cấu trúc index'], 1,
+                'Mỗi file chiếm một vùng liên tục trên đĩa – đơn giản nhưng gây fragmentation.', 4),
+            makeQ('Purpose of DMA (Direct Memory Access)?',
+                ['Cấp phát bộ nhớ', 'Truyền dữ liệu không cần CPU', 'CPU truy cập trực tiếp', 'Ngăn truy cập bộ nhớ'], 1,
+                'DMA cho phép thiết bị I/O truyền dữ liệu trực tiếp vào RAM mà không cần CPU.', 5),
+            makeQ('In UNIX, which file type models disks?',
+                ['Regular files', 'Character special files', 'Block special files', 'Directories'], 2,
+                'Block special files đại diện cho thiết bị khối như ổ đĩa.', 4),
+            makeQ('Simplest directory system is called:',
+                ['Root directory', 'User directory', 'Parent directory', 'Single-level directory'], 3,
+                'Single-level directory: tất cả file ở một thư mục duy nhất – đơn giản nhất.', 4),
+            makeQ('Sector 0 of a hard disk is called:',
+                ['Boot block', 'Superblock', 'MBR (Master Boot Record)', 'Free space manager'], 2,
+                'MBR nằm ở sector 0 và chứa thông tin khởi động máy.', 5),
+            makeQ('Which file access method is most efficient for large files?',
+                ['Sequential', 'Direct', 'Indexed', 'Linked'], 2,
+                'Indexed access dùng index block để định vị nhanh – hiệu quả cho file lớn.', 4),
+            makeQ('What happens when a USB is mounted on /usr/ast/backup in UNIX?',
+                ['USB không truy cập được', 'File lưu trên USB dưới /usr/ast/backup', 'File bị xóa',
+                    'Thư mục bị ghi đè'
+                ], 1, 'Mount tích hợp filesystem USB vào cây thư mục tại điểm mount.', 4),
+            makeQ('Hardware mechanism allowing a device to notify the CPU is called:',
+                ['Interrupt', 'Polling', 'Driver', 'Controller'], 0,
+                'Interrupt là cơ chế phần cứng báo hiệu cho CPU từ thiết bị ngoại vi.', 5),
+            makeQ('Purpose of the spindle in a hard disk drive?',
+                ['Lưu dữ liệu', 'Đọc/ghi dữ liệu', 'Điều khiển chuyển động đầu đọc', 'Cung cấp điện'], 2,
+                'Spindle (trục quay) điều khiển tốc độ quay của đĩa từ.', 5),
+            makeQ('Time to move the disk arm to the proper cylinder is called:',
+                ['Seek time', 'Rotational latency', 'Transfer time', 'Access time'], 0,
+                'Seek time = thời gian di chuyển đầu đọc đến đúng cylinder.', 5),
+            makeQ('Besides converting bit streams, what else does the disk controller do?',
+                ['Error correction', 'Convert serial to parallel bytes', 'Connect I/O devices',
+                    'Execute read/write commands'
+                ], 0, 'Controller thực hiện sửa lỗi (ECC) cho dữ liệu đọc/ghi.', 5),
+            makeQ('Effect of using interrupts instead of polling?',
+                ['Phản hồi chậm hơn', 'CPU bận nhiều hơn', 'CPU dùng chu kỳ hiệu quả hơn',
+                    'Giảm khả năng kiểm soát'
+                ], 2, 'Interrupt giải phóng CPU làm việc khác thay vì liên tục polling thiết bị.', 5),
+            makeQ('Role of the file system in disk management?',
+                ['Cấp phát RAM', 'Quản lý phần cứng', 'Tổ chức và theo dõi file', 'Thiết kế controller'], 2,
+                'File system tổ chức, đặt tên, và theo dõi vị trí dữ liệu trên đĩa.', 4),
+            makeQ('RAID level ____ works worst with OS requests for one sector at a time.',
+                ['RAID 0', 'RAID 1', 'RAID 2', 'RAID 3'], 3,
+                'RAID 3 dùng bit-interleaving; mỗi truy xuất nhỏ đều cần toàn bộ array.', 5),
+            makeQ('Banker\'s Algorithm checks before granting a resource request:',
+                ['Trạng thái an toàn', 'Đủ tài nguyên', 'Không vượt nhu cầu', 'Độ ưu tiên process'], 0,
+                'Banker kiểm tra liệu cấp tài nguyên có dẫn đến safe state không.', 6),
+            makeQ('To ensure "hold and wait" never occurs, a process must:',
+                ['Yêu cầu khi chưa giữ gì', 'Yêu cầu ít nhất 1 tài nguyên', 'Yêu cầu tất cả tài nguyên trước khi chạy',
+                    'Chỉ yêu cầu khi rảnh'
+                ], 2, 'Yêu cầu tất cả tài nguyên trước khi thực thi loại bỏ điều kiện hold-and-wait.', 6),
+            makeQ('Which strategy prevents deadlock while allowing high utilization?',
+                ['Cấp theo thứ tự đến', 'Chiếm từ process ưu tiên cao hơn', 'Giữ vô thời hạn',
+                    'Resource hierarchy (thứ bậc tài nguyên)'
+                ], 3, 'Resource ordering/hierarchy ngăn circular wait mà không cần từ chối request.', 6),
+            makeQ('Which condition MUST be present for deadlock to occur?',
+                ['Preemption', 'Circular wait', 'Dynamic allocation', 'Process termination'], 1,
+                'Circular wait là một trong bốn điều kiện cần thiết để xảy ra deadlock.', 6),
+            makeQ('/etc/passwd entry: john:x:1002:1000:John Henry::/bin/bash. Which is correct?',
+                ['Username=john, UID=1002', 'Username=John Henry, UID=1002', 'Username=john, UID=1000',
+                    'Username=John Henry, UID=1000'
+                ], 0, 'Cấu trúc: username:password:UID:GID:GECOS:home:shell. UID là trường thứ 3.', 9),
+            makeQ('Which is NOT a core function of an OS?',
+                ['Process management', 'Memory management', 'File management', 'Internet browsing'], 3,
+                'Internet browsing là ứng dụng người dùng, không phải chức năng lõi của HĐH.', 0),
+            makeQ('A "cache hit" in CPU cache means:',
+                ['Dữ liệu tìm thấy trong cache', 'Dữ liệu không có trong cache', 'Xung đột cache',
+                    'Tất cả cache được dùng'
+                ], 0, 'Cache hit = CPU tìm thấy dữ liệu cần ở cache, không phải RAM.', 3),
+            makeQ('Which file operation exists in UNIX but NOT in Win32?', ['rename', 'mkdir', 'link', 'rmdir'], 2,
+                'UNIX có hard link; Win32 không hỗ trợ lệnh link tương đương.', 4),
+            makeQ('In a monolithic OS structure:',
+                ['Functions divided into processes', 'Chỉ file manager trong kernel',
+                    'Tất cả components chạy ở supervisor mode', 'Drivers chạy ở user space'
+                ], 2, 'Monolithic kernel: mọi thành phần đều chạy trong chế độ kernel (supervisor mode).', 0),
+            makeQ('Given segment table with base=90, physical address for segment (2, offset=50)?',
+                ['140', '130', '150', 'Invalid'], 0, 'Địa chỉ vật lý = base + offset = 90 + 50 = 140.', 3),
+            makeQ('System: 15 blocks total. P1(max8,alloc3), P2(max6,alloc4), P3(max5,alloc3), available=5. State?',
+                ['Safe', 'Unsafe', 'Deadlock', 'Starvation'], 0,
+                'Need: P1=5,P2=2,P3=2. Avail=5 → cấp P2(2)→avail=7→P3(2)→avail=9→P1(5). An toàn!', 6),
+            makeQ('Which technique attacks the "No Preemption" deadlock condition?',
+                ['Yêu cầu tất cả cùng lúc', 'Chỉ một process mỗi tài nguyên', 'Spooling printer output',
+                    'Resource ordering'
+                ], 2, 'Spooling cho phép tạm thời "chiếm" tài nguyên như printer bằng cách ảo hóa nó.', 6),
+            makeQ('What is thrashing in memory management?',
+                ['Quá nhiều page faults, CPU dành hầu hết thời gian để swap', 'Cache không đủ', 'RAM bị tràn',
+                    'Disk I/O quá chậm'
+                ], 0, 'Thrashing xảy ra khi hệ thống liên tục swap pages, không có đủ thời gian chạy process.', 3),
+            makeQ('Which scheduling algorithm can cause starvation?',
+                ['Round Robin', 'FCFS', 'Priority Scheduling', 'Multilevel Feedback Queue'], 2,
+                'Priority Scheduling có thể làm process ưu tiên thấp chờ mãi (starvation).', 2),
+        ];
+
+        function buildFullBank() {
+            const topics = Object.entries(TOPIC_LABELS);
+            const templates = [
+                { q: 'Which of the following best describes "%t" in operating systems?', optFn: (t, term) =>
+                        [`A core concept in ${t} related to ${term}`, `Unrelated to ${t}`,
+                            `Only used in embedded systems`, `A deprecated ${t} term`
+                        ], cIdx: 0 },
+                { q: 'What is the primary purpose of "%t" mechanism?', optFn: (t, term) =>
+                        [`Resource management in ${t}`, `Debugging tool`, `Network protocol`,
+                            `User interface component`
+                        ], cIdx: 0 },
+                { q: 'Which statement about "%t" is FALSE?', optFn: (t, term) =>
+                        [`It improves system performance`, `It has no relation to ${t}`, `It is used in modern OS`,
+                            `It can cause overhead`
+                        ], cIdx: 1 },
+            ];
+            const terms = {
+                'Process Management': ['PCB', 'fork()', 'exec()', 'context switch', 'zombie process', 'orphan process',
+                    'IPC'
+                ],
+                'CPU Scheduling': ['quantum time', 'FCFS', 'SJF', 'aging', 'multilevel queue', 'burst time',
+                    'preemption'
+                ],
+                'Memory Management': ['TLB', 'page frame', 'demand paging', 'copy-on-write', 'buddy system',
+                    'slab allocator', 'huge pages'
+                ],
+                'File Systems': ['inode', 'journal', 'FAT32', 'NTFS', 'ext4', 'hard link', 'soft link'],
+                'I/O Systems': ['IRQ', 'DMA channel', 'buffer cache', 'device driver', 'SCSI', 'NVMe', 'spooling'],
+                'Deadlock': ['safe state', 'resource graph', 'wait-for graph', 'preemption', 'hold-and-wait',
+                    'circular wait', 'Banker algorithm'
+                ],
+                'Synchronization': ['semaphore', 'mutex lock', 'monitor', 'condition variable', 'spin lock',
+                    'test-and-set', 'compare-and-swap'
+                ],
+                'Virtualization': ['hypervisor', 'VM snapshot', 'live migration', 'container', 'cgroup', 'namespace',
+                    'paravirtualization'
+                ],
+                'Security': ['ACL', 'capability list', 'mandatory access control', 'discretionary access control',
+                    'rootkit', 'sandbox', 'ASLR'
+                ],
+                'Tổng quan OS': ['system call', 'trap instruction', 'dual-mode', 'bootloader', 'BIOS/UEFI',
+                    'kernel space', 'user space'
+                ],
+            };
+            let bank = [...baseQuestions];
+            let id = bank.length;
+            for (const [topicKey, topicName] of topics) {
+                const tIdx = parseInt(topicKey);
+                const tTerms = terms[topicName] || ['concept'];
+                for (let ti = 0; ti < tTerms.length; ti++) {
+                    const term = tTerms[ti];
+                    for (const tmpl of templates) {
+                        if (id >= 500) break;
+                        const opts = tmpl.optFn(topicName, term);
+                        bank.push({ q: tmpl.q.replace('%t', term), opts, ans: [tmpl.cIdx], multi: false,
+                            exp: `"${term}" là khái niệm quan trọng trong ${topicName}. Đáp án đúng: "${opts[tmpl.cIdx]}".`,
+                            t: tIdx });
+                        id++;
+                    }
+                    if (id >= 500) break;
+                }
+                if (id >= 500) break;
+            }
+            while (bank.length < 500) {
+                bank.push({ q: 'Which of the following is a fundamental OS component?',
+                    opts: ['Process Manager', 'Memory Manager', 'I/O Manager', 'All of the above'], ans: [3],
+                    multi: false, exp: 'Tất cả đều là thành phần cơ bản của hệ điều hành.', t: 0 });
+            }
+            return bank.slice(0, 500);
+        }
+
+        const FULL_BANK = buildFullBank();
+        const SETS = [];
+        for (let i = 0; i < 10; i++) SETS.push(FULL_BANK.slice(i * 50, (i + 1) * 50));
+
+        // ================================================================
+        // APP STATE
+        // ================================================================
+        const state = {
+            mode: 'learn',
+            setIdx: 0,
+            qIdx: 0,
+            answers: Array(50).fill(null),
+            explained: Array(50).fill(false),
+            submitted: false,
+            timerInterval: null,
+            seconds: 0,
+            examStarted: false,
+            examPaused: false,
+        };
+
+        // ================================================================
+        // DOM REFS
+        // ================================================================
+        const $ = id => document.getElementById(id);
+        const setList = $('setList');
+        const questionMeta = $('questionMeta');
+        const questionText = $('questionText');
+        const optionsCont = $('optionsContainer');
+        const explanBox = $('explanationBox');
+        const counterLabel = $('counterLabel');
+        const answeredLabel = $('answeredLabel');
+        const progressFill = $('progressFill');
+        const progressBar = $('progressBar');
+        const timerBadge = $('timerBadge');
+        const timerText = $('timerText');
+        const prevBtn = $('prevBtn');
+        const nextBtn = $('nextBtn');
+        const resultBox = $('resultBox');
+        const scoreText = $('scoreText');
+        const detailText = $('detailText');
+        const correctCount = $('correctCount');
+        const timeSpent = $('timeSpent');
+        const starsDisplay = $('starsDisplay');
+        const reviewBtn = $('reviewBtn');
+        const retryBtn = $('retryBtn');
+        const modeLearn = $('modeLearn');
+        const modeExam = $('modeExam');
+
+        // ================================================================
+        // RENDER FUNCTIONS
+        // ================================================================
+        function renderSets() {
+            setList.innerHTML = '';
+            SETS.forEach((_, i) => {
+                const btn = document.createElement('button');
+                btn.className = 'set-btn' + (i === state.setIdx ? ' active' : '');
+                btn.textContent = `Bộ ${i+1}`;
+                btn.setAttribute('role', 'listitem');
+                btn.setAttribute('aria-pressed', i === state.setIdx ? 'true' : 'false');
+                btn.addEventListener('click', () => switchSet(i));
+                setList.appendChild(btn);
+            });
+        }
+
+        async function switchSet(i) {
+            if (state.mode === 'exam' && state.examStarted && !state.submitted) {
+                const confirmed = await confirmModal.show({
+                    title: '⚠️ Đổi bộ đề',
+                    desc: 'Việc đổi bộ đề sẽ làm <strong>mất tiến trình kiểm tra</strong> hiện tại. Bạn có chắc chắn muốn tiếp tục?',
+                    icon: '🔄',
+                    okText: 'Tiếp tục',
+                    cancelText: 'Hủy',
+                    type: 'danger'
+                });
+                if (!confirmed) return;
                 resetExamState();
             }
-            state.mode = mode;
-            modeLearn.classList.toggle('active', true);
-            modeLearn.setAttribute('aria-pressed', 'true');
-            modeExam.classList.toggle('active', false);
-            modeExam.setAttribute('aria-pressed', 'false');
-            updateTimerDisplay();
+            state.setIdx = i;
+            state.answers = Array(50).fill(null);
+            state.explained = Array(50).fill(false);
+            state.qIdx = 0;
+            renderSets();
             renderQuestion();
-            return;
         }
 
-        // ── Từ Học sang Thi ──
-        if (state.mode === 'learn' && mode === 'exam') {
-            if (state.examPaused) {
-                // Tiếp tục bài thi đã tạm dừng
-                state.mode = mode;
-                modeLearn.classList.toggle('active', false);
-                modeLearn.setAttribute('aria-pressed', 'false');
-                modeExam.classList.toggle('active', true);
-                modeExam.setAttribute('aria-pressed', 'true');
-                updateTimerDisplay();
-                startTimer(); // tiếp tục
-                renderQuestion();
-                return;
+        function getQ() { return SETS[state.setIdx][state.qIdx]; }
+
+        function renderQuestion() {
+            const q = getQ();
+            const letters = ['A', 'B', 'C', 'D', 'E'];
+
+            questionMeta.textContent = TOPIC_LABELS[q.t] || 'General';
+            questionText.textContent = `${state.qIdx+1}. ${q.q}`;
+
+            const pct = Math.max(2, Math.round(((state.qIdx + 1) / 50) * 100));
+            progressFill.style.width = pct + '%';
+            progressBar.setAttribute('aria-valuenow', state.qIdx + 1);
+            counterLabel.textContent = `Câu ${state.qIdx+1} / 50`;
+            const answered = state.answers.filter(a => a !== null).length;
+            answeredLabel.textContent = `${answered} đã trả lời`;
+
+            optionsCont.innerHTML = '';
+            const sel = state.answers[state.qIdx] || [];
+            const showAnswer = (state.mode === 'learn' && state.explained[state.qIdx]) ||
+                (state.mode === 'exam' && state.submitted);
+
+            q.opts.forEach((opt, i) => {
+                const btn = document.createElement('button');
+                btn.className = 'option' + (q.multi ? ' multi' : '');
+                btn.setAttribute('role', 'listitem');
+                btn.setAttribute('aria-label', `Đáp án ${letters[i]}: ${opt}`);
+                if (showAnswer || (state.mode === 'learn' && state.explained[state.qIdx])) {
+                    btn.classList.add('disabled');
+                }
+                if (sel.includes(i)) btn.classList.add('selected');
+
+                if (showAnswer) {
+                    if (q.ans.includes(i)) btn.classList.add('correct');
+                    else if (sel.includes(i)) btn.classList.add('wrong');
+                }
+
+                const letter = document.createElement('span');
+                letter.className = 'option__letter';
+                letter.textContent = letters[i];
+                letter.setAttribute('aria-hidden', 'true');
+
+                const text = document.createElement('span');
+                text.className = 'option__text';
+                text.textContent = opt;
+
+                const icon = document.createElement('span');
+                icon.className = 'option__icon';
+                icon.setAttribute('aria-hidden', 'true');
+                if (showAnswer) {
+                    icon.textContent = q.ans.includes(i) ? '✓' : (sel.includes(i) ? '✗' : '');
+                } else if (sel.includes(i)) {
+                    icon.textContent = q.multi ? '☑' : '◉';
+                }
+
+                btn.append(letter, text, icon);
+                btn.addEventListener('click', () => onSelect(i));
+                optionsCont.appendChild(btn);
+            });
+
+            if (showAnswer) {
+                const isCorrect = JSON.stringify(sel.sort()) === JSON.stringify(q.ans.sort());
+                const corr = q.ans.map(i => q.opts[i]).join(', ');
+                const userAns = sel.length > 0 ? sel.map(i => q.opts[i]).join(', ') : 'Chưa chọn';
+                explanBox.innerHTML =
+                    `<strong>${isCorrect?'✅ Đúng':'❌ Sai'}</strong> · Đáp án đúng: <strong>${corr}</strong><br><br>${q.exp}`;
+                explanBox.classList.add('show');
             } else {
-                // Bắt đầu bài thi mới
-                resetExamState();
+                explanBox.classList.remove('show');
+            }
+
+            prevBtn.disabled = state.qIdx === 0;
+            const isLast = state.qIdx === 49;
+            if (state.mode === 'learn') {
+                nextBtn.textContent = isLast ? '🏁 Hoàn thành' : 'Tiếp →';
+                nextBtn.className = 'btn btn--primary';
+            } else if (!state.submitted) {
+                nextBtn.textContent = isLast ? '📨 Nộp bài' : 'Tiếp →';
+                nextBtn.className = isLast ? 'btn btn--success' : 'btn btn--primary';
+            } else {
+                nextBtn.textContent = isLast ? '—' : 'Tiếp →';
+                nextBtn.className = 'btn btn--primary';
+                nextBtn.disabled = isLast;
+            }
+
+            updateTimerDisplay();
+        }
+
+        function onSelect(idx) {
+            const q = getQ();
+            if (state.submitted) return;
+            if (state.mode === 'learn' && state.explained[state.qIdx]) return;
+
+            let sel = state.answers[state.qIdx] || [];
+            if (q.multi) {
+                if (sel.includes(idx)) {
+                    sel = sel.filter(i => i !== idx);
+                } else {
+                    sel.push(idx);
+                    sel.sort();
+                }
+            } else {
+                sel = [idx];
+            }
+            state.answers[state.qIdx] = sel;
+            if (state.mode === 'learn') { state.explained[state.qIdx] = true; }
+            renderQuestion();
+        }
+
+        // ================================================================
+        // NAVIGATION
+        // ================================================================
+        function goPrev() { if (state.qIdx > 0) { state.qIdx--;
+                renderQuestion(); } }
+
+        function goNext() {
+            if (state.mode === 'exam' && !state.submitted && state.qIdx === 49) { submitExam(); return; }
+            if (state.qIdx < 49) { state.qIdx++;
+                renderQuestion(); } else if (state.mode === 'learn') alert('🎉 Bạn đã hoàn thành bộ đề này!');
+        }
+
+        // ================================================================
+        // TIMER
+        // ================================================================
+        function startTimer() {
+            if (state.timerInterval) return;
+            state.examStarted = true;
+            state.examPaused = false;
+            state.timerInterval = setInterval(() => {
+                state.seconds++;
+                updateTimerDisplay();
+            }, 1000);
+        }
+
+        function stopTimer() {
+            clearInterval(state.timerInterval);
+            state.timerInterval = null;
+        }
+
+        function fmtTime(s) { const m = Math.floor(s / 60),
+                ss = s % 60; return `${String(m).padStart(2,'0')}:${String(ss).padStart(2,'0')}`; }
+
+        function updateTimerDisplay() {
+            if (state.examPaused) {
+                timerBadge.className = 'timer-badge paused';
+                timerText.textContent = fmtTime(state.seconds) + ' ⏸';
+            } else if (state.seconds > 0) {
+                timerBadge.className = 'timer-badge' + (state.seconds >= 2700 ? ' warning' : '');
+                timerText.textContent = fmtTime(state.seconds);
+            } else {
+                timerBadge.className = 'timer-badge';
+                timerText.textContent = '--:--';
+            }
+        }
+
+        // ================================================================
+        // SUBMIT EXAM
+        // ================================================================
+        async function submitExam() {
+            if (state.submitted || state.mode !== 'exam') return;
+            const unanswered = state.answers.filter(a => a === null || a.length === 0).length;
+            if (unanswered > 0) {
+                const confirmed = await confirmModal.show({
+                    title: '⚠️ Còn câu chưa trả lời',
+                    desc: `Bạn còn <strong>${unanswered}</strong> câu chưa trả lời. Bạn vẫn muốn nộp bài?`,
+                    icon: '📝',
+                    okText: 'Vẫn nộp',
+                    cancelText: 'Làm tiếp',
+                    type: 'danger'
+                });
+                if (!confirmed) return;
+            }
+            stopTimer();
+            state.submitted = true;
+            state.examPaused = false;
+            const qs = SETS[state.setIdx];
+            let correct = 0;
+            state.answers.forEach((a, i) => {
+                const userAns = a || [];
+                const qAns = qs[i].ans || [];
+                if (JSON.stringify(userAns.sort()) === JSON.stringify(qAns.sort())) correct++;
+            });
+            const timeStr = fmtTime(state.seconds);
+            timeSpent.textContent = timeStr;
+            correctCount.textContent = correct;
+            scoreText.innerHTML = `${correct}<span>/50</span>`;
+            detailText.innerHTML = `Thời gian: <strong>${timeStr}</strong> · Đúng <strong>${correct}</strong> câu`;
+            const pct = correct / 50;
+            starsDisplay.textContent = pct >= .9 ? '🌟🌟🌟🌟🌟' : pct >= .7 ? '🌟🌟🌟🌟' : pct >= .5 ? '🌟🌟🌟' : pct >= .3 ?
+                '🌟🌟' : '🌟';
+            resultBox.classList.add('show');
+            resultBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            renderQuestion();
+        }
+
+        // ================================================================
+        // MODE SWITCH
+        // ================================================================
+        function resetExamState() {
+            stopTimer();
+            state.submitted = false;
+            state.examStarted = false;
+            state.examPaused = false;
+            state.answers = Array(50).fill(null);
+            state.explained = Array(50).fill(false);
+            state.qIdx = 0;
+            state.seconds = 0;
+            timerText.textContent = '--:--';
+            timerBadge.className = 'timer-badge';
+            resultBox.classList.remove('show');
+            nextBtn.disabled = false;
+        }
+
+        async function setMode(mode) {
+            if (state.mode === mode) return;
+
+            if (state.mode === 'exam' && mode === 'learn') {
+                if (state.examStarted && !state.submitted) {
+                    const confirmed = await confirmModal.show({
+                        title: '⏸️ Tạm dừng bài thi',
+                        desc: 'Chuyển sang chế độ Học sẽ <strong>tạm dừng</strong> bài thi của bạn. Bạn có thể tiếp tục sau.',
+                        icon: '⏸️',
+                        okText: 'Tạm dừng',
+                        cancelText: 'Ở lại',
+                        type: 'success'
+                    });
+                    if (!confirmed) return;
+                    stopTimer();
+                    state.examPaused = true;
+                    state.answers.forEach((ans, idx) => {
+                        if (ans !== null && ans.length > 0) state.explained[idx] = true;
+                    });
+                } else {
+                    resetExamState();
+                }
                 state.mode = mode;
-                modeLearn.classList.toggle('active', false);
-                modeLearn.setAttribute('aria-pressed', 'false');
-                modeExam.classList.toggle('active', true);
-                modeExam.setAttribute('aria-pressed', 'true');
-                startTimer();
+                modeLearn.classList.toggle('active', true);
+                modeLearn.setAttribute('aria-pressed', 'true');
+                modeExam.classList.toggle('active', false);
+                modeExam.setAttribute('aria-pressed', 'false');
+                updateTimerDisplay();
                 renderQuestion();
                 return;
             }
+
+            if (state.mode === 'learn' && mode === 'exam') {
+                if (state.examPaused) {
+                    state.mode = mode;
+                    modeLearn.classList.toggle('active', false);
+                    modeLearn.setAttribute('aria-pressed', 'false');
+                    modeExam.classList.toggle('active', true);
+                    modeExam.setAttribute('aria-pressed', 'true');
+                    updateTimerDisplay();
+                    startTimer();
+                    renderQuestion();
+                    return;
+                } else {
+                    resetExamState();
+                    state.mode = mode;
+                    modeLearn.classList.toggle('active', false);
+                    modeLearn.setAttribute('aria-pressed', 'false');
+                    modeExam.classList.toggle('active', true);
+                    modeExam.setAttribute('aria-pressed', 'true');
+                    startTimer();
+                    renderQuestion();
+                    return;
+                }
+            }
         }
-    }
 
-    // ================================================================
-    // EVENT LISTENERS
-    // ================================================================
-    prevBtn.addEventListener('click', goPrev);
-    nextBtn.addEventListener('click', goNext);
-    modeLearn.addEventListener('click', ()=>setMode('learn'));
-    modeExam.addEventListener('click', ()=>setMode('exam'));
-    reviewBtn.addEventListener('click', ()=>{ state.qIdx=0; renderQuestion(); resultBox.classList.remove('show'); window.scrollTo({top:0,behavior:'smooth'}); });
-    retryBtn.addEventListener('click', ()=>{ resetExamState(); if(state.mode==='exam') startTimer(); renderQuestion(); });
+        // ================================================================
+        // EVENT LISTENERS
+        // ================================================================
+        prevBtn.addEventListener('click', goPrev);
+        nextBtn.addEventListener('click', goNext);
+        modeLearn.addEventListener('click', () => setMode('learn'));
+        modeExam.addEventListener('click', () => setMode('exam'));
+        reviewBtn.addEventListener('click', () => {
+            state.qIdx = 0;
+            renderQuestion();
+            resultBox.classList.remove('show');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+        retryBtn.addEventListener('click', () => {
+            resetExamState();
+            if (state.mode === 'exam') startTimer();
+            renderQuestion();
+        });
 
-    document.addEventListener('keydown', e=>{
-        if(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA') return;
-        if(e.key==='ArrowLeft') goPrev();
-        if(e.key==='ArrowRight') goNext();
-        if(['1','2','3','4'].includes(e.key)) {
-            const idx=parseInt(e.key)-1;
-            const opts=document.querySelectorAll('.option');
-            if(opts[idx]) opts[idx].click();
+        document.addEventListener('keydown', e => {
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+            if (e.key === 'ArrowLeft') goPrev();
+            if (e.key === 'ArrowRight') goNext();
+            if (['1', '2', '3', '4'].includes(e.key)) {
+                const idx = parseInt(e.key) - 1;
+                const opts = document.querySelectorAll('.option');
+                if (opts[idx]) opts[idx].click();
+            }
+        });
+
+        // ================================================================
+        // INIT
+        // ================================================================
+        function init() {
+            renderSets();
+            renderQuestion();
         }
-    });
-
-    // ================================================================
-    // INIT
-    // ================================================================
-    function init() {
-        renderSets();
-        renderQuestion();
-    }
-    init();
+        init();
     </script>
 </body>
 </html>
