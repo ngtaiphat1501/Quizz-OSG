@@ -1042,7 +1042,7 @@
         confirmModal.init();
 
         // ================================================================
-        // QUESTION BANK – 500 câu (Cập nhật đáp án đúng và hỗ trợ multi-choice)
+        // QUESTION BANK – 500 câu (ALL IN ENGLISH)
         // ================================================================
         const TOPIC_LABELS = {
             0: 'Tổng quan OS',
@@ -1067,7 +1067,7 @@
         });
 
         const baseQuestions = [
-            // ===== CÂU HỎI MULTI-CHOICE =====
+            // ===== MULTI-CHOICE QUESTIONS =====
             makeQ(
                 'What special registers are visible to the programmer? (Select all that apply)',
                 ['MAR (Memory Address Register)', 'Program Counter', 'Stack Pointer', 'PSW (Program Status Word)'],
@@ -1099,7 +1099,7 @@
                 5, true
             ),
 
-            // ===== CÂU HỎI SINGLE-CHOICE =====
+            // ===== SINGLE-CHOICE QUESTIONS =====
             makeQ('Mouse is unique tool to interface between user and computer', ['True', 'False'], 1,
                 'Chuột là một công cụ, nhưng không phải công cụ duy nhất.', 0),
             makeQ('Windows operating system does not provide a work in network environment.', ['True', 'False'], 1,
@@ -1124,10 +1124,10 @@
                 ['Child process', 'Root process', 'Parent process', 'Init process'], 2,
                 'Parent process tạo ra child process thông qua lời gọi fork().', 1),
             makeQ('Which of the following is shared among threads of the same process?',
-                ['Stack và PC', 'File descriptors, heap, biến toàn cục', 'CPU registers', 'Cache và clock speed'], 1,
-                'Các thread cùng process chia sẻ heap, biến toàn cục và file descriptor.', 1),
+                ['Stack and PC', 'File descriptors, heap, global variables', 'CPU registers', 'Cache and clock speed'],
+                1, 'Các thread cùng process chia sẻ heap, biến toàn cục và file descriptor.', 1),
             makeQ('What does the OS do to execute a new process?',
-                ['Cấp CPU ngay', 'Cung cấp tài nguyên', 'Tạo PCB', 'Cấp registers'], 2,
+                ['Provide immediate CPU', 'Deliver resources', 'Create PCB', 'Provide registers'], 2,
                 'HĐH tạo PCB (Process Control Block) cho mỗi process mới.', 1),
             makeQ('In real-time scheduling, which type of process gets highest priority?',
                 ['Shortest processes', 'Highest computation', 'Earliest deadlines', 'Background tasks'], 2,
@@ -1136,8 +1136,8 @@
                 ['Continuous stream of readers', 'Reader exits too early', 'Mutex remains locked', 'Too many writers'], 0,
                 'Luồng reader liên tục không dừng sẽ ngăn writer vào vùng tới hạn.', 7),
             makeQ('Benefit of paging in virtual memory?',
-                ['Tăng tốc CPU', 'Cải thiện đĩa', 'Sử dụng bộ nhớ hiệu quả', 'Tăng tốc mạng'], 2,
-                'Paging loại bỏ external fragmentation, giúp dùng RAM hiệu quả hơn.', 3),
+                ['Enhanced CPU performance', 'Improved disk storage', 'Efficient memory utilization', 'Faster network'],
+                2, 'Paging loại bỏ external fragmentation, giúp dùng RAM hiệu quả hơn.', 3),
             makeQ('Swapping out lower priority process for higher priority is called:',
                 ['Roll out, roll in', 'Priority swapping', 'Pull in, push out', 'Pull out, push in'], 0,
                 '"Roll out, roll in" là thuật ngữ chỉ việc swap process theo độ ưu tiên.', 3),
@@ -1146,8 +1146,8 @@
                     'Monolithic allocation'
                 ], 0, 'Segmentation kết hợp paging linh hoạt cho cấu trúc dữ liệu động.', 3),
             makeQ('Role of MMU (Memory Management Unit)?',
-                ['Dịch địa chỉ ảo sang vật lý', 'Cấp phát bộ nhớ', 'Quản lý paging', 'Lưu page table'], 0,
-                'MMU là phần cứng chuyển đổi địa chỉ ảo sang địa chỉ vật lý.', 3),
+                ['Translates virtual to physical addresses', 'Allocates memory', 'Manages paging', 'Stores page table'],
+                0, 'MMU là phần cứng chuyển đổi địa chỉ ảo sang địa chỉ vật lý.', 3),
             makeQ('In 1965, Dijkstra solved which synchronization problem?',
                 ['Dining philosophers', 'Ostrich algorithm', 'Banker\'s algorithm', 'Allocation algorithm'], 0,
                 'Dijkstra đặt ra và giải bài toán Dining Philosophers năm 1965.', 7),
@@ -1163,14 +1163,14 @@
                     'Reduce page fault rate'
                 ], 3, 'Working set giữ các trang đang hoạt động trong RAM để giảm page fault.', 3),
             makeQ('Difference between process and thread in Windows?',
-                ['Process chứa thread; thread là đơn vị thực thi', 'Process là chương trình; thread là lệnh',
-                    'Giống nhau', 'Process cho tài nguyên; thread cho UI'
+                ['Process contains threads; thread is execution unit', 'Process is a program; thread is an instruction',
+                    'They are the same', 'Process is for resources; thread is for UI'
                 ], 0, 'Process là container tài nguyên; thread là đơn vị thực thi bên trong process.', 1),
             makeQ('Contiguous Allocation in file systems means:',
-                ['Các block không liên tiếp', 'File chiếm vùng đĩa liên tục', 'Danh sách liên kết', 'Cấu trúc index'], 1,
+                ['Non-contiguous blocks', 'Contiguous disk space', 'Linked chain', 'Index structure'], 1,
                 'Mỗi file chiếm một vùng liên tục trên đĩa – đơn giản nhưng gây fragmentation.', 4),
             makeQ('Purpose of DMA (Direct Memory Access)?',
-                ['Cấp phát bộ nhớ', 'Truyền dữ liệu không cần CPU', 'CPU truy cập trực tiếp', 'Ngăn truy cập bộ nhớ'], 1,
+                ['Allocate memory', 'Transfer data without CPU', 'Direct CPU access', 'Prevent memory access'], 1,
                 'DMA cho phép thiết bị I/O truyền dữ liệu trực tiếp vào RAM mà không cần CPU.', 5),
             makeQ('In UNIX, which file type models disks?',
                 ['Regular files', 'Character special files', 'Block special files', 'Directories'], 2,
@@ -1185,14 +1185,14 @@
                 ['Sequential', 'Direct', 'Indexed', 'Linked'], 2,
                 'Indexed access dùng index block để định vị nhanh – hiệu quả cho file lớn.', 4),
             makeQ('What happens when a USB is mounted on /usr/ast/backup in UNIX?',
-                ['USB không truy cập được', 'File lưu trên USB dưới /usr/ast/backup', 'File bị xóa',
-                    'Thư mục bị ghi đè'
+                ['USB is inaccessible', 'Files copied to /usr/ast/backup/monday are stored on USB',
+                    'Files are deleted', 'Directory is overwritten'
                 ], 1, 'Mount tích hợp filesystem USB vào cây thư mục tại điểm mount.', 4),
             makeQ('Hardware mechanism allowing a device to notify the CPU is called:',
                 ['Interrupt', 'Polling', 'Driver', 'Controller'], 0,
                 'Interrupt là cơ chế phần cứng báo hiệu cho CPU từ thiết bị ngoại vi.', 5),
             makeQ('Purpose of the spindle in a hard disk drive?',
-                ['Lưu dữ liệu', 'Đọc/ghi dữ liệu', 'Điều khiển chuyển động đầu đọc', 'Cung cấp điện'], 2,
+                ['Store data', 'Read/write data', 'Control head movement', 'Provide power'], 2,
                 'Spindle (trục quay) điều khiển tốc độ quay của đĩa từ.', 5),
             makeQ('Time to move the disk arm to the proper cylinder is called:',
                 ['Seek time', 'Rotational latency', 'Transfer time', 'Access time'], 0,
@@ -1202,25 +1202,24 @@
                     'Execute read/write commands'
                 ], 0, 'Controller thực hiện sửa lỗi (ECC) cho dữ liệu đọc/ghi.', 5),
             makeQ('Effect of using interrupts instead of polling?',
-                ['Phản hồi chậm hơn', 'CPU bận nhiều hơn', 'CPU dùng chu kỳ hiệu quả hơn',
-                    'Giảm khả năng kiểm soát'
-                ], 2, 'Interrupt giải phóng CPU làm việc khác thay vì liên tục polling thiết bị.', 5),
+                ['Slower response', 'Higher CPU usage', 'More efficient processor cycles', 'Reduced control'], 2,
+                'Interrupt giải phóng CPU làm việc khác thay vì liên tục polling thiết bị.', 5),
             makeQ('Role of the file system in disk management?',
-                ['Cấp phát RAM', 'Quản lý phần cứng', 'Tổ chức và theo dõi file', 'Thiết kế controller'], 2,
+                ['Allocate memory', 'Manage hardware', 'Organize and track files', 'Design controllers'], 2,
                 'File system tổ chức, đặt tên, và theo dõi vị trí dữ liệu trên đĩa.', 4),
             makeQ('RAID level ____ works worst with OS requests for one sector at a time.',
                 ['RAID 0', 'RAID 1', 'RAID 2', 'RAID 3'], 3,
                 'RAID 3 dùng bit-interleaving; mỗi truy xuất nhỏ đều cần toàn bộ array.', 5),
             makeQ('Banker\'s Algorithm checks before granting a resource request:',
-                ['Trạng thái an toàn', 'Đủ tài nguyên', 'Không vượt nhu cầu', 'Độ ưu tiên process'], 0,
+                ['Safe state', 'Within needs', 'Enough resources', 'Process priority'], 0,
                 'Banker kiểm tra liệu cấp tài nguyên có dẫn đến safe state không.', 6),
             makeQ('To ensure "hold and wait" never occurs, a process must:',
-                ['Yêu cầu khi chưa giữ gì', 'Yêu cầu ít nhất 1 tài nguyên', 'Yêu cầu tất cả tài nguyên trước khi chạy',
-                    'Chỉ yêu cầu khi rảnh'
+                ['Request when holding none', 'Request at least one resource', 'Request all resources before execution',
+                    'Request only when has none'
                 ], 2, 'Yêu cầu tất cả tài nguyên trước khi thực thi loại bỏ điều kiện hold-and-wait.', 6),
             makeQ('Which strategy prevents deadlock while allowing high utilization?',
-                ['Cấp theo thứ tự đến', 'Chiếm từ process ưu tiên cao hơn', 'Giữ vô thời hạn',
-                    'Resource hierarchy (thứ bậc tài nguyên)'
+                ['Grant in arrival order', 'Preempt higher priority', 'Hold indefinitely',
+                    'Resource hierarchy (resource ordering)'
                 ], 3, 'Resource ordering/hierarchy ngăn circular wait mà không cần từ chối request.', 6),
             makeQ('Which condition MUST be present for deadlock to occur?',
                 ['Preemption', 'Circular wait', 'Dynamic allocation', 'Process termination'], 1,
@@ -1233,14 +1232,13 @@
                 ['Process management', 'Memory management', 'File management', 'Internet browsing'], 3,
                 'Internet browsing là ứng dụng người dùng, không phải chức năng lõi của HĐH.', 0),
             makeQ('A "cache hit" in CPU cache means:',
-                ['Dữ liệu tìm thấy trong cache', 'Dữ liệu không có trong cache', 'Xung đột cache',
-                    'Tất cả cache được dùng'
-                ], 0, 'Cache hit = CPU tìm thấy dữ liệu cần ở cache, không phải RAM.', 3),
+                ['Data found in cache', 'Data not found in cache', 'Cache collision', 'All cache utilized'], 0,
+                'Cache hit = CPU tìm thấy dữ liệu cần ở cache, không phải RAM.', 3),
             makeQ('Which file operation exists in UNIX but NOT in Win32?', ['rename', 'mkdir', 'link', 'rmdir'], 2,
                 'UNIX có hard link; Win32 không hỗ trợ lệnh link tương đương.', 4),
             makeQ('In a monolithic OS structure:',
-                ['Functions divided into processes', 'Chỉ file manager trong kernel',
-                    'Tất cả components chạy ở supervisor mode', 'Drivers chạy ở user space'
+                ['Functions are divided into processes', 'Only file manager is in kernel',
+                    'All components run in supervisor mode', 'Drivers run in user space'
                 ], 2, 'Monolithic kernel: mọi thành phần đều chạy trong chế độ kernel (supervisor mode).', 0),
             makeQ('Given segment table with base=90, physical address for segment (2, offset=50)?',
                 ['140', '130', '150', 'Invalid'], 0, 'Địa chỉ vật lý = base + offset = 90 + 50 = 140.', 3),
@@ -1248,16 +1246,176 @@
                 ['Safe', 'Unsafe', 'Deadlock', 'Starvation'], 0,
                 'Need: P1=5,P2=2,P3=2. Avail=5 → cấp P2(2)→avail=7→P3(2)→avail=9→P1(5). An toàn!', 6),
             makeQ('Which technique attacks the "No Preemption" deadlock condition?',
-                ['Yêu cầu tất cả cùng lúc', 'Chỉ một process mỗi tài nguyên', 'Spooling printer output',
+                ['Request all at once', 'Only one process per resource', 'Spooling printer output',
                     'Resource ordering'
                 ], 2, 'Spooling cho phép tạm thời "chiếm" tài nguyên như printer bằng cách ảo hóa nó.', 6),
             makeQ('What is thrashing in memory management?',
-                ['Quá nhiều page faults, CPU dành hầu hết thời gian để swap', 'Cache không đủ', 'RAM bị tràn',
-                    'Disk I/O quá chậm'
+                ['Too many page faults, CPU spends most time swapping', 'Cache is insufficient', 'RAM overflows',
+                    'Disk I/O is too slow'
                 ], 0, 'Thrashing xảy ra khi hệ thống liên tục swap pages, không có đủ thời gian chạy process.', 3),
             makeQ('Which scheduling algorithm can cause starvation?',
                 ['Round Robin', 'FCFS', 'Priority Scheduling', 'Multilevel Feedback Queue'], 2,
                 'Priority Scheduling có thể làm process ưu tiên thấp chờ mãi (starvation).', 2),
+            makeQ('What is NOT an operating system mode?',
+                ['System mode', 'User mode', 'Kernel mode', 'Supervisor mode'], 0,
+                'System mode không phải là chế độ chính thức của hệ điều hành.', 0),
+            makeQ('What does the term "multiprogramming" mean?',
+                ['Running multiple lines of the same program', 'Writing code in many languages',
+                    'Running multiple programs at once', 'Debugging with multiple users'
+                ], 2, 'Multiprogramming cho phép nhiều chương trình chạy đồng thời trên CPU.', 0),
+            makeQ('Which statement is true about implementing Threads in Kernel?',
+                ['The kernel has a thread table', 'The threads run on top of a runtime system',
+                    'Suitable for OS that does not support threads', 'Thread switching and scheduling are faster'
+                ], 0, 'Kernel-level threads được quản lý bằng bảng thread trong kernel.', 1),
+            makeQ('Which type of memory is typically very fast, expensive, and volatile?',
+                ['Main memory', 'Virtual memory', 'Cache memory', 'Secondary memory'], 2,
+                'Cache memory nhanh, đắt và dễ bay hơi.', 3),
+            makeQ('In threads, web servers use this fact to improve performance by maintaining a collection of heavily used pages in main memory. What is this collection called?',
+                ['Threads', 'Dispatcher', 'Buffer', 'Cache'], 3, 'Bộ nhớ đệm (cache) lưu các trang được dùng nhiều để truy xuất nhanh.',
+                1),
+            makeQ('In Round-robin scheduling, what happens to a process when it runs out of its time quantum?',
+                ['Switches from running to ready', 'Switches from running to blocked',
+                    'Switches from running to suspended-ready', 'Switches from running to suspended'
+                ], 0, 'Hết quantum, process bị đưa về hàng đợi ready.', 2),
+            makeQ('Which programming model supports parallel execution but may involve blocking system calls?',
+                ['Single-threaded process', 'Finite-state machine', 'Threads', 'None of the above'], 2,
+                'Threads hỗ trợ song song nhưng có thể bị chặn bởi system calls.', 1),
+            makeQ('When a process is running in a contention zone, no other processes are running in the same zone. What is this condition called?',
+                ['Mutual exclusion', 'Bounded waiting', 'Progress', 'Critical exclusion'], 0,
+                'Loại trừ tương hỗ (Mutual exclusion) đảm bảo chỉ một process vào vùng tranh chấp.', 7),
+            makeQ('A computer has 8 GB of memory. The OS occupies 2 GB, each user program requires 3 GB. The average I/O wait time is 60%. What is the CPU utilization?',
+                ['64%', '60%', '66%', '70%'], 0,
+                'Max processes = (8-2)/3 = 2. CPU util = 1 - 0.6^2 = 0.64 = 64%.', 2),
+            makeQ('In the deadlock-avoidance solution to the Dining Philosophers problem, when can a philosopher eat?',
+                ['Both neighbors are not eating', 'Both neighbors are thinking or hungry',
+                    'The philosopher hasn\'t eaten yet', 'Mutex is unlocked'
+                ], 0, 'Philosopher chỉ ăn khi cả hai hàng xóm đều không ăn.', 7),
+            makeQ('Evaluate the impact of the absence of real segmentation support in the 64-bit version of the x86 architecture on modern OS.',
+                ['More efficient memory utilization but limits diversity', 'Significantly improves memory management',
+                    'Simplifies memory management but limits flexibility', 'No impact as OS rely solely on paging'
+                ], 2, 'Thiếu segmentation giúp đơn giản hóa nhưng hạn chế linh hoạt xử lý bộ nhớ động.', 3),
+            makeQ('Which of the following methods is used to track memory?',
+                ['Linked Lists', 'Best fit', 'Paging', 'Segmentation'], 0,
+                'Linked lists dùng để quản lý danh sách vùng nhớ trống.', 3),
+            makeQ('In paged memory systems, if the page size is increased, internal fragmentation generally:',
+                ['becomes less', 'becomes more', 'remains constant', 'none of mentioned'], 1,
+                'Khi page size tăng, phân mảnh nội (internal fragmentation) tăng.', 3),
+            makeQ('Which memory management technique involves dividing memory into fixed-sized partitions to accommodate varying process sizes?',
+                ['Paging Management', 'Contiguous Allocation', 'Segmentation', 'Virtual Memory Management'], 0,
+                'Paging chia bộ nhớ thành các khung cố định và trang cố định.', 3),
+            makeQ('How does memory abstraction through address spaces benefit a computer system?',
+                ['Allows each process to access physical memory directly', 'Isolates processes, preventing unauthorized access',
+                    'Eliminates virtual memory', 'Reduces CPU processing speed'
+                ], 1, 'Address spaces cách ly các process, bảo vệ dữ liệu.', 3),
+            makeQ('A computer with a 32-bit address uses a two-level page table. Virtual addresses are split into a 10-bit top-level page table field, a 12-bit second-level page table field, and an offset. What is the size of the pages?',
+                ['512B', '1-KB', '2-KB', '4-KB'], 1, 'Offset = 32-10-12 = 10 bits → 2^10 = 1KB.', 3),
+            makeQ('If FIFO page replacement algorithm is used with four page frames, how many page faults will occur with the reference string 0,1,7,2,3,2,7,1,0,3 if the four frames are initially empty?',
+                ['4', '5', '6', '7'], 2, 'FIFO faults: 0,1,7,2,3,0 → 6 faults.', 3),
+            makeQ('When designing a paging system, which of the following factors is the most critical in minimizing translation overhead?',
+                ['Increasing the number of page table entries per process', 'Using a Translation Lookaside Buffer (TLB) for faster lookups',
+                    'Storing page tables in slower secondary storage',
+                    'Assigning fixed-size page frames without considering process needs'
+                ], 1, 'TLB giúp tăng tốc dịch địa chỉ, giảm overhead.', 3),
+            makeQ('After the page fault trap, which of the following is responsible for saving general-purpose registers and volatile state?',
+                ['Disk controller', 'Operating system scheduler', 'Assembly-language routine',
+                    'Page replacement algorithm'
+                ], 2, 'Một routine hợp ngữ sẽ lưu trạng thái thanh ghi.', 3),
+            makeQ('Indexed Allocation in file systems uses:',
+                ['A table of pointers for each file', 'Contiguous blocks of disk space',
+                    'Linked lists to connect files', 'Hierarchical file structures'
+                ], 0, 'Indexed allocation dùng bảng con trỏ cho mỗi file.', 4),
+            makeQ('Which system call repositions the file pointer so that data can be read from or written to a specific location in the file?',
+                ['Seek', 'Append', 'Rename', 'Write'], 0, 'Seek di chuyển con trỏ file đến vị trí cần đọc/ghi.', 4),
+            makeQ('In a memory system consisting of hole sizes: 10MB, 18MB, 9MB, and 14MB, suppose the Best Fit algorithm is used. Which holes are allocated in order for consecutive segment requests of 11MB, 2MB, 9MB, and 8MB?',
+                ['14MB, 3MB, 10MB, 9MB', '18MB, 7MB, 10MB, 9MB', '14MB, 3MB, 9MB, 10MB', '18MB, 7MB, 9MB, 10MB'], 0,
+                'Best Fit: 11→14 (dư3), 2→3 (vừa), 9→9 (vừa), 8→10 (dư2).', 3),
+            makeQ('Which file allocation method uses pointers in each file block to the next block?',
+                ['Contiguous', 'Indexed', 'Linked', 'Hash-based'], 2,
+                'Linked allocation dùng con trỏ trong mỗi block đến block kế tiếp.', 4),
+            makeQ('Why is defragmenting a Solid-State Drive (SSD) generally not recommended?',
+                ['SSDs store data without needing contiguous blocks', 'SSDs can fail when defragmented more than once',
+                    'SSDs degrade faster with unnecessary write cycles', 'SSDs auto-defrag and ignore manual optimization'
+                ], 2, 'SSD có số lần ghi hữu hạn, defrag làm giảm tuổi thọ.', 5),
+            makeQ('In Windows 95, what is the maximum partition size if the FAT type is FAT-16 and the block size is 4 KB?',
+                ['128MB', '256MB', '512MB', '1024MB'], 1, '2^16 * 4KB = 256MB.', 4),
+            makeQ('What is the role of a file descriptor in Unix-based systems?',
+                ['To keep track of file sizes', 'To store the file contents',
+                    'To keep track of open files and their I/O operations', 'To store the file\'s metadata'
+                ], 2, 'File descriptor theo dõi các file đang mở và thao tác I/O.', 4),
+            makeQ('Which layer of the I/O software system is closest to the hardware?',
+                ['Interrupt handlers', 'Device drivers', 'Device-independent operating system software',
+                    'User-level I/O software'
+                ], 1, 'Device drivers là lớp gần phần cứng nhất.', 5),
+            makeQ('In C-SCAN scheduling, what happens when the arm reaches the end?',
+                ['Stops', 'Jumps back', 'Reverses', 'Skips requests'], 1, 'C-SCAN nhảy về đầu khi đến cuối.', 5),
+            makeQ('In DMA transfer cycle, what two modes can many buses operate in?',
+                ['Word-at-a-time mode and byte mode', 'Word-at-a-time mode and block mode',
+                    'Word-at-a-time mode and bit mode', 'Word-at-a-time mode and page mode'
+                ], 1, 'DMA có hai chế độ: word-at-a-time và block mode.', 5),
+            makeQ('Which I/O software layer is primarily responsible for handling device-specific details while maintaining a uniform interface for the upper layers?',
+                ['User-space I/O libraries', 'Device drivers', 'Interrupt handlers', 'Hardware controllers'], 1,
+                'Device drivers che giấu chi tiết thiết bị và cung cấp giao diện thống nhất.', 5),
+            makeQ('What are the weaknesses of RAID 0?',
+                ['Requires the highest number of disks', 'There is no data recovery mechanism',
+                    'The unit of data transmitted is at the BIT level', 'Does not improve read and write speeds'
+                ], 1, 'RAID 0 không có dự phòng, hỏng một đĩa là mất dữ liệu.', 5),
+            makeQ('Which of the following is NOT one of the usual duties of Clock Software?',
+                ['Maintaining the time of day', 'Helping processes run longer than they are allowed to',
+                    'Accounting for CPU usage', 'Handling the alarm system call',
+                    'Doing profiling, monitoring, and statistics gathering'
+                ], 1, 'Clock software không giúp process chạy lâu hơn.', 5),
+            makeQ('Which strategy prevents deadlock by requiring all resources at once?',
+                ['Resource ordering', 'Wait-die', 'Wound-wait', 'One-shot allocation'], 3,
+                'One-shot allocation yêu cầu tất cả tài nguyên cùng lúc.', 6),
+            makeQ('System with 5 processes, 3 resources. Available [3,3,2]. Is it safe?',
+                ['Yes', 'No', 'Only if P1 first', 'Only if P3 first', 'Insufficient data'], 0,
+                'Banker\'s algorithm cho thấy tồn tại chuỗi an toàn.', 6),
+            makeQ('What is a preemptable resource?',
+                ['Can be taken away with no ill effects', 'Can be taken away with ill effects',
+                    'Cannot be taken away with no ill effects', 'Cannot be taken away with ill effects'
+                ], 0, 'Tài nguyên có thể thu hồi mà không gây hại.', 6),
+            makeQ('Which condition is both necessary and sufficient for a system to experience deadlock?',
+                ['Mutual exclusion', 'Circular wait', 'Hold and wait', 'No preemption'], 1,
+                'Circular wait là điều kiện đủ để xác định deadlock.', 6),
+            makeQ('In disk scheduling, which algorithm is considered the fairest but may lead to high seek times?',
+                ['FCFS', 'SSTF', 'SCAN', 'C-SCAN'], 0, 'FCFS công bằng nhưng có thể gây di chuyển đầu đọc lớn.', 5),
+            makeQ('A VMM (Virtual Machine Monitor) creates the illusion of multiple virtual machines on the same physical hardware. What is VMM also known as?',
+                ['Hypovisor', 'hypervisor', 'shell', 'console'], 1, 'VMM còn gọi là hypervisor.', 8),
+            makeQ('In paravirtualization, the guest OS executes:',
+                ['system calls', 'virtual calls', 'hyper calls', 'Hyper commands'], 2,
+                'Paravirtualized guest dùng hypercalls thay cho lệnh nhạy cảm.', 8),
+            makeQ('Which component of the OS acts as an interface between user programs and hardware?',
+                ['Compiler', 'Assembler', 'Kernel', 'Loader'], 2, 'Kernel là giao diện giữa phần mềm và phần cứng.', 0),
+            makeQ('Which hardware unit inside the computer is managed by the OS?',
+                ['Scanner', 'USB', 'Memory', 'Browser'], 2, 'OS quản lý bộ nhớ (Memory).', 0),
+            makeQ('What are the two main functions of an operating system?',
+                ['Debugging and memory allocation', 'Resource management and memory allocation',
+                    'Resource management and providing abstractions', 'Networking and power saving'
+                ], 2, 'OS có hai chức năng chính: quản lý tài nguyên và cung cấp trừu tượng.', 0),
+            makeQ('Which layer in the Layered Operating System Model is responsible for managing memory and drum storage?',
+                ['Layer 0', 'Layer 1', 'Layer 3', 'Layer 2'], 1, 'THE system: Layer 1 quản lý bộ nhớ và drum.', 0),
+            makeQ('Which of the following is NOT a benefit of segmentation in memory management?',
+                ['Segments grow independently without collision', 'Programmers no longer manage memory overlays manually',
+                    'Segments can be loaded into non-contiguous physical memory',
+                    'Segment addresses automatically optimize CPU scheduling'
+                ], 3, 'Segmentation không tự động tối ưu scheduling CPU.', 3),
+            makeQ('Which deadlock recovery technique is least likely to impact system performance but may lead to potential inconsistencies?',
+                ['Killing one or more processes', 'Preempting resources', 'Increasing system resources',
+                    'Restarting the entire system'
+                ], 0, 'Kill một process ít ảnh hưởng nhất nhưng có thể mất dữ liệu.', 6),
+            makeQ('A system has 10 units of a single resource. There are three processes: P1, P2, and P3. At a certain moment, their maximum needed and allocated units are: P1(max6,alloc3), P2(max5,alloc4), P3(max7,alloc3). What is the state of the system?',
+                ['Unsafe', 'Safe', 'Deadlock', 'Starvation'], 0,
+                'Available = 10 - (3+4+3) = 0, không process nào có thể hoàn thành → unsafe.', 6),
+            makeQ('Which approach to deadlock prevention eliminates circular wait?',
+                ['Forcing all processes to request resources in a predefined order',
+                    'Allowing processes to hold and wait for resources indefinitely',
+                    'Preventing mutual exclusion for critical resources',
+                    'Granting all resources to a process before execution begins'
+                ], 0, 'Yêu cầu tài nguyên theo thứ tự cố định ngăn chặn circular wait.', 6),
+            makeQ('In UNIX systems, what is the primary purpose of system calls like fork() and exec()?',
+                ['To control peripheral devices', 'To load device drivers into memory',
+                    'To create and execute new processes', 'To switch between user and kernel mode'
+                ], 2, 'fork() tạo tiến trình mới, exec() thay thế chương trình thực thi.', 1),
         ];
 
         function buildFullBank() {
